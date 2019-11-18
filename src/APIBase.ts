@@ -58,7 +58,7 @@ export class APIBase {
   }
 
   /**
-   * **Request handling from `chastikey-js` `<->` `ChastiKey`**
+   * **Request handling from `chastikey.js` `<->` `ChastiKey`**
    * @protected
    * @template T
    * @template I

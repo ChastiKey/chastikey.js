@@ -1,20 +1,20 @@
-# chastikey-js
+# chastikey.js
 
-[![travis-ci](https://img.shields.io/travis/ChastiKey/chastikey-js/master.svg?style=flat-square)](https://travis-ci.org/ChastiKey/chastikey-js)
-[![travis-ci](https://img.shields.io/npm/v/chastikey-js.svg?style=flat-square)](https://www.npmjs.com/package/chastikey-js)
+[![travis-ci](https://img.shields.io/travis/ChastiKey/chastikey.js/master.svg?style=flat-square)](https://travis-ci.org/ChastiKey/chastikey.js)
+[![travis-ci](https://img.shields.io/npm/v/chastikey.js.svg?style=flat-square)](https://www.npmjs.com/package/chastikey.js)
 
 ## How to install
 
 Yarn
 
 ```sh
-yarn add chastikey-js
+yarn add chastikey.js
 ```
 
 NPM
 
 ```sh
-npm i chastikey-js
+npm i chastikey.js
 ```
 
 ---

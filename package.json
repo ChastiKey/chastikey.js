@@ -1,9 +1,9 @@
 {
-  "name": "chastikey-js",
+  "name": "chastikey.js",
   "version": "1.0.0",
   "description": "ChastiKey API Wrapper",
   "main": "./app/.js",
-  "repository": "https://github.com/ChastiKey/chastikey-js",
+  "repository": "https://github.com/ChastiKey/chastikey.js",
   "author": "Emma <RileyIO>",
   "license": "MIT",
   "scripts": {
