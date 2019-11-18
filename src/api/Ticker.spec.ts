@@ -1,5 +1,5 @@
 import test from 'ava'
-import { Ticker } from './ticker'
+import { Ticker } from './Ticker'
 
 test('[Direct] Test get Ticker URL Lockee', async t => {
   const ticker = new Ticker()

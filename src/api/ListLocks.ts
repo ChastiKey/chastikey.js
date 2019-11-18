@@ -1,6 +1,6 @@
 import * as Objects from '../objects/'
 import { APIBase } from '../APIBase'
-import { IChastiKeyParam } from '../chastikey'
+import { IChastiKeyParam } from '../Chastikey'
 
 interface IListLocksGetParams extends IChastiKeyParam {
   username?: string
@@ -13,7 +13,7 @@ export class ListLocks extends APIBase {
   /**
    * **Fetches the specified user's locks**
    *
-   * - Cached: `30 seconds server side`
+   * - Cached: `60 seconds server side`
    *
    * @param {IListLocksGetParams} params
    * @returns {Promise<Objects.ListLocksResponse>}

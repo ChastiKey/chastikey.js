@@ -103,7 +103,7 @@ Available Options:
 API Usage:
 
 ```ts
-const ticker = new ChastiKey.Ticker.getURL({
+const ticker = new ChastiKey().Ticker.getURL({
   username: 'UsernameHere',
   type: 'Keyholder',
   show5StarRating: false,
