@@ -10,9 +10,9 @@
     "declaration": true,
     "sourceMap": true,
     "outDir": "app",
-    "rootDir": "src",
+    "rootDir": "./src",
     "allowJs": false
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.spec.ts"],
   "exclude": ["node_modules"]
 }

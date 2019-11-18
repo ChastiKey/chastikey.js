@@ -19,12 +19,13 @@
     "prepublishOnly": "run-s test:n"
   },
   "ava": {
-    "failFast": false,
-    "files": [
-      "app/**/*.spec.js"
+    "babel": false,
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
     ],
-    "sources": [
-      "app/**/*.js"
+    "require": [
+      "ts-node/register"
     ]
   },
   "eslintConfig": {
@@ -70,6 +71,7 @@
     "prettier": "^1.19.1",
     "trash": "^6.0.0",
     "trash-cli": "^3.0.0",
+    "ts-node": "^8.5.2",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   },
