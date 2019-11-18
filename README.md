@@ -33,6 +33,32 @@ Available Options:
 
 > **\*1.0** - is only for the JSON exports, NOT for regular lookups.
 
+Importing & Setup:
+
+```ts
+// ==================
+// Examples for JS:
+// ==================
+const { ChastiKey } from 'chastikey.js';
+// Then you're ready for:
+new ChastiKey()...
+
+// ==================
+var CK from 'chastikey.js';
+// Then you're ready for:
+new CK.ChastiKey()...
+
+// ******************
+// ******************
+
+// ==================
+// Examples for TS:
+// ==================
+import { ChastiKey } from 'chastikey.js'
+// Then you're ready for:
+new ChastiKey()...
+```
+
 ### `ChastiKey.ListLocks`
 
 Retrieves the specified user's locks.
