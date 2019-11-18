@@ -2,7 +2,7 @@
   "name": "chastikey.js",
   "version": "1.0.0",
   "description": "ChastiKey API Wrapper",
-  "main": "./app/.js",
+  "main": "./app/ChastiKey.js",
   "repository": "https://github.com/ChastiKey/chastikey.js",
   "author": "Emma <RileyIO>",
   "license": "MIT",
@@ -14,7 +14,9 @@
     "test:n": "ava",
     "test:v": "ava --verbose --serial",
     "test:w": "ava --verbose --watch",
-    "test:js": "ava ./test/js-tests.js"
+    "test:js": "ava ./test/js-tests.js",
+    "prepare": "run-s build",
+    "prepublishOnly": "run-s test:n"
   },
   "ava": {
     "failFast": false,
