@@ -1,6 +1,6 @@
 import * as Objects from '../objects/'
 import { APIBase } from '../APIBase'
-import { IChastiKeyParam } from '../Chastikey'
+import { IChastiKeyParam } from '../ChastiKey'
 
 interface IListLocksGetParams extends IChastiKeyParam {
   username?: string
