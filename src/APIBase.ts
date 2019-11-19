@@ -48,10 +48,13 @@ export class APIBase {
       const valueType = typeof params[key]
       var valueTransformed
 
-      if (valueType === 'boolean') valueTransformed = params[key] ? true : false
+      // Convert boolean to int
+      if (valueType === 'boolean') valueTransformed = params[key] ? 1 : 0
+      // Any other values assume as a string
       else valueTransformed = params[key]
 
-      queryStr += i > 0 ? `&=${key}=${valueTransformed}` : `?${key}=${valueTransformed}`
+      // Check to ensure its not undefined
+      if (params[key] !== undefined) queryStr += i > 0 ? `&${key}=${valueTransformed}` : `?${key}=${valueTransformed}`
     })
 
     return queryStr
