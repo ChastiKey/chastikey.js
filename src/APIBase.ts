@@ -9,8 +9,8 @@ export class APIBase {
     apiVersion: 'v0.4'
   }
 
-  constructor(conf?: IChastiKeyOptions) {
-    this.config = conf || this.config
+  constructor(config?: IChastiKeyOptions) {
+    if (config !== undefined) Object.assign(this.config, config)
   }
 
   /**
@@ -74,8 +74,21 @@ export class APIBase {
     try {
       // Make request to ChastiKey
       const response = (await Axios.get(
-        `${this.baseURLBuilt}${endpoint}${typeof params !== 'string' ? this.paramsBuilder(params) : params}`
+        params !== undefined
+          ? `${this.baseURLBuilt}${endpoint}${typeof params !== 'string' ? this.paramsBuilder(params) : params}`
+          : `${this.baseURLBuilt}${endpoint}`
       )) as AxiosResponse<T>
+      // On Success code (200)
+      return response.data
+    } catch (error) {
+      throw new FetchError(error.response ? error.response.status : 999, error.message)
+    }
+  }
+
+  protected async requestDataExport<T>(endpoint: ChastiKeyEndpoint) {
+    try {
+      // Make request to ChastiKey
+      const response = (await Axios.get(`${this.baseURLBuilt}${endpoint}`)) as AxiosResponse<Array<T>>
       // On Success code (200)
       return response.data
     } catch (error) {

@@ -3,6 +3,8 @@
 - Fixed: Internal URL building now properly converts booleans to 0 & 1
 - Fixed: ListLock types, some optional should not have been, etc
 - Added: CheckLock lookup
+- Added: Support for JSON Data Exports
+- Added: CompletedLocks Data Export pull & helpers
 
 1.0.1
 - Improved: package.json scripts for install
