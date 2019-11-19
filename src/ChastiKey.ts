@@ -1,7 +1,7 @@
 import { ListLocks } from './api/ListLocks'
 import { Ticker } from './api/Ticker'
 
-export type ChastiKeyEndpoint = 'combinations.php' | 'listlocks.php' | 'listlocks2.php'
+export type ChastiKeyEndpoint = 'combinations.php' | 'checklock.php' | 'listlocks.php' | 'listlocks2.php'
 
 /**
  * Options when constructing `ChastiKey`

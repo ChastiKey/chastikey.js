@@ -1,6 +1,7 @@
 1.1.0
 - Fixed: Internal URL building will now ignore undefined values
 - Fixed: Internal URL building now properly converts booleans to 0 & 1
+- Added: CheckLock lookup
 
 1.0.1
 - Improved: package.json scripts for install

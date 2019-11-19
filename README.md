@@ -82,6 +82,29 @@ const ll = await new ChastiKey().ListLocks.getByUsername('username')
 ll // => { status: 200, locks: Array<ListLocksLock>, ... }
 ```
 
+### `ChastiKey.CheckLock`
+
+Retrieves the specified user's lock.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 60 Seconds ]`
+
+Available Options:
+
+| Key      | Required? | Accepts Type(s) | Default |
+| -------- | :-------: | --------------- | ------- |
+| username |    Yes    | `string`        |         |
+| lockid   |    Yes    | `string`        |         |
+| bot      |    No     | `string`        |         |
+
+API Usage:
+
+```ts
+const ll = await new ChastiKey().CheckLock.get({ username: 'username', lockid: '123456' })
+const ll = await new ChastiKey().CheckLock.getByUsername('username', '123456')
+
+ll // => { status: 200, locks: Array<ListLocksLock>, ... } // Yes, It does use the same ListLocksLock type
+```
+
 ### `ChastiKey.Ticker`
 
 Creates the URL string to the user's Ticker.
