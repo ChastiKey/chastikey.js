@@ -59,6 +59,8 @@ import { ChastiKey } from 'chastikey.js'
 new ChastiKey()...
 ```
 
+---
+
 ### `ChastiKey.ListLocks`
 
 Retrieves the specified user's locks.
@@ -82,6 +84,45 @@ const ll = await new ChastiKey().ListLocks.getByUsername('username')
 ll // => { status: 200, locks: Array<ListLocksLock>, ... }
 ```
 
+---
+
+### `ChastiKey.CheckLock`
+
+Retrieves the specified user's lock.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 60 Seconds ]`
+
+Available Options:
+
+| Key      | Required? | Accepts Type(s) | Default |
+| -------- | :-------: | --------------- | ------- |
+| username |    Yes    | `string`        |         |
+| lockid   |    Yes    | `string`        |         |
+| bot      |    No     | `string`        |         |
+
+API Usage:
+
+```ts
+const clResp = await new ChastiKey().CheckLock.get({ username: 'username', lockid: '123456' })
+const clResp = await new ChastiKey().CheckLock.getByUsername('username', '123456')
+
+clResp // => { status: 200, locks: Array<ListLocksLock>, ... } // Yes, It does use the same ListLocksLock type
+```
+
+#### Available Computed Values / Helpers
+
+#### `clResp.getLocked`: Array<`ListLocksLock`>
+
+#### `ListLocksLock.isLocked`: boolean
+
+#### `ListLocksLock.isUnlocked`: boolean
+
+#### `ListLocksLock.isAbandoned`: boolean
+
+#### `ListLocksLock.totalTimeLocked`: number
+
+---
+
 ### `ChastiKey.Ticker`
 
 Creates the URL string to the user's Ticker.
@@ -103,7 +144,7 @@ Available Options:
 API Usage:
 
 ```ts
-const ticker = new ChastiKey.Ticker.getURL({
+const ticker = new ChastiKey().Ticker.getURL({
   username: 'UsernameHere',
   type: 'Keyholder',
   show5StarRating: false,
@@ -111,6 +152,34 @@ const ticker = new ChastiKey.Ticker.getURL({
 })
 
 ticker // => "https://chastikey.com/tickers/ticker.php?ty=1&un=UsernameHere&r=0&ext=.png"
+```
+
+---
+
+### `ChastiKey.CompletedLocks`
+
+Retrieves the current data export JSON of completed locks.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 15 Minutes ]`
+
+Available Options: None
+
+API Usage:
+
+```ts
+const completedResp = await new ChastiKey().CompletedLocks.get()
+
+completedResp // => { locks: Array<CompletedLocksLock>, search: HelperFunc }
+```
+
+#### Available Helpers
+
+#### `completedResp.search( { searchBy: RegExp | value }, ... )`
+
+Usage Example(s):
+
+```ts
+resp.search({ username: /^e/i }, { build: 133 })
 ```
 
 ---

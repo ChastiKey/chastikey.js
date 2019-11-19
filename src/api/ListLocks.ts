@@ -1,19 +1,19 @@
 import * as Objects from '../objects/'
 import { APIBase } from '../APIBase'
-import { IChastiKeyParam } from '../chastikey'
+import { IChastiKeyParam } from '../ChastiKey'
 
 interface IListLocksGetParams extends IChastiKeyParam {
-  username?: string
+  username: string
   // discord_id?: string
-  bot?: string
   showdeleted?: boolean
+  bot?: string
 }
 
 export class ListLocks extends APIBase {
   /**
    * **Fetches the specified user's locks**
    *
-   * - Cached: `30 seconds server side`
+   * - Cached: `60 seconds server side`
    *
    * @param {IListLocksGetParams} params
    * @returns {Promise<Objects.ListLocksResponse>}
@@ -26,10 +26,10 @@ export class ListLocks extends APIBase {
   }
 
   public async getByUsername(username: string, showdeleted?: boolean, bot?: string) {
-    return this.get({ username: username, showdeleted: showdeleted !== undefined ? showdeleted : false, bot: bot })
+    return this.get({ username: username, showdeleted: showdeleted, bot: bot })
   }
 
   // public async getByDiscordID(discord_id: string, showdeleted?: boolean, bot?: string) {
-  //   return this.get({ discord_id: discord_id, showdeleted: showdeleted !== undefined ? showdeleted : false, bot: bot })
+  //   return this.get({ discord_id: discord_id, showdeleted: showdeleted, bot: bot })
   // }
 }
