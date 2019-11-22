@@ -84,6 +84,18 @@ const ll = await new ChastiKey().ListLocks.getByUsername('username')
 ll // => { status: 200, locks: Array<ListLocksLock>, ... }
 ```
 
+#### [`ListLocks`] Available Computed Values / Helpers
+
+**`clResp.getLocked`: Array<`ListLocksLock`>**
+
+**`ListLocksLock.isLocked`: boolean**
+
+**`ListLocksLock.isUnlocked`: boolean**
+
+**`ListLocksLock.isAbandoned`: boolean**
+
+**`ListLocksLock.totalTimeLocked`: number**
+
 ---
 
 ### `ChastiKey.CheckLock`
@@ -109,17 +121,17 @@ const clResp = await new ChastiKey().CheckLock.getByUsername('username', '123456
 clResp // => { status: 200, locks: Array<ListLocksLock>, ... } // Yes, It does use the same ListLocksLock type
 ```
 
-#### Available Computed Values / Helpers
+#### [`CheckLock`] Available Computed Values / Helpers
 
-#### `clResp.getLocked`: Array<`ListLocksLock`>
+**`clResp.getLocked`: Array<`ListLocksLock`>**
 
-#### `ListLocksLock.isLocked`: boolean
+**`ListLocksLock.isLocked`: boolean**
 
-#### `ListLocksLock.isUnlocked`: boolean
+**`ListLocksLock.isUnlocked`: boolean**
 
-#### `ListLocksLock.isAbandoned`: boolean
+**`ListLocksLock.isAbandoned`: boolean**
 
-#### `ListLocksLock.totalTimeLocked`: number
+**`ListLocksLock.totalTimeLocked`: number**
 
 ---
 
@@ -172,7 +184,7 @@ const completedResp = await new ChastiKey().CompletedLocks.get()
 completedResp // => { locks: Array<CompletedLocksLock>, search: HelperFunc }
 ```
 
-#### Available Helpers
+#### [`CompletedLocks`] Available Computed Values / Helpers
 
 #### `completedResp.search( { searchBy: RegExp | value }, ... )`
 
