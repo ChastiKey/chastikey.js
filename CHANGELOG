@@ -1,5 +1,7 @@
 1.2.0
 - Added: Date First Keyheld data export.
+- Added: Keyholder Total Locks Managed data export.
+- Added: Running Locks data export.
 - Improved: Documentation.
 
 1.1.0

@@ -6,6 +6,7 @@ import { CompletedLocksResponse } from '../objects/'
  * **Cached Completed Locks**
  *
  * - Cached: `15 Minutes`
+ * - Requirement: `ActiveInApp <= 2 weeks`
  * @export
  * @class CompletedLocks
  * @extends {APIBase}

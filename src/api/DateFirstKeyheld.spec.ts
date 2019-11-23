@@ -3,11 +3,11 @@ import { DateFirstKeyheld } from './DateFirstKeyheld'
 import { DateFirstKeyheldResponse } from '../objects'
 
 // Since this is a BIG export, put the data here to save sending the same query over
-const cl = new DateFirstKeyheld({ repo: 'json', apiVersion: 'v1.0' })
+const dfkh = new DateFirstKeyheld({ repo: 'json', apiVersion: 'v1.0' })
 var resp: DateFirstKeyheldResponse
 
 test.before('Test fetch DateFirstKeyheld -> DateFirstKeyheld.get()', async t => {
-  resp = await cl.get()
+  resp = await dfkh.get()
   t.is(resp.keyholders.length > 0, true)
 })
 

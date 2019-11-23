@@ -224,6 +224,62 @@ resp.search({ username: /^e/i })
 
 ---
 
+### `ChastiKey.KeyholderTotalLocksManaged`
+
+Retrieves the current data export JSON for Keyholder total locks managed counts.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 15 Minutes ]`
+
+Available Options: None
+
+API Usage:
+
+```ts
+const khtlm = await new ChastiKey().KeyholderTotalLocksManaged.get()
+
+khtlm // => { keyholders: Array<KeyholderTotalLocksManagedEntry>, search: HelperFunc }
+```
+
+#### [`KeyholderTotalLocksManaged`] Available Computed Values / Helpers
+
+#### `khtlm.search( { searchBy: RegExp | value }, ... )`
+
+Usage Example(s):
+
+```ts
+resp.search({ username: /^e/i })
+```
+
+---
+
+### `ChastiKey.RunningLocks`
+
+Retrieves the current data export JSON for Running Locks.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 15 Minutes ]`
+
+Available Options: None
+
+API Usage:
+
+```ts
+const rl = await new ChastiKey().RunningLocks.get()
+
+rl // => { keyholders: Array<RunningLocksLock>, search: HelperFunc }
+```
+
+#### [`RunningLocks`] Available Computed Values / Helpers
+
+#### `rl.search( { searchBy: RegExp | value }, ... )`
+
+Usage Example(s):
+
+```ts
+resp.search({ username: /^e/i })
+```
+
+---
+
 ## License
 
 MIT

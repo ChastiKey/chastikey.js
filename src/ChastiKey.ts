@@ -2,6 +2,9 @@ import { CheckLock } from './api/CheckLock'
 import { CompletedLocks } from './api/CompletedLocks'
 import { ListLocks } from './api/ListLocks'
 import { Ticker } from './api/Ticker'
+import { DateFirstKeyheld } from './api/DateFirstKeyheld'
+import { KeyholderTotalLocksManaged } from './api/KeyholderTotalLocksManaged'
+import { RunningLocks } from './api/RunningLocks'
 
 export type ChastiKeyEndpoint =
   // API
@@ -11,6 +14,9 @@ export type ChastiKeyEndpoint =
   | 'listlocks2.php'
   // Exports
   | 'completed_locks.json'
+  | 'date_first_keyheld.json'
+  | 'keyholders_total_locks_managed.json'
+  | 'running_locks.json'
 
 /**
  * Options when constructing `ChastiKey`
@@ -84,18 +90,18 @@ export class ChastiKey {
   // * ////////////////////////
   // * API Calls
   // * ////////////////////////
+  
+  /**
+   * CheckLock queries
+   * @memberof ChastiKey
+   */
+  public CheckLock = new CheckLock(this.apiConfig)
 
   /**
    * ListLocks queries
    * @memberof ChastiKey
    */
   public ListLocks = new ListLocks(this.apiConfig)
-
-  /**
-   * CheckLock queries
-   * @memberof ChastiKey
-   */
-  public CheckLock = new CheckLock(this.apiConfig)
 
   /**
    * Ticker queries
@@ -108,8 +114,35 @@ export class ChastiKey {
   // * ////////////////////////
 
   /**
-   * Ticker queries
+   * **Cached Completed Locks**
+   *
+   * - Cached: `15 Minutes`
+   * - Requirement: `ActiveInApp <= 2 weeks`
    * @memberof ChastiKey
    */
   public CompletedLocks = new CompletedLocks(this.exportConfig)
+
+  /**
+   * **Cached Date First keyheld for all public keyholders**
+   *
+   * - Cached: `15 Minutes`
+   * @memberof ChastiKey
+   */
+  public DateFirstKeyheld = new DateFirstKeyheld(this.exportConfig)
+
+  /**
+   * **Retrieves the current data export JSON for Keyholder total locks managed counts.**
+   *
+   * - Cached: `15 Minutes`
+   * @memberof ChastiKey
+   */
+  public KeyholderTotalLocksManaged = new KeyholderTotalLocksManaged(this.exportConfig)
+
+  /**
+   * **Retrieves the current data export JSON for Running Locks**
+   *
+   * - Cached: `15 Minutes`
+   * @memberof ChastiKey
+   */
+  public RunningLocks = new RunningLocks(this.exportConfig)
 }

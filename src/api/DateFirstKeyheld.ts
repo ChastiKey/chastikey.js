@@ -18,7 +18,7 @@ export class DateFirstKeyheld extends APIBase {
    */
   public async get(): Promise<DateFirstKeyheldResponse> {
     return new DateFirstKeyheldResponse(
-      await this.requestDataExport<Objects.DateFirstKeyheldEntry>('completed_locks.json')
+      await this.requestDataExport<Objects.DateFirstKeyheldEntry>('date_first_keyheld.json')
     )
   }
 }

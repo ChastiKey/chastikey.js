@@ -6,7 +6,7 @@ export enum IDateFirstKeyheldSearchParam {
 
 export class DateFirstKeyheldResponse {
   /**
-   * Locks from Data Export
+   * Keyholders from Data Export
    * @type {Array<DateFirstKeyheldEntry>}
    * @memberof DateFirstKeyheldResponse
    */
@@ -14,7 +14,7 @@ export class DateFirstKeyheldResponse {
 
   constructor(init?: Array<DateFirstKeyheldEntry>) {
     // Init any DateFirstKeyheldEntry Objects
-    if (init) this.keyholders = init.map(l => new DateFirstKeyheldEntry(l))
+    if (init) this.keyholders = init.map(kh => new DateFirstKeyheldEntry(kh))
   }
 
   public search(...filters: Array<{ [key in IDateFirstKeyheldSearchParam]?: RegExp | number | string }>) {
@@ -23,10 +23,10 @@ export class DateFirstKeyheldResponse {
     filters.forEach(f => {
       for (const k in f) {
         const typeFixedKey = k as IDateFirstKeyheldSearchParam
-        filtered = filtered.filter(l => {
+        filtered = filtered.filter(kh => {
           return typeof f[typeFixedKey] === 'object'
-            ? new RegExp(f[typeFixedKey] as string).test(l[typeFixedKey] as string)
-            : l[typeFixedKey] === f[typeFixedKey]
+            ? new RegExp(f[typeFixedKey] as string).test(kh[typeFixedKey] as string)
+            : kh[typeFixedKey] === f[typeFixedKey]
         })
       }
     })
