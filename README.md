@@ -191,7 +191,7 @@ completedResp // => { locks: Array<CompletedLocksLock>, search: HelperFunc }
 Usage Example(s):
 
 ```ts
-resp.search({ username: /^e/i }, { build: 133 })
+completedResp.search({ username: /^e/i }, { build: 133 })
 ```
 
 ---
@@ -219,7 +219,7 @@ dfkh // => { keyholders: Array<DateFirstKeyheldEntry>, search: HelperFunc }
 Usage Example(s):
 
 ```ts
-resp.search({ username: /^e/i })
+dfkh.search({ username: /^e/i })
 ```
 
 ---
@@ -247,7 +247,7 @@ khtlm // => { keyholders: Array<KeyholderTotalLocksManagedEntry>, search: Helper
 Usage Example(s):
 
 ```ts
-resp.search({ username: /^e/i })
+khtlm.search({ username: /^e/i })
 ```
 
 ---
@@ -275,7 +275,7 @@ rl // => { keyholders: Array<RunningLocksLock>, search: HelperFunc }
 Usage Example(s):
 
 ```ts
-resp.search({ username: /^e/i })
+rl.search({ username: /^e/i })
 ```
 
 ---
