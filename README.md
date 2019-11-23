@@ -84,6 +84,18 @@ const ll = await new ChastiKey().ListLocks.getByUsername('username')
 ll // => { status: 200, locks: Array<ListLocksLock>, ... }
 ```
 
+#### [`ListLocks`] Available Computed Values / Helpers
+
+**`clResp.getLocked`: Array<`ListLocksLock`>**
+
+**`ListLocksLock.isLocked`: boolean**
+
+**`ListLocksLock.isUnlocked`: boolean**
+
+**`ListLocksLock.isAbandoned`: boolean**
+
+**`ListLocksLock.totalTimeLocked`: number**
+
 ---
 
 ### `ChastiKey.CheckLock`
@@ -109,17 +121,17 @@ const clResp = await new ChastiKey().CheckLock.getByUsername('username', '123456
 clResp // => { status: 200, locks: Array<ListLocksLock>, ... } // Yes, It does use the same ListLocksLock type
 ```
 
-#### Available Computed Values / Helpers
+#### [`CheckLock`] Available Computed Values / Helpers
 
-#### `clResp.getLocked`: Array<`ListLocksLock`>
+**`clResp.getLocked`: Array<`ListLocksLock`>**
 
-#### `ListLocksLock.isLocked`: boolean
+**`ListLocksLock.isLocked`: boolean**
 
-#### `ListLocksLock.isUnlocked`: boolean
+**`ListLocksLock.isUnlocked`: boolean**
 
-#### `ListLocksLock.isAbandoned`: boolean
+**`ListLocksLock.isAbandoned`: boolean**
 
-#### `ListLocksLock.totalTimeLocked`: number
+**`ListLocksLock.totalTimeLocked`: number**
 
 ---
 
@@ -172,7 +184,7 @@ const completedResp = await new ChastiKey().CompletedLocks.get()
 completedResp // => { locks: Array<CompletedLocksLock>, search: HelperFunc }
 ```
 
-#### Available Helpers
+#### [`CompletedLocks`] Available Computed Values / Helpers
 
 #### `completedResp.search( { searchBy: RegExp | value }, ... )`
 
@@ -180,6 +192,90 @@ Usage Example(s):
 
 ```ts
 resp.search({ username: /^e/i }, { build: 133 })
+```
+
+---
+
+### `ChastiKey.DateFirstKeyheld`
+
+Retrieves the current data export JSON for Date First keyheld for all public keyholders.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 15 Minutes ]`
+
+Available Options: None
+
+API Usage:
+
+```ts
+const dfkh = await new ChastiKey().DateFirstKeyheld.get()
+
+dfkh // => { keyholders: Array<DateFirstKeyheldEntry>, search: HelperFunc }
+```
+
+#### [`DateFirstKeyheld`] Available Computed Values / Helpers
+
+#### `dfkh.search( { searchBy: RegExp | value }, ... )`
+
+Usage Example(s):
+
+```ts
+resp.search({ username: /^e/i })
+```
+
+---
+
+### `ChastiKey.KeyholderTotalLocksManaged`
+
+Retrieves the current data export JSON for Keyholder total locks managed counts.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 15 Minutes ]`
+
+Available Options: None
+
+API Usage:
+
+```ts
+const khtlm = await new ChastiKey().KeyholderTotalLocksManaged.get()
+
+khtlm // => { keyholders: Array<KeyholderTotalLocksManagedEntry>, search: HelperFunc }
+```
+
+#### [`KeyholderTotalLocksManaged`] Available Computed Values / Helpers
+
+#### `khtlm.search( { searchBy: RegExp | value }, ... )`
+
+Usage Example(s):
+
+```ts
+resp.search({ username: /^e/i })
+```
+
+---
+
+### `ChastiKey.RunningLocks`
+
+Retrieves the current data export JSON for Running Locks.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 15 Minutes ]`
+
+Available Options: None
+
+API Usage:
+
+```ts
+const rl = await new ChastiKey().RunningLocks.get()
+
+rl // => { keyholders: Array<RunningLocksLock>, search: HelperFunc }
+```
+
+#### [`RunningLocks`] Available Computed Values / Helpers
+
+#### `rl.search( { searchBy: RegExp | value }, ... )`
+
+Usage Example(s):
+
+```ts
+resp.search({ username: /^e/i })
 ```
 
 ---

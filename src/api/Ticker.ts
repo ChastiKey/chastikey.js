@@ -11,9 +11,15 @@ export interface ITickerGetParams {
   }
 }
 
+/**
+ * **Generate the URL string for a user's ticker**
+ * @export
+ * @class Ticker
+ * @extends {APIBase}
+ */
 export class Ticker extends APIBase {
   /**
-   * **Generates the Ticker URL**
+   * **Generate the Ticker URL**
    * @param {string} username
    * @param {('Keyholder' | 'Lockee')} type
    * @param {boolean} show5StarRating

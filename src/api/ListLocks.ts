@@ -9,12 +9,17 @@ interface IListLocksGetParams extends IChastiKeyParam {
   bot?: string
 }
 
+/**
+ * **Query the API for the specified user**
+ *
+ * - Cached: `60 seconds server side`
+ * @export
+ * @class ListLocks
+ * @extends {APIBase}
+ */
 export class ListLocks extends APIBase {
   /**
    * **Fetches the specified user's locks**
-   *
-   * - Cached: `60 seconds server side`
-   *
    * @param {IListLocksGetParams} params
    * @returns {Promise<Objects.ListLocksResponse>}
    * @memberof ListLocks
@@ -25,11 +30,15 @@ export class ListLocks extends APIBase {
     )
   }
 
+  /**
+   * **(Alternative) Fetches the specified user's locks**
+   * @param {string} username
+   * @param {boolean} [showdeleted]
+   * @param {string} [bot]
+   * @returns
+   * @memberof ListLocks
+   */
   public async getByUsername(username: string, showdeleted?: boolean, bot?: string) {
     return this.get({ username: username, showdeleted: showdeleted, bot: bot })
   }
-
-  // public async getByDiscordID(discord_id: string, showdeleted?: boolean, bot?: string) {
-  //   return this.get({ discord_id: discord_id, showdeleted: showdeleted, bot: bot })
-  // }
 }
