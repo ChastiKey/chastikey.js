@@ -196,6 +196,34 @@ resp.search({ username: /^e/i }, { build: 133 })
 
 ---
 
+### `ChastiKey.DateFirstKeyheld`
+
+Retrieves the current data export JSON for Date First keyheld for all public keyholders.
+
+ChastiKey Side Caching: `[ Yes ]` `[ 15 Minutes ]`
+
+Available Options: None
+
+API Usage:
+
+```ts
+const dfkh = await new ChastiKey().DateFirstKeyheld.get()
+
+dfkh // => { keyholders: Array<DateFirstKeyheldEntry>, search: HelperFunc }
+```
+
+#### [`DateFirstKeyheld`] Available Computed Values / Helpers
+
+#### `dfkh.search( { searchBy: RegExp | value }, ... )`
+
+Usage Example(s):
+
+```ts
+resp.search({ username: /^e/i })
+```
+
+---
+
 ## License
 
 MIT
