@@ -2,12 +2,17 @@ import * as Objects from '../objects/'
 import { APIBase } from '../APIBase'
 import { CompletedLocksResponse } from '../objects/'
 
+/**
+ * **Cached Completed Locks**
+ *
+ * - Cached: `15 Minutes`
+ * @export
+ * @class CompletedLocks
+ * @extends {APIBase}
+ */
 export class CompletedLocks extends APIBase {
   /**
-   * **Fetches the specified lock**
-   *
-   * - Cached: `15 Minutes`
-   *
+   * **Fetches the scheduled data export of completed locks**
    * @returns {Promise<CompletedLocksResponse>}
    * @memberof CompletedLocks
    */

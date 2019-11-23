@@ -8,12 +8,17 @@ interface ICheckLockGetParams extends IChastiKeyParam {
   bot?: string
 }
 
+/**
+ * **Query the API for the specified user lock**
+ *
+ * - Cached: `60 seconds server side`
+ * @export
+ * @class CheckLock
+ * @extends {APIBase}
+ */
 export class CheckLock extends APIBase {
   /**
    * **Fetches the specified lock**
-   *
-   * - Cached: `60 seconds server side`
-   *
    * @param {ICheckLockGetParams} params
    * @returns {Promise<Objects.CheckLockResponse>}
    * @memberof CheckLock
@@ -24,6 +29,14 @@ export class CheckLock extends APIBase {
     )
   }
 
+  /**
+   * **(Alternative) Fetches the specified lock**
+   * @param {string} username
+   * @param {string} lockid
+   * @param {string} [bot]
+   * @returns
+   * @memberof CheckLock
+   */
   public async getByUsername(username: string, lockid: string, bot?: string) {
     return this.get({ username: username, lockid: lockid, bot: bot })
   }
