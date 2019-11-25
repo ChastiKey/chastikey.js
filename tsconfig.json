@@ -7,7 +7,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "preserveConstEnums": true,
-    "strictNullChecks": false,
     "declaration": true,
     "sourceMap": true,
     "outDir": "app",
