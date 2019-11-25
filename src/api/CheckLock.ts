@@ -5,7 +5,7 @@ import { IChastiKeyParam } from '../ChastiKey'
 interface ICheckLockGetParams extends IChastiKeyParam {
   username: string
   lockid: string
-  bot?: string | undefined
+  bot?: string
 }
 
 /**
