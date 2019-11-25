@@ -1,4 +1,8 @@
-1.2.3
+1.2.4
+- Fixing: Building on install in external installs.
+- Rollback: Typescript version to 3.5.3 per #3 before next release.
+
+1.2.1 - 1.2.3
 - Fixing: On install hook.
 
 1.2.0
