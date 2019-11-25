@@ -1,6 +1,6 @@
 {
   "name": "chastikey.js",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "ChastiKey API Wrapper",
   "main": "./app/ChastiKey.js",
   "repository": "https://github.com/ChastiKey/chastikey.js",
