@@ -15,7 +15,6 @@
     "test:v": "ava --verbose --serial",
     "test:w": "ava --verbose --watch",
     "test:js": "ava ./test/js-tests.js",
-    "prepare": "run-s build",
     "prepublishOnly": "run-s test:n",
     "postinstall": "tsc"
   },
@@ -77,6 +76,6 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "typescript": "^3.7.2"
+    "typescript": "3.5.3"
   }
 }
