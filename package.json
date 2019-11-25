@@ -1,6 +1,6 @@
 {
   "name": "chastikey.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "ChastiKey API Wrapper",
   "main": "./app/ChastiKey.js",
   "repository": "https://github.com/ChastiKey/chastikey.js",
@@ -16,7 +16,8 @@
     "test:w": "ava --verbose --watch",
     "test:js": "ava ./test/js-tests.js",
     "prepare": "run-s build",
-    "prepublishOnly": "run-s test:n"
+    "prepublishOnly": "run-s test:n",
+    "postinstall": "run-s build"
   },
   "ava": {
     "babel": false,
