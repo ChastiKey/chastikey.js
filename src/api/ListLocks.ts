@@ -5,8 +5,8 @@ import { IChastiKeyParam } from '../ChastiKey'
 interface IListLocksGetParams extends IChastiKeyParam {
   username: string
   // discord_id?: string
-  showdeleted?: boolean
-  bot?: string
+  showdeleted?: boolean | undefined
+  bot?: string | undefined
 }
 
 /**
