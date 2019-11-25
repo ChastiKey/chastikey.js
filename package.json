@@ -17,7 +17,7 @@
     "test:js": "ava ./test/js-tests.js",
     "prepare": "run-s build",
     "prepublishOnly": "run-s test:n",
-    "postinstall": "run-s build"
+    "postinstall": "tsc"
   },
   "ava": {
     "babel": false,
@@ -73,10 +73,10 @@
     "trash": "^6.0.0",
     "trash-cli": "^3.0.0",
     "ts-node": "^8.5.2",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "tslint": "^5.20.1"
   },
   "dependencies": {
-    "axios": "^0.19.0"
+    "axios": "^0.19.0",
+    "typescript": "^3.7.2"
   }
 }

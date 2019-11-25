@@ -1,3 +1,6 @@
+1.2.1
+- Fixing: On install hook.
+
 1.2.0
 - Added: Date First Keyheld data export.
 - Added: Keyholder Total Locks Managed data export.
