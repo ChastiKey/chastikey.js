@@ -7,7 +7,7 @@ export class ListLocksResponse {
 
   constructor(init?: Partial<ListLocksResponse>) {
     if (init) {
-      //  [ v0.3 >= Only ] Transfer Response out of Array
+      //  [ v0.4 <= Only ] Transfer Response out of Array
       if (Array.isArray((init as any).response)) {
         const legacyResp = (init as any).response[0]
         this.status = legacyResp.status
