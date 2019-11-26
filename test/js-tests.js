@@ -3,7 +3,7 @@ const { ChastiKey } = require('../app/ChastiKey')
 
 test('Creating a new ChastiKey instance for requests', t => {
   const ck = new ChastiKey()
-  t.is(typeof ck.config, 'object')
+  t.is(typeof ck.apiConfig, 'object')
 })
 
 test('Test fetch ListLocks', t => {

@@ -42,7 +42,6 @@ export class ListLocksLock {
    * `0 = false`
    * `1 = true`
    *
-   * ! Only found in newer API exports
    * @type {number}
    * @memberof ListLocksLock
    */
@@ -55,6 +54,13 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public lockedBy: string
+  /**
+   * ChastiKey Discard pile (Variable locks only)
+   *
+   * @type {(string | Array<String>)}
+   * @memberof ListLocksLock
+   */
+  public discardPile: string | Array<String>
   /**
    * Frozen state (Keyholder or Card)
    *
@@ -71,6 +77,12 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public timestampDeleted: number
+  /**
+   * Unix timestamp (seconds) that the lock had its last card pick (variable only)
+   * @type {number}
+   * @memberof ListLocksLock
+   */
+  public timestampLastPicked: number
   /**
    * Unix timestamp (seconds) that the lock was created
    * @type {number}
@@ -138,5 +150,10 @@ export class ListLocksLock {
 
   constructor(init?: Partial<ListLocksLock>) {
     Object.assign(this, init || {})
+    // Parse discard pile to array of strings instead of CSV
+    if (init) {
+      if (init.discardPile !== undefined)
+        if (typeof init.discardPile !== 'string') this.discardPile = String(init.discardPile).split(',')
+    }
   }
 }

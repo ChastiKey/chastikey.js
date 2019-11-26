@@ -56,7 +56,7 @@ export class ChastiKey {
   public apiConfig: IChastiKeyOptions = {
     baseURL: `https://chastikey.com`,
     repo: 'api',
-    apiVersion: 'v0.3'
+    apiVersion: 'v0.4'
   }
 
   public exportConfig: IChastiKeyOptions = {
@@ -90,7 +90,7 @@ export class ChastiKey {
   // * ////////////////////////
   // * API Calls
   // * ////////////////////////
-  
+
   /**
    * CheckLock queries
    * @memberof ChastiKey
@@ -146,3 +146,5 @@ export class ChastiKey {
    */
   public RunningLocks = new RunningLocks(this.exportConfig)
 }
+
+export default ChastiKey
