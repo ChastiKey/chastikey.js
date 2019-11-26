@@ -1,9 +1,10 @@
 1.4.0
 - Fixing: ChastiKey.apiConfig was overriding others to use `v0.3`, calling a API directly was working properly - Fixed now.
-- Adding: Discard pile as its present in ChastiKey's API as of `v0.4` on `listlocks.php` (see #7 for current limitations).
-- Adding: Issue Templates to GH Repo.
-- Adding: 3 Ways the main ChastiKey class is exported (index.js for webpack, default and named exports for all others).
-- Adding: webpack script & config to bundle for web browsers (currently only testing in Chrome, will need user feedback).
+- Added: Discard pile as its present in ChastiKey's API as of `v0.4` on `listlocks.php` (see #7 for current limitations).
+- Added: Issue Templates to GH Repo.
+- Added: 3 Ways the main ChastiKey class is exported (index.js for webpack, default and named exports for all others).
+- Added: webpack script & config to bundle for web browsers (currently only testing in Chrome, will need user feedback).
+- Added: Examples for JS and a Status Board webpage.
 
 1.3.0
 - Upgrading: Typescript to `^3.7.2`
