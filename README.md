@@ -5,22 +5,24 @@
 
 ## How to install / use
 
-Yarn
+**Yarn**
 
 ```sh
 yarn add chastikey.js
 ```
 
-NPM
+**NPM**
 
 ```sh
 npm i chastikey.js
 ```
 
-Web Page (Only tested with Chrome to date - will require user feedback)
+**Web Page** (Only tested with Chrome to date - will require user feedback)
+
+Check [JSDelivr](https://www.jsdelivr.com/package/gh/ChastiKey/chastikey.js?path=dist) for builds available (Note: Only as of `>= 1.4.0`). Find it in the `/dist/` folder
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/ChastiKey/chastikey.js/dist/ChastiKey.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ChastiKey/chastikey.js@1.4.0/dist/ChastiKey.js"></script>
 ```
 
 ---
@@ -39,30 +41,37 @@ Available Options:
 
 > **\*1.0** - is only for the JSON exports, NOT for regular lookups.
 
-Importing & Setup:
+Importing & Setup quick examples:
 
-```ts
+```js
 // ==================
 // Examples for JS:
 // ==================
-const { ChastiKey } from 'chastikey.js';
+const ChastiKey = require('chastikey.js');
 // Then you're ready for:
-new ChastiKey()...
+new ChastiKey().ListLocks.get( ... )
+```
 
-// ==================
-var CK from 'chastikey.js';
-// Then you're ready for:
-new CK.ChastiKey()...
-
-// ******************
-// ******************
-
+```ts
 // ==================
 // Examples for TS:
 // ==================
 import { ChastiKey } from 'chastikey.js'
 // Then you're ready for:
-new ChastiKey()...
+new ChastiKey().ListLocks.get( ... )
+```
+
+```html
+<!--
+// ==================
+// Examples for HTML:
+// ==================
+-->
+<script src="https://cdn.jsdelivr.net/gh/ChastiKey/chastikey.js@1.4.0/dist/ChastiKey.js"></script>
+// Then you're ready for:
+<script>
+  new ChastiKey().ListLocks.get( ... )
+</script>
 ```
 
 ---
