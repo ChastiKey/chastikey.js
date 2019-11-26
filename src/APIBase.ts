@@ -78,7 +78,7 @@ export class APIBase {
           ? `${this.baseURLBuilt}${endpoint}${typeof params !== 'string' ? this.paramsBuilder(params) : params}`
           : `${this.baseURLBuilt}${endpoint}`
       )) as AxiosResponse<T>
-      // On Success code (200)
+      // On Response from Server (non-404)
       return response.data
     } catch (error) {
       throw new FetchError(error.response ? error.response.status : 999, error.message)
@@ -89,7 +89,7 @@ export class APIBase {
     try {
       // Make request to ChastiKey
       const response = (await Axios.get(`${this.baseURLBuilt}${endpoint}`)) as AxiosResponse<Array<T>>
-      // On Success code (200)
+      // On Response from Server (non-404)
       return response.data
     } catch (error) {
       throw new FetchError(error.response ? error.response.status : 999, error.message)

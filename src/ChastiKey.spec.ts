@@ -1,5 +1,5 @@
 import test from 'ava'
-import { ChastiKey } from './ChastiKey'
+import ChastiKey from './ChastiKey'
 
 var ck: ChastiKey
 
