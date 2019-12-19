@@ -96,6 +96,12 @@ export class ListLocksLock {
    */
   public timestampUnlocked: number
   /**
+   * Unix timestamp (seconds) that the lock at the time of this request should unlock
+   * @type {number}
+   * @memberof ListLocksLock
+   */
+  public timestampExpectedUnlock: number
+  /**
    * State of the lock
    * @type {('UnlockedReal' | 'Locked' | 'ReadyToUnlock')}
    * @memberof ListLocksLock

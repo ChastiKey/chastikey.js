@@ -120,6 +120,11 @@
         font-weight: 300;
       }
 
+      #timer-locked-expected {
+        font-size: 1em;
+        font-weight: 200;
+      }
+
       .timer-interval {
         font-size: 22px;
         color: #999;
@@ -149,6 +154,7 @@
       <div id="timer">
         Time Locked:<br />
         <div id="timer-locked-main">...</div>
+        <!-- <div id="timer-locked-expected">...</div> -->
       </div>
 
       <div id="modal-username" class="modal">
@@ -178,6 +184,7 @@
       var listLocksDataLockedLocks = null
       // Elements
       var elOnScreenMainTime = null
+      var elOnScreenExpectedTime = null
       // Elements:Modals
       var elModalUsername = null
       var elModalConfig = null
@@ -207,6 +214,10 @@
       function startInterval() {
         updateTicker = setInterval(() => {
           elOnScreenMainTime.innerHTML = calculateHumanTimeDDHHMM(listLocksDataLockedLocks[0].totalTimeLocked, true)
+          // elOnScreenExpectedTime.innerHTML = calculateHumanTimeDDHHMM(
+          //   listLocksDataLockedLocks[0].timestampExpectedUnlock - Date.now() / 1000,
+          //   true
+          // )
         }, 1000)
       }
 
@@ -281,6 +292,7 @@
       document.addEventListener('DOMContentLoaded', event => {
         // Set focus of main timer
         elOnScreenMainTime = document.querySelector('#timer-locked-main')
+        elOnScreenExpectedTime = document.querySelector('#timer-locked-expected')
         elModalUsername = document.querySelector('#modal-username')
         elModalConfig = document.querySelector('#modal-config')
 
