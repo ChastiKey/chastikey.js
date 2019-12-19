@@ -1,3 +1,7 @@
+1.4.1:
+- Updating: Dependencies
+- Added: New property to locks returned from ListLocks2
+
 1.4.0
 - Fixing: ChastiKey.apiConfig was overriding others to use `v0.3`, calling a API directly was working properly - Fixed now.
 - Added: Discard pile as its present in ChastiKey's API as of `v0.4` on `listlocks.php` (see #7 for current limitations).
