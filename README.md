@@ -114,20 +114,20 @@ ld // => { status: 200, data: LockeeData, locks: Array<LockeeDataLock>, ... }
 
 #### [`LockeeData.locks`] Available Computed Values / Helpers
 
-**`isCardInfoHidden`: boolean**
-**`isCumulative`: boolean**
-**`combinationInt`: number**
-**`isDeleted`: boolean**
-**`isDiscarded`: boolean**
-**`isFixed`: boolean**
-**`isFrozen`: boolean**
-**`isFrozenByCard`: boolean**
-**`isFrozenByKeyholder`: boolean**
-**`isLocked`: boolean**
-**`isMultipleGreensRequired`: boolean**
-**`isTimerHidden`: boolean**
-**`isTrustedKeyholder`: boolean**
-**`isUnlocked`: boolean**
+**`isCardInfoHidden`: boolean**  
+**`isCumulative`: boolean**  
+**`combinationInt`: number**  
+**`isDeleted`: boolean**  
+**`isDiscarded`: boolean**  
+**`isFixed`: boolean**  
+**`isFrozen`: boolean**  
+**`isFrozenByCard`: boolean**  
+**`isFrozenByKeyholder`: boolean**  
+**`isLocked`: boolean**  
+**`isMultipleGreensRequired`: boolean**  
+**`isTimerHidden`: boolean**  
+**`isTrustedKeyholder`: boolean**  
+**`isUnlocked`: boolean**  
 **`totalTimeLocked`: number**
 
 ---
@@ -157,15 +157,11 @@ ll // => { status: 200, locks: Array<ListLocksLock>, ... }
 
 #### [`ListLocks`] Available Computed Values / Helpers
 
-**`clResp.getLocked`: Array<`ListLocksLock`>**
-
-**`ListLocksLock.isLocked`: boolean**
-
-**`ListLocksLock.isUnlocked`: boolean**
-
-**`ListLocksLock.isAbandoned`: boolean**
-
-**`ListLocksLock.totalTimeLocked`: number**
+**`clResp.getLocked`: Array<`ListLocksLock`>**  
+**`ListLocksLock.isLocked`: boolean**  
+**`ListLocksLock.isUnlocked`: boolean**  
+**`ListLocksLock.isAbandoned`: boolean**  
+**`ListLocksLock.totalTimeLocked`: number**  
 
 ---
 
@@ -194,15 +190,11 @@ clResp // => { status: 200, locks: Array<ListLocksLock>, ... } // Yes, It does u
 
 #### [`CheckLock`] Available Computed Values / Helpers
 
-**`clResp.getLocked`: Array<`ListLocksLock`>**
-
-**`ListLocksLock.isLocked`: boolean**
-
-**`ListLocksLock.isUnlocked`: boolean**
-
-**`ListLocksLock.isAbandoned`: boolean**
-
-**`ListLocksLock.totalTimeLocked`: number**
+**`clResp.getLocked`: Array<`ListLocksLock`>**  
+**`ListLocksLock.isLocked`: boolean**  
+**`ListLocksLock.isUnlocked`: boolean**  
+**`ListLocksLock.isAbandoned`: boolean**  
+**`ListLocksLock.totalTimeLocked`: number**  
 
 ---
 
