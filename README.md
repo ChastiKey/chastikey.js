@@ -101,15 +101,18 @@ Available Options:
 API Usage:
 
 ```ts
-const ld = await new ChastiKey({ api: { clientID: 'xxxx', clientSecret: 'xxxx' } })
-  .LockeeData.get({
-    username: 'username'
-  })
+const ld = await new ChastiKey({ api: { clientID: 'xxxx', clientSecret: 'xxxx' } }).LockeeData.get({
+  username: 'username'
+})
 
 ld // => { status: 200, data: LockeeData, locks: Array<LockeeDataLock>, ... }
 ```
 
 #### [`LockeeData`] Available Computed Values / Helpers
+
+**`clResp.getLocked`: Array<`LockeeDataLock`>**
+
+#### [`LockeeData.locks`] Available Computed Values / Helpers
 
 **`isCardInfoHidden`: boolean**
 **`isCumulative`: boolean**
