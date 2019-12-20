@@ -1,16 +1,13 @@
 import Axios, { AxiosResponse } from 'axios'
-import { ChastiKeyEndpoint, IChastiKeyOptions } from './ChastiKey'
+import * as FormData from 'form-data'
+import { ChastiKeyEndpoint, IChastiKeyRequestConfig } from './ChastiKey'
 import { FetchError } from './errors'
 
 export class APIBase {
-  public config: IChastiKeyOptions = {
-    baseURL: `https://chastikey.com`,
-    repo: 'api',
-    apiVersion: 'v0.4'
-  }
+  public config: IChastiKeyRequestConfig
 
-  constructor(config?: IChastiKeyOptions) {
-    if (config !== undefined) Object.assign(this.config, config)
+  constructor(config: IChastiKeyRequestConfig) {
+    this.config = config
   }
 
   /**
@@ -24,7 +21,7 @@ export class APIBase {
   }
 
   /**
-   * Builds a proper query from Array of paramaters passed.
+   * Builds a proper query from Array of parameters passed.
    *
    * From:
    * ```
@@ -70,16 +67,39 @@ export class APIBase {
    * @returns
    * @memberof ChastiKey
    */
-  protected async request<T, I>(endpoint: ChastiKeyEndpoint, params?: I) {
+  protected async request<T, I>(endpoint: ChastiKeyEndpoint, params?: I | any) {
     try {
-      // Make request to ChastiKey
-      const response = (await Axios.get(
-        params !== undefined
-          ? `${this.baseURLBuilt}${endpoint}${typeof params !== 'string' ? this.paramsBuilder(params) : params}`
-          : `${this.baseURLBuilt}${endpoint}`
-      )) as AxiosResponse<T>
-      // On Response from Server (non-404)
-      return response.data
+      // * Newer requests will require a ClientID and Secret from the ChastiKey App
+      if (this.config.apiVersion === 'v0.5') {
+        // Build Multipart form data used by newer API version(s)
+        const formData = new FormData()
+        Object.keys(params).forEach(key => formData.append(key, params[key]))
+        // Prep headers
+        const headers = Object.assign(
+          {
+            clientID: this.config.clientID,
+            clientSecret: this.config.clientSecret
+          },
+          formData.getHeaders()
+        )
+        // Make request to ChastiKey
+        const response = (await Axios.post(`${this.baseURLBuilt}${endpoint}`, formData, {
+          headers
+        })) as AxiosResponse<T>
+        // On Response from Server (non-404)
+        return response.data
+      }
+      // * Legacy Requests use this one
+      else {
+        // Make request to ChastiKey
+        const response = (await Axios.get(
+          params !== undefined
+            ? `${this.baseURLBuilt}${endpoint}${typeof params !== 'string' ? this.paramsBuilder(params) : params}`
+            : `${this.baseURLBuilt}${endpoint}`
+        )) as AxiosResponse<T>
+        // On Response from Server (non-404)
+        return response.data
+      }
     } catch (error) {
       throw new FetchError(error.response ? error.response.status : 999, error.message)
     }

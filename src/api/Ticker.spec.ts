@@ -1,15 +1,15 @@
 import test from 'ava'
-import { Ticker } from './Ticker'
+import { ChastiKey } from '../ChastiKey'
 
 test('[Direct] Test get Ticker URL Lockee', async t => {
-  const ticker = new Ticker()
-  const lockee = await ticker.getURL({ username: 'Emma', type: 'Lockee', show5StarRating: true })
+  const ck = new ChastiKey()
+  const lockee = await ck.Ticker.getURL({ username: 'Emma', type: 'Lockee', show5StarRating: true })
   t.is(lockee, 'https://chastikey.com/tickers/ticker.php?ty=2&un=Emma&r=1')
 })
 
 test('[Direct] Test get Ticker URL Keyholder', async t => {
-  const ticker = new Ticker()
-  const keyholder = await ticker.getURL({
+  const ck = new ChastiKey()
+  const keyholder = await ck.Ticker.getURL({
     username: 'Emma',
     type: 'Keyholder',
     show5StarRating: false,

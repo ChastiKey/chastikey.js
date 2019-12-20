@@ -5,28 +5,43 @@ import { Ticker } from './api/Ticker'
 import { DateFirstKeyheld } from './api/DateFirstKeyheld'
 import { KeyholderTotalLocksManaged } from './api/KeyholderTotalLocksManaged'
 import { RunningLocks } from './api/RunningLocks'
+import { LockeeData } from './api/LockeeData'
 
 export type ChastiKeyEndpoint =
   // API
-  | 'combinations.php'
-  | 'checklock.php'
-  | 'listlocks.php'
-  | 'listlocks2.php'
+  | 'combinations.php' // <= v0.4
+  | 'checklock.php' // <= v0.4
+  | 'listlocks.php' // <= v0.4
+  | 'listlocks2.php' // <= v0.4
+  | 'lockeedata.php' // = v0.5
   // Exports
   | 'completed_locks.json'
   | 'date_first_keyheld.json'
   | 'keyholders_total_locks_managed.json'
   | 'running_locks.json'
 
+export interface IChastiKeyRequestConfig {
+  baseURL?: string
+  repo?: 'api' | 'json'
+  apiVersion?: 'v0.2' | 'v0.3' | 'v0.4' | 'v0.5' | 'v1.0' | ''
+  clientID?: string
+  clientSecret?: string
+}
+
 /**
  * Options when constructing `ChastiKey`
  * @export
- * @interface IChastiKeyOptions
+ * @interface IChastiKeyConfig
  */
-export interface IChastiKeyOptions {
-  baseURL?: string
-  repo?: 'api' | 'json'
-  apiVersion?: 'v0.2' | 'v0.3' | 'v0.4' | 'v1.0' | ''
+export interface IChastiKeyConfig {
+  api?: IChastiKeyRequestConfig
+  export?: IChastiKeyRequestConfig
+
+  // * This is for fallback commands where the newer API no longer supports these calls
+  legacy?: {
+    api?: IChastiKeyRequestConfig
+    export?: IChastiKeyRequestConfig
+  }
 }
 
 /**
@@ -53,38 +68,29 @@ export interface IChastiKeyLegacyResponse {
  * @class ChastiKey
  */
 export class ChastiKey {
-  public apiConfig: IChastiKeyOptions = {
-    baseURL: `https://chastikey.com`,
-    repo: 'api',
-    apiVersion: 'v0.4'
-  }
-
-  public exportConfig: IChastiKeyOptions = {
-    baseURL: `https://chastikey.com`,
-    repo: 'json',
-    apiVersion: 'v1.0'
-  }
-
-  /**
-   *Creates an instance of ChastiKey.
-   * @param {IChastiKeyOptions} [options]
-   * @memberof ChastiKey
-   */
-  constructor(options?: IChastiKeyOptions, exportConfig?: IChastiKeyOptions) {
-    // When the First param is passed
-    if (options !== undefined) {
-      if (options.repo === 'api') {
-        // Merge any optional props
-        if (options) Object.assign(this.apiConfig, options)
-      }
-      if (options.repo === 'json') {
-        // Merge any optional props
-        if (options) Object.assign(this.exportConfig, options)
+  public apiConfig: IChastiKeyConfig = {
+    api: {
+      baseURL: 'https://chastikey.com',
+      repo: 'api',
+      apiVersion: 'v0.5'
+    },
+    export: {
+      baseURL: 'https://chastikey.com',
+      repo: 'json',
+      apiVersion: 'v1.0'
+    },
+    legacy: {
+      api: {
+        baseURL: 'https://chastikey.com',
+        repo: 'api',
+        apiVersion: 'v0.4'
+      },
+      export: {
+        baseURL: 'https://chastikey.com',
+        repo: 'json',
+        apiVersion: 'v1.0'
       }
     }
-
-    // When Second param is passed it's specifically for the export config
-    if (exportConfig !== undefined) Object.assign(this.exportConfig, options)
   }
 
   // * ////////////////////////
@@ -95,19 +101,25 @@ export class ChastiKey {
    * CheckLock queries
    * @memberof ChastiKey
    */
-  public CheckLock = new CheckLock(this.apiConfig)
+  public CheckLock = new CheckLock(this.apiConfig.legacy.api)
 
   /**
    * ListLocks queries
    * @memberof ChastiKey
    */
-  public ListLocks = new ListLocks(this.apiConfig)
+  public ListLocks = new ListLocks(this.apiConfig.legacy.api)
 
   /**
    * Ticker queries
    * @memberof ChastiKey
    */
-  public Ticker = new Ticker(this.apiConfig)
+  public Ticker = new Ticker(this.apiConfig.legacy.api)
+
+  /**
+   * LockeeData queries
+   * @memberof ChastiKey
+   */
+  public LockeeData = new LockeeData(this.apiConfig.api)
 
   // * ////////////////////////
   // * Data Exports
@@ -120,7 +132,7 @@ export class ChastiKey {
    * - Requirement: `ActiveInApp <= 2 weeks`
    * @memberof ChastiKey
    */
-  public CompletedLocks = new CompletedLocks(this.exportConfig)
+  public CompletedLocks = new CompletedLocks(this.apiConfig.legacy.export)
 
   /**
    * **Cached Date First keyheld for all public keyholders**
@@ -128,7 +140,7 @@ export class ChastiKey {
    * - Cached: `15 Minutes`
    * @memberof ChastiKey
    */
-  public DateFirstKeyheld = new DateFirstKeyheld(this.exportConfig)
+  public DateFirstKeyheld = new DateFirstKeyheld(this.apiConfig.legacy.export)
 
   /**
    * **Retrieves the current data export JSON for Keyholder total locks managed counts.**
@@ -136,7 +148,7 @@ export class ChastiKey {
    * - Cached: `15 Minutes`
    * @memberof ChastiKey
    */
-  public KeyholderTotalLocksManaged = new KeyholderTotalLocksManaged(this.exportConfig)
+  public KeyholderTotalLocksManaged = new KeyholderTotalLocksManaged(this.apiConfig.legacy.export)
 
   /**
    * **Retrieves the current data export JSON for Running Locks**
@@ -144,7 +156,25 @@ export class ChastiKey {
    * - Cached: `15 Minutes`
    * @memberof ChastiKey
    */
-  public RunningLocks = new RunningLocks(this.exportConfig)
+  public RunningLocks = new RunningLocks(this.apiConfig.legacy.export)
+
+  /**
+   *Creates an instance of ChastiKey.
+   * @param {IChastiKeyConfig} [options]
+   * @memberof ChastiKey
+   */
+  constructor(overrides?: IChastiKeyConfig) {
+    if (overrides) {
+      // Legacy Config Overrides
+      if (overrides.hasOwnProperty('legacy')) {
+        if (overrides.legacy.hasOwnProperty('api')) Object.assign(this.apiConfig.legacy.api, overrides.legacy.api)
+        if (overrides.legacy.hasOwnProperty('export')) Object.assign(this.apiConfig.legacy.api, overrides.legacy.api)
+      }
+      // Current Config Overrides
+      if (overrides.hasOwnProperty('api')) Object.assign(this.apiConfig.api, overrides.api)
+      if (overrides.hasOwnProperty('export')) Object.assign(this.apiConfig.export, overrides.export)
+    }
+  }
 }
 
 export default ChastiKey

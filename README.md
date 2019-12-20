@@ -33,11 +33,17 @@ Check [JSDelivr](https://www.jsdelivr.com/package/gh/ChastiKey/chastikey.js?path
 
 Available Options:
 
-| Key        | Accepts Type(s) | Default                 | Available/Example                 |
-| ---------- | --------------- | ----------------------- | --------------------------------- |
-| baseURL    | `string`        | `https://chastikey.com` |
-| repo       | `string`        | `api`                   | `api`, `json`                     |
-| apiVersion | `string`        | `v0.4`                  | `v0.2`, `v0.3`, `v0.4`, (`1.0`\*) |
+| Key                     | Accepts Type(s) | Default                 | Available/Example      |
+| ----------------------- | --------------- | ----------------------- | ---------------------- |
+| `api.baseURL`           | `string`        | `https://chastikey.com` |
+| `api.repo`              | `string`        | `api`                   | `api`, `json`          |
+| `api.apiVersion`        | `string`        | `v0.5`                  | `v0.5`                 |
+| `export.baseURL`        | `string`        | `https://chastikey.com` |
+| `export.repo`           | `string`        | `export`                | `api`, `json`          |
+| `export.apiVersion`     | `string`        | `1.0`                   | `1.0`\*                |
+| `legacy.api.baseURL`    | `string`        | `https://chastikey.com` |
+| `legacy.api.repo`       | `string`        | `api`                   | `api`, `json`          |
+| `legacy.api.apiVersion` | `string`        | `v0.4`                  | `v0.2`, `v0.3`, `v0.4` |
 
 > **\*1.0** - is only for the JSON exports, NOT for regular lookups.
 
@@ -73,6 +79,53 @@ new ChastiKey().ListLocks.get( ... )
   new ChastiKey().ListLocks.get( ... )
 </script>
 ```
+
+---
+
+### `ChastiKey.LockeeData`
+
+> **`clientID + clientSecret Required`**
+
+Retrieves the specified user's lockee data _(Locks + Stats)_.
+
+ChastiKey Side Caching: `[ No ]`
+
+Available Options:
+
+| Key        | Required? | Accepts Type(s) | Default |
+| ---------- | :-------: | --------------- | :-----: |
+| username   |    Yes    | `string`        |         |
+| discordid  |    No     | `string`        |         |
+| showdelete |    No     | `number`        |   `1`   |
+
+API Usage:
+
+```ts
+const ld = await new ChastiKey({ api: { clientID: 'xxxx', clientSecret: 'xxxx' } })
+  .LockeeData.get({
+    username: 'username'
+  })
+
+ld // => { status: 200, data: LockeeData, locks: Array<LockeeDataLock>, ... }
+```
+
+#### [`LockeeData`] Available Computed Values / Helpers
+
+**`isCardInfoHidden`: boolean**
+**`isCumulative`: boolean**
+**`combinationInt`: number**
+**`isDeleted`: boolean**
+**`isDiscarded`: boolean**
+**`isFixed`: boolean**
+**`isFrozen`: boolean**
+**`isFrozenByCard`: boolean**
+**`isFrozenByKeyholder`: boolean**
+**`isLocked`: boolean**
+**`isMultipleGreensRequired`: boolean**
+**`isTimerHidden`: boolean**
+**`isTrustedKeyholder`: boolean**
+**`isUnlocked`: boolean**
+**`totalTimeLocked`: number**
 
 ---
 
@@ -201,7 +254,7 @@ completedResp // => { locks: Array<CompletedLocksLock>, search: HelperFunc }
 
 #### [`CompletedLocks`] Available Computed Values / Helpers
 
-#### `completedResp.search( { searchBy: RegExp | value }, ... )`
+##### `completedResp.search( { searchBy: RegExp | value }, ... )`
 
 Usage Example(s):
 
@@ -229,7 +282,7 @@ dfkh // => { keyholders: Array<DateFirstKeyheldEntry>, search: HelperFunc }
 
 #### [`DateFirstKeyheld`] Available Computed Values / Helpers
 
-#### `dfkh.search( { searchBy: RegExp | value }, ... )`
+##### `dfkh.search( { searchBy: RegExp | value }, ... )`
 
 Usage Example(s):
 
@@ -257,7 +310,7 @@ khtlm // => { keyholders: Array<KeyholderTotalLocksManagedEntry>, search: Helper
 
 #### [`KeyholderTotalLocksManaged`] Available Computed Values / Helpers
 
-#### `khtlm.search( { searchBy: RegExp | value }, ... )`
+##### `khtlm.search( { searchBy: RegExp | value }, ... )`
 
 Usage Example(s):
 
@@ -285,7 +338,7 @@ rl // => { keyholders: Array<RunningLocksLock>, search: HelperFunc }
 
 #### [`RunningLocks`] Available Computed Values / Helpers
 
-#### `rl.search( { searchBy: RegExp | value }, ... )`
+##### `rl.search( { searchBy: RegExp | value }, ... )`
 
 Usage Example(s):
 
