@@ -1,10 +1,12 @@
 export class LockeeDataResponse {
-  /**
-   * Response Information of API request
-   */
-  public status: 0 | 200 | 204 | 400 = 0
-  public message: '<pending request>'
-  public timestampGenerated: number = 0
+  public response = {
+    /**
+     * Response Information of API request
+     */
+    status: 0 as 0 | 200 | 204 | 400,
+    message: '<pending request>' as string,
+    timestampGenerated: 0 as number
+  }
 
   /**
    * ChastiKey App user account data & stats
@@ -31,20 +33,10 @@ export class LockeeDataResponse {
 
   constructor(init?: Partial<LockeeDataResponse>) {
     if (init) {
-      //  [ v0.5 <= Only ] Transfer Response out of Array
-      if (Array.isArray((init as any).response)) {
-        const legacyResp = (init as any).response[0]
-        this.status = legacyResp.status
-        this.message = legacyResp.message
-        this.timestampGenerated = legacyResp.timestampGenerated
-      } else {
-        this.status = init.status
-        this.message = init.message
-        this.timestampGenerated = init.timestampGenerated
-      }
+      Object.assign(this.response, init.response)
 
       this.data = new LockeeData(init.locks ? init.data || {} : {})
-      this.locks = init ? (init.locks = init.locks || []) : this.locks
+      this.locks = init.hasOwnProperty('locks') ? (this.locks = init.locks.map(l => new LockeeDataLock(l))) : this.locks
     }
   }
 }
