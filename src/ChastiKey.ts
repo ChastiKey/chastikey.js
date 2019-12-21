@@ -6,10 +6,11 @@ import { DateFirstKeyheld } from './api/DateFirstKeyheld'
 import { KeyholderTotalLocksManaged } from './api/KeyholderTotalLocksManaged'
 import { RunningLocks } from './api/RunningLocks'
 import { LockeeData } from './api/LockeeData'
+import { Combinations } from './api/Combinations'
 
 export type ChastiKeyEndpoint =
   // API
-  | 'combinations.php' // <= v0.4
+  | 'combinations.php' // <= v0.5
   | 'checklock.php' // <= v0.4
   | 'listlocks.php' // <= v0.4
   | 'listlocks2.php' // <= v0.4
@@ -102,6 +103,12 @@ export class ChastiKey {
    * @memberof ChastiKey
    */
   public CheckLock = new CheckLock(this.apiConfig.legacy.api)
+
+  /**
+   * Combinations queries
+   * @memberof ChastiKey
+   */
+  public Combinations = new Combinations(this.apiConfig.api)
 
   /**
    * ListLocks queries

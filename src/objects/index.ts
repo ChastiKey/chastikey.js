@@ -1,4 +1,5 @@
 export * from './CheckLock'
+export * from './Combinations'
 export * from './CompletedLocks'
 export * from './DateFirstKeyheld'
 export * from './KeyholderTotalLocksManaged'
