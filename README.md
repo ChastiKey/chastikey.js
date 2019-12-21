@@ -27,6 +27,23 @@ Check [JSDelivr](https://www.jsdelivr.com/package/gh/ChastiKey/chastikey.js?path
 
 ---
 
+## Calls Available
+
+- **`[API]`** - These are low or non cached lookups
+  - [CheckLock](#chastikeychecklock)
+  - [Combinations](#chastikeycombinations)
+  - [ListLocks](#chastikeylistlocks)
+  - [LockeeData](#chastikeylockeedata)
+- **`[Data Export]`** - These are larger exported files of all public data
+  - [CompletedLocks](#chastikeycompletedlocks)
+  - [DateFirstKeyheld](#chastikeydatefirstkeyheld)
+  - [KeyholderTotalLocksManaged](#chastikeykeyholdertotallocksmanaged)
+  - [RunningLocks](#chastikeyrunninglocks)
+- **`[URL]`** - These are just for URL building
+  - [Ticker](#chastikeyticker)
+
+---
+
 ## Usage
 
 ### `ChastiKey`
@@ -249,7 +266,7 @@ completedResp // => { locks: Array<CompletedLocksLock>, search: HelperFunc }
 
 #### [`CompletedLocks`] Available Computed Values / Helpers
 
-##### `completedResp.search( { searchBy: RegExp | value }, ... )`
+**`completedResp.search( { searchBy: RegExp | value }, ... )`**
 
 Usage Example(s):
 
@@ -277,7 +294,7 @@ dfkh // => { keyholders: Array<DateFirstKeyheldEntry>, search: HelperFunc }
 
 #### [`DateFirstKeyheld`] Available Computed Values / Helpers
 
-##### `dfkh.search( { searchBy: RegExp | value }, ... )`
+**`dfkh.search( { searchBy: RegExp | value }, ... )`**
 
 Usage Example(s):
 
@@ -305,7 +322,7 @@ khtlm // => { keyholders: Array<KeyholderTotalLocksManagedEntry>, search: Helper
 
 #### [`KeyholderTotalLocksManaged`] Available Computed Values / Helpers
 
-##### `khtlm.search( { searchBy: RegExp | value }, ... )`
+**`khtlm.search( { searchBy: RegExp | value }, ... )`**
 
 Usage Example(s):
 
@@ -333,7 +350,7 @@ rl // => { keyholders: Array<RunningLocksLock>, search: HelperFunc }
 
 #### [`RunningLocks`] Available Computed Values / Helpers
 
-##### `rl.search( { searchBy: RegExp | value }, ... )`
+**`rl.search( { searchBy: RegExp | value }, ... )`**
 
 Usage Example(s):
 
