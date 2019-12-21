@@ -53,7 +53,7 @@ Importing & Setup quick examples:
 // ==================
 // Examples for JS:
 // ==================
-const ChastiKey = require('chastikey.js');
+const { ChastiKey } = require('chastikey.js');
 // Then you're ready for:
 new ChastiKey().ListLocks.get( ... )
 ```
@@ -161,7 +161,7 @@ ll // => { status: 200, locks: Array<ListLocksLock>, ... }
 **`ListLocksLock.isLocked`: boolean**  
 **`ListLocksLock.isUnlocked`: boolean**  
 **`ListLocksLock.isAbandoned`: boolean**  
-**`ListLocksLock.totalTimeLocked`: number**  
+**`ListLocksLock.totalTimeLocked`: number**
 
 ---
 
@@ -194,7 +194,7 @@ clResp // => { status: 200, locks: Array<ListLocksLock>, ... } // Yes, It does u
 **`ListLocksLock.isLocked`: boolean**  
 **`ListLocksLock.isUnlocked`: boolean**  
 **`ListLocksLock.isAbandoned`: boolean**  
-**`ListLocksLock.totalTimeLocked`: number**  
+**`ListLocksLock.totalTimeLocked`: number**
 
 ---
 
