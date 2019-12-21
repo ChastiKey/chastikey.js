@@ -241,6 +241,16 @@ export class LockeeDataLock {
   public sharedLockURL: string
 
   /**
+   * - `0` Human Keyholder
+   * - `1` Bot Hailey
+   * - `2` Bot Blaine
+   * - `3` Bot Zoe
+   * - `4` Bot Chase
+   * @type {(0 | 1 | 2 | 3 | 4)}
+   */
+  public botChosen: 0 | 1 | 2 | 3 | 4
+
+  /**
    * Numerical status value for if Card info is hidden by the Keyholder
    *
    * **Tip:** See `isCardInfoHidden` for the computed boolean version of this value
@@ -312,8 +322,6 @@ export class LockeeDataLock {
 
   /**
    * `Variable Lock Only` Green cards picked
-   *
-   * **Note:** Will return `-9` if card info is hidden
    * @type {number}
    */
   public greenCardsPicked: number
@@ -344,8 +352,7 @@ export class LockeeDataLock {
 
   /**
    * `Variable Lock Only` Numerical value for multiple greens required status
-   *
-   * **Note:** Will return `-9` if card info is hidden
+
    * **Tip:** See `isMultipleGreensRequired` for the computed boolean version of this value
    * @type {number}
    */
@@ -364,6 +371,12 @@ export class LockeeDataLock {
    * @type {number}
    */
   public redCards: number
+
+  /**
+   * Decimal hour for the card pick frequency - Fixed locks will show just 24
+   * @type {number}
+   */
+  public regularity: number
 
   /**
    * `Variable Lock Only` Reset cards remaining
@@ -412,10 +425,22 @@ export class LockeeDataLock {
   public timestampLocked: number
 
   /**
+   * `Variable Lock Only` Timestamp when the next card draw will be available
+   * @type {number}
+   */
+  public timestampNextPick: number
+
+  /**
    * Timestamp the lock was declared unlocked in the ChastiKey App
    * @type {number}
    */
   public timestampUnlocked: number
+
+  /**
+   * Total time ths lock has been frozen
+   * @type {number}
+   */
+  public totalTimeFrozen: number
 
   /**
    * Numerical value for trusted keyholder status
