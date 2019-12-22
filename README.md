@@ -50,17 +50,17 @@ Check [JSDelivr](https://www.jsdelivr.com/package/gh/ChastiKey/chastikey.js?path
 
 Available Options:
 
-| Key                     | Accepts Type(s) | Default                 | Available/Example      |
-| ----------------------- | --------------- | ----------------------- | ---------------------- |
-| `api.baseURL`           | `string`        | `https://chastikey.com` |
-| `api.repo`              | `string`        | `api`                   | `api`, `json`          |
-| `api.apiVersion`        | `string`        | `v0.5`                  | `v0.5`                 |
-| `export.baseURL`        | `string`        | `https://chastikey.com` |
-| `export.repo`           | `string`        | `export`                | `api`, `json`          |
-| `export.apiVersion`     | `string`        | `1.0`                   | `1.0`\*                |
-| `legacy.api.baseURL`    | `string`        | `https://chastikey.com` |
-| `legacy.api.repo`       | `string`        | `api`                   | `api`, `json`          |
-| `legacy.api.apiVersion` | `string`        | `v0.4`                  | `v0.2`, `v0.3`, `v0.4` |
+| Key                  | Accepts Type(s) | Default                 | Available/Example      |
+| -------------------- | --------------- | ----------------------- | ---------------------- |
+| `api.baseURL`        | `string`        | `https://chastikey.com` |
+| `api.repo`           | `string`        | `api`                   | `api`, `json`          |
+| `api.version`        | `string`        | `v0.5`                  | `v0.5`                 |
+| `export.baseURL`     | `string`        | `https://chastikey.com` |
+| `export.repo`        | `string`        | `export`                | `api`, `json`          |
+| `export.version`     | `string`        | `1.0`                   | `1.0`\*                |
+| `legacy.api.baseURL` | `string`        | `https://chastikey.com` |
+| `legacy.api.repo`    | `string`        | `api`                   | `api`, `json`          |
+| `legacy.api.version` | `string`        | `v0.4`                  | `v0.2`, `v0.3`, `v0.4` |
 
 > **\*1.0** - is only for the JSON exports, NOT for regular lookups.
 
@@ -148,6 +148,34 @@ ld // => { status: 200, data: LockeeData, locks: Array<LockeeDataLock>, ... }
 **`totalTimeLocked`: number**
 
 ---
+
+---
+
+### `ChastiKey.LockeeData`
+
+> **`clientID + clientSecret Required`**
+
+Retrieves the specified user's lockee data _(Locks + Stats)_.
+
+ChastiKey Side Caching: `[ No ]`
+
+Available Options:
+
+| Key        | Required? | Accepts Type(s) | Default |
+| ---------- | :-------: | --------------- | :-----: |
+| username   |    Yes    | `string`        |         |
+| discordid  |    No     | `string`        |         |
+| showdelete |    No     | `number`        |   `1`   |
+
+API Usage:
+
+```ts
+const ld = await new ChastiKey({ api: { clientID: 'xxxx', clientSecret: 'xxxx' } }).LockeeData.get({
+  username: 'username'
+})
+
+ld // => { status: 200, data: LockeeData, locks: Array<LockeeDataLock>, ... }
+```
 
 ### `ChastiKey.ListLocks`
 

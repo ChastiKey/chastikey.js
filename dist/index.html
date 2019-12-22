@@ -1,0 +1,333 @@
+<!--
+/**
+* ## How to run this example:
+* .
+* > Open in Chrome
+*/
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ChastiKey.js</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,400&display=swap');
+
+      body,
+      * {
+        font-family: 'Raleway', sans-serif;
+        -webkit-transition: all 0.35s ease-in-out;
+        -moz-transition: all 0.35s ease-in-out;
+        transition: all 0.35s ease-in-out;
+      }
+
+      #content {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #timer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        max-width: 640px;
+        width: 100%;
+        height: 240px;
+        margin: auto;
+        padding: 0px;
+        font-size: 2.5em;
+        text-align: center;
+        font-weight: 200;
+      }
+
+      #modal-username {
+        max-width: 575px;
+        width: 100%;
+        height: 150px;
+      }
+
+      #modal-config {
+        max-width: 375px;
+        width: 100%;
+        height: 475px;
+      }
+
+      #username-input {
+        padding: 5px;
+        width: 75%;
+        outline: none;
+        font-size: 1.5em;
+        color: #444;
+        text-align: center;
+        border: 0;
+        border-bottom: 2px solid #747474;
+      }
+
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        padding: 0px;
+        border: 3px solid #999;
+        background-color: #fff;
+        padding: 25px 10px;
+        text-align: center;
+        transform: scale(0.75);
+        -webkit-transform: scale(0.75);
+        opacity: 0;
+        display: none;
+      }
+
+      .modal-show {
+        transform: scale(1) !important;
+        -webkit-transform: scale(1) !important;
+        -moz-transform: scale(1) !important;
+        opacity: 1 !important;
+      }
+
+      .close-modal {
+        cursor: pointer;
+      }
+
+      .header {
+        font-weight: 200;
+        font-size: 1.5em;
+        margin: 20px 0;
+      }
+
+      .error {
+        color: #c0392b;
+        margin: 10px 0;
+      }
+
+      .show {
+        opacity: 1 !important;
+      }
+
+      #timer-locked-main {
+        font-size: 1.5em;
+        font-weight: 300;
+      }
+
+      #timer-locked-expected {
+        font-size: 1em;
+        font-weight: 200;
+      }
+
+      .timer-interval {
+        font-size: 22px;
+        color: #999;
+      }
+
+      #menu {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 15px;
+        color: #777;
+        opacity: 0;
+      }
+
+      #menu .item {
+        cursor: pointer;
+        margin: 0 8px;
+      }
+
+      #menu .item:hover {
+        color: #222;
+      }
+    </style>
+
+    <script src="./ChastiKey.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="content">
+      <div id="timer">
+        Time Locked:<br />
+        <div id="timer-locked-main">...</div>
+        <!-- <div id="timer-locked-expected">...</div> -->
+      </div>
+
+      <div id="modal-username" class="modal">
+        <div class="header">Input your username, then [Enter] key to proceed</div>
+        <div><input type="text" id="username-input" placeholder="Emma" /></div>
+        <div class="error"></div>
+      </div>
+
+      <div id="modal-config" class="modal">
+        <div class="header">Active Locks</div>
+        <div><ul id="locks-list"></ul></div>
+        <div class="close-modal"><u>close</u></div>
+      </div>
+
+      <div id="menu">
+        <span class="item" id="btn-locks">lock (#)</span>
+        <span class="item" id="btn-refresh">refresh</span>
+      </div>
+    </div>
+
+    <script>
+      // Any shared variables
+      var updateTicker = null
+      var username = ''
+      var listLocksData = null
+      var listLocksDataLockedLocks = null
+      // Elements
+      var elOnScreenMainTime = null
+      var elOnScreenExpectedTime = null
+      // Elements:Modals
+      var elModalUsername = null
+      var elModalConfig = null
+
+      function calculateHumanTimeDDHHMM(seconds, html = false) {
+        // Calculate human readible time for lock from seconds
+        const timelocked = seconds
+        var secs = parseInt(timelocked % 60)
+        var min = Math.floor(timelocked / 60)
+        var hrs = Math.floor(min / 60)
+        var days = Math.floor(hrs / 24)
+        min = min % 60
+        hrs = hrs % 24
+
+        const timeToShowDays = `${days > 9 ? +days : '0' + days}`
+        const timeToShowHours = `${hrs > 9 ? +hrs : '0' + hrs}`
+        const timeToShowMins = `${min > 9 ? +min : '0' + min}`
+        const timeToShowSecs = `${secs > 9 ? +secs : '0' + secs}`
+
+        if (html) {
+          return `${timeToShowDays}<span class="timer-interval">d</span> ${timeToShowHours}<span class="timer-interval">h</span> ${timeToShowMins}<span class="timer-interval">m</span> ${timeToShowSecs}<span class="timer-interval">s</span>`
+        } else {
+          return `${timeToShowDays}d ${timeToShowHours}h ${timeToShowMins}m ${timeToShowSecs}s`
+        }
+      }
+
+      function startInterval() {
+        updateTicker = setInterval(() => {
+          elOnScreenMainTime.innerHTML = calculateHumanTimeDDHHMM(listLocksDataLockedLocks[0].totalTimeLocked, true)
+          // elOnScreenExpectedTime.innerHTML = calculateHumanTimeDDHHMM(
+          //   listLocksDataLockedLocks[0].timestampExpectedUnlock - Date.now() / 1000,
+          //   true
+          // )
+        }, 1000)
+      }
+
+      function stopInterval() {
+        clearInterval(updateTicker)
+      }
+
+      function showModal(id) {
+        console.log('showModal', id, document.querySelector(id))
+        document.querySelector(id).style.display = 'block'
+        setTimeout(() => {
+          document.querySelector(id).classList.add('modal-show')
+        }, 100)
+      }
+
+      function hideModal(id) {
+        console.log('hideModal', id)
+        document.querySelector(id).classList.remove('modal-show')
+        setTimeout(() => {
+          document.querySelector(id).style.display = 'none'
+        }, 400)
+      }
+
+      function createLockForList(lock) {
+        // li element
+        var node = document.createElement('li')
+        var textnode = document.createTextNode(
+          `ID: ${lock.lockID} - ${calculateHumanTimeDDHHMM(lock.totalTimeLocked, false)}`
+        )
+        node.appendChild(textnode)
+        return node
+      }
+
+      function fetchListLocksData(uname) {
+        username = uname
+        // Reset any error messages
+        elModalUsername.querySelector('.error').textContent = ''
+        // Stop any update ticks
+        stopInterval()
+
+        // Make the request using the API Wrapper
+        new ChastiKey().ListLocks.get({ username: username })
+          .then(resp => {
+            if (resp.status === 200) {
+              // Set listLocksData, this will contain the user's fetched data
+              listLocksData = resp
+              listLocksDataLockedLocks = resp.getLocked
+              // Start interval to update onscreen time
+              startInterval()
+              // If user was found, close the username modal
+              hideModal('#modal-username')
+              // Show menu
+              document.querySelector('#menu').classList.add('show')
+              // Populate active locks list
+              elModalConfig.querySelector('#locks-list').innerHTML = ''
+              listLocksDataLockedLocks.forEach(l =>
+                elModalConfig.querySelector('#locks-list').appendChild(createLockForList(l))
+              )
+            } else {
+              // Show error message on screen
+              elModalUsername.querySelector('.error').textContent = resp.message
+            }
+          })
+          .catch(error => {
+            console.error(error)
+            // Show error message on screen - Notify user to check the console output for a throw error
+            elModalUsername.querySelector('.error').textContent = 'Unknown error! Check console output.'
+          })
+      }
+
+      // Watch elements
+      document.addEventListener('DOMContentLoaded', event => {
+        // Set focus of main timer
+        elOnScreenMainTime = document.querySelector('#timer-locked-main')
+        elOnScreenExpectedTime = document.querySelector('#timer-locked-expected')
+        elModalUsername = document.querySelector('#modal-username')
+        elModalConfig = document.querySelector('#modal-config')
+
+        // Set an artificial delay to allow for animation transition to occur
+        window.setTimeout(() => {
+          // Show modal input
+          showModal('#modal-username')
+          // Focus modal's input
+          elModalUsername.querySelector('input[type=text]').focus()
+        }, 120)
+
+        // Add listener for enter key from input
+        elModalUsername.querySelector('input[type=text]').addEventListener('keyup', e => {
+          // On Enter key
+          if (e.keyCode === 13) {
+            fetchListLocksData(elModalUsername.querySelector('input[type=text]').value)
+          }
+          // On Esc key
+          if (e.keyCode === 27) {
+            elModalUsername.querySelector('input[type=text]').value = ''
+          }
+        })
+
+        // Add listener for refresh button
+        document.querySelector('#btn-refresh').addEventListener('click', e => fetchListLocksData(username))
+        // Add listener for locks button
+        document.querySelector('#btn-locks').addEventListener('click', e => {
+          showModal('#modal-config')
+        })
+        // Add listener closing Active Locks modal
+        elModalConfig.querySelector('.close-modal').addEventListener('click', e => {
+          hideModal('#modal-config')
+        })
+      })
+    </script>
+  </body>
+</html>
