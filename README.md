@@ -33,6 +33,29 @@ Check [JSDelivr](https://www.jsdelivr.com/package/gh/ChastiKey/chastikey.js?path
 
 ---
 
+## `2.0.0` Todo
+
+- [x] Add LockeeData endpoint from `v0.5`
+  - [x] Type definitions for Objects
+  - [x] Helpers / Computed added
+  - [x] Documentation
+  - [ ] Add multiple test cases
+- [x] Add KeyholderData endpoint from `v0.5`
+  - [ ] Type definitions for Objects
+  - [ ] Helpers / Computed added
+  - [ ] Documentation
+  - [ ] Add multiple test cases
+- [x] Add Combinations endpoint from `v0.5`
+  - [x] Type definitions for Objects
+  - [x] Helpers / Computed added
+  - [x] Documentation
+  - [ ] Add multiple test cases
+- [x] GH Pages Documentation (due to size of main `README`)
+- [ ] JSDoc output to GH Pages
+- [ ] Investigate and implement FormData support for `useNoProxy` usage as JSON sometimes causes issues
+
+---
+
 ## License
 
 MIT

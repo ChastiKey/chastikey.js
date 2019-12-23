@@ -7,6 +7,7 @@ import { KeyholderTotalLocksManaged } from './api/KeyholderTotalLocksManaged'
 import { RunningLocks } from './api/RunningLocks'
 import { LockeeData } from './api/LockeeData'
 import { Combinations } from './api/Combinations'
+import { KeyholderData } from './api/KeyholderData'
 
 export type ChastiKeyEndpoint =
   // API
@@ -115,22 +116,28 @@ export class ChastiKey {
   public Combinations = new Combinations(this.apiConfig)
 
   /**
+   * KeyholderData queries
+   * @memberof ChastiKey
+   */
+  public KeyholderData = new KeyholderData(this.apiConfig)
+
+  /**
    * ListLocks queries
    * @memberof ChastiKey
    */
   public ListLocks = new ListLocks(this.apiConfig)
 
   /**
-   * Ticker queries
-   * @memberof ChastiKey
-   */
-  public Ticker = new Ticker(this.apiConfig)
-
-  /**
    * LockeeData queries
    * @memberof ChastiKey
    */
   public LockeeData = new LockeeData(this.apiConfig)
+
+  /**
+   * Ticker queries
+   * @memberof ChastiKey
+   */
+  public Ticker = new Ticker(this.apiConfig)
 
   // * ////////////////////////
   // * Data Exports
