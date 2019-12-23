@@ -6,7 +6,7 @@ test('Test fetch Combinations -> Combinations.get({ params })', async t => {
   const ck = new ChastiKey({
     clientID: process.env.CLIENTID,
     clientSecret: process.env.CLIENTSECRET,
-    rapidAPIKey: process.env.rapidAPIKey
+    rapidAPIKey: process.env.RAPIDAPIKEY
   })
   const resp = await ck.Combinations.get({ username: 'emma' })
   t.is(resp.response.status, 200)
