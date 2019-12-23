@@ -3,11 +3,8 @@
 # abort on errors
 set -e
 
-# build
-yarn run build
-
 # navigate into the build output directory
-cd dist
+cd docs
 
 git init
 git add -A

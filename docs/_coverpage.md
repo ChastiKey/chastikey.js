@@ -4,8 +4,9 @@
 
 - No fussing writing requests from scratch
 - Covering all available Endpoints & Data Exports
-<!-- - Webpacked & ready for web browser use -->
+- Webpacked & ready for web browser use
+- Request Proxy Support
 - Typescript definitions included
 
 [GitHub](https://github.com/ChastiKey/chastikey.js/)
-[Get Started](#docsify)
+[Get Started](#getting-started)

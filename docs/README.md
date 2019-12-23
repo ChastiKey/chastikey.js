@@ -1,7 +1,7 @@
 # Getting Started
 
-> Note: Some requests will require a `clientID` & `clientSecret` obtained from the ChastiKey App Alpha.  
-> [More info]()
+> Note: Some requests will require a `clientID`, `clientSecret` obtained from the ChastiKey App Alpha & `rapidAPIKey` from RapidAPI.  
+> [More info](https://ChastiKey.github.io/chastikey.js/#/configuration?id=configuration-options)
 
 ## Installing
 
@@ -50,11 +50,12 @@ new ChastiKey().ListLocks.get( { ... } )
   .then(resp => ... )
   .catch(error => ... )
 ```
+
 ### Web Page
 
 Until some server side configuration is completed the webpacked version of `chastikey.js` will remain out of order.
 
-<!-- 
+<!--
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/ChastiKey/chastikey.js@1.4.0/dist/ChastiKey.js"></script>
