@@ -28,7 +28,7 @@ export class LockeeDataResponse {
    * @type {number}
    */
   public get getLocked(): Array<LockeeDataLock> {
-    return this.locks.filter(l => l.status !== 'UnlockedReal' && l.deleted === 0)
+    return this.locks.filter(l => l.status !== 'UnlockedReal' && l.status !== 'UnlockedFake' && l.deleted === 0)
   }
 
   constructor(init?: Partial<LockeeDataResponse>) {
@@ -392,9 +392,9 @@ export class LockeeDataLock {
 
   /**
    * State of the lock
-   * @type {('UnlockedReal' | 'Locked' | 'ReadyToUnlock')}
+   * @type {('UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake')}
    */
-  public status: 'UnlockedReal' | 'Locked' | 'ReadyToUnlock'
+  public status: 'UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake'
 
   /**
    * Numerical value for lock timer hidden status
@@ -470,6 +470,9 @@ export class LockeeDataLock {
   public get isCumulative(): boolean {
     return this.cumulative === 1
   }
+  public get isNonCumulative(): boolean {
+    return this.cumulative === 0
+  }
   public get combinationInt(): number {
     return this.combination ? Number(this.combination) : null
   }
@@ -500,7 +503,7 @@ export class LockeeDataLock {
     return this.lockFrozenByKeyholder === 1
   }
   public get isLocked(): boolean {
-    return this.status === 'UnlockedReal'
+    return this.status !== 'UnlockedReal' && this.status !== 'UnlockedFake'
   }
   public get isMultipleGreensRequired(): boolean {
     return this.multipleGreensRequired === 1
@@ -512,7 +515,7 @@ export class LockeeDataLock {
     return this.trustKeyholder === 1
   }
   public get isUnlocked(): boolean {
-    return this.status !== 'UnlockedReal'
+    return this.status === 'UnlockedReal' || this.status === 'UnlockedFake'
   }
 
   /**

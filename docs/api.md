@@ -316,6 +316,7 @@ Example Response:
 
 **`isCardInfoHidden`: boolean**  
 **`isCumulative`: boolean**  
+**`isNonCumulative`: boolean**  
 **`combinationInt`: number**  
 **`isDeleted`: boolean**  
 **`isDiscarded`: boolean**  
