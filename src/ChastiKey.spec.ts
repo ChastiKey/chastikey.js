@@ -29,6 +29,12 @@ test('Has .KeyholderTotalLocksManaged', t => {
 test('Has .RunningLocks', t => {
   t.is(typeof ck.RunningLocks, 'object')
 })
+test('Has .Combinations', t => {
+  t.is(typeof ck.Combinations, 'object')
+})
+test('Has .LockeeData', t => {
+  t.is(typeof ck.LockeeData, 'object')
+})
 
 test('Test fetch ListLocks', async t => {
   const resp = await ck.ListLocks.get({ username: 'emma', showdeleted: true })

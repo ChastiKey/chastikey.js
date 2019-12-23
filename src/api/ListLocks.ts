@@ -18,6 +18,8 @@ interface IListLocksGetParams extends IChastiKeyParam {
  * @extends {APIBase}
  */
 export class ListLocks extends APIBase {
+  protected repo = 'api'
+
   /**
    * **Fetches the specified user's locks**
    * @param {IListLocksGetParams} params

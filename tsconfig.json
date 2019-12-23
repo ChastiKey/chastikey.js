@@ -4,6 +4,7 @@
     "target": "es6",
     "removeComments": true,
     "noImplicitAny": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "preserveConstEnums": true,

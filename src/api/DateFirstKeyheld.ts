@@ -11,6 +11,8 @@ import { DateFirstKeyheldResponse } from '../objects/'
  * @extends {APIBase}
  */
 export class DateFirstKeyheld extends APIBase {
+  protected repo = 'json'
+
   /**
    * **Fetches the scheduled data export for date first keyheld**
    * @returns {Promise<DateFirstKeyheldResponse>}

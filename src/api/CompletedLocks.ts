@@ -12,6 +12,8 @@ import { CompletedLocksResponse } from '../objects/'
  * @extends {APIBase}
  */
 export class CompletedLocks extends APIBase {
+  protected repo = 'json'
+
   /**
    * **Fetches the scheduled data export of completed locks**
    * @returns {Promise<CompletedLocksResponse>}

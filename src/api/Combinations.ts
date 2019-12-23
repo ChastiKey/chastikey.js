@@ -15,6 +15,8 @@ interface ICombinationsGetParams extends IChastiKeyParam {
  * @extends {APIBase}
  */
 export class Combinations extends APIBase {
+  protected repo = 'api'
+
   /**
    * **Fetches the specified user's locks & Basic account data/stats**
    * @param {ICombinationsGetParams} params

@@ -12,14 +12,14 @@ import { RunningLocksResponse } from '../objects/'
  * @extends {APIBase}
  */
 export class RunningLocks extends APIBase {
+  protected repo = 'json'
+
   /**
    * **Fetches the scheduled data export for running locks**
    * @returns {Promise<RunningLocksResponse>}
    * @memberof RunningLocks
    */
   public async get(): Promise<RunningLocksResponse> {
-    return new RunningLocksResponse(
-      await this.requestDataExport<Objects.RunningLocksLock>('running_locks.json')
-    )
+    return new RunningLocksResponse(await this.requestDataExport<Objects.RunningLocksLock>('running_locks.json'))
   }
 }

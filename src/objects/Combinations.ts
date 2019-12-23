@@ -35,7 +35,8 @@ export class CombinationLock {
   /**
    * Keyholder's username
    *
-   * **Note:** This may be hidden if the Keyholder has their App Stats disabled!   * @type {string}
+   * **Note:** This may be hidden if the Keyholder has their App Stats disabled!   *
+   * @type {string}
    */
   public lockedBy: string
 

@@ -1,12 +1,18 @@
 import Axios, { AxiosResponse } from 'axios'
-import * as FormData from 'form-data'
-import { ChastiKeyEndpoint, IChastiKeyRequestConfig } from './ChastiKey'
+import { ChastiKeyEndpoint, IChastiKeyConfig } from './ChastiKey'
 import { FetchError } from './errors'
 
 export class APIBase {
-  public config: IChastiKeyRequestConfig
+  protected readonly callerName: string = this.constructor.name
+  protected readonly runningInNode = typeof self === 'undefined'
+  protected readonly repo: string
+  public config: IChastiKeyConfig
 
-  constructor(config: IChastiKeyRequestConfig) {
+  private get version() {
+    return (this.config.apiVersion as { [key: string]: string })[this.callerName]
+  }
+
+  constructor(config: IChastiKeyConfig) {
     this.config = config
   }
 
@@ -17,7 +23,7 @@ export class APIBase {
    * @memberof ChastiKey
    */
   public get baseURLBuilt(): string {
-    return `${this.config.baseURL}/${this.config.repo}/${this.config.apiVersion}/`
+    return `${this.config.baseURL}/${this.repo}/${this.version}/`
   }
 
   /**
@@ -70,21 +76,43 @@ export class APIBase {
   protected async request<T, I>(endpoint: ChastiKeyEndpoint, params?: I | any) {
     try {
       // * Newer requests will require a ClientID and Secret from the ChastiKey App
-      if (this.config.apiVersion === 'v0.5') {
-        // Build Multipart form data used by newer API version(s)
-        const formData = new FormData()
-        Object.keys(params).forEach(key => formData.append(key, params[key]))
-        // Prep headers
-        const headers = Object.assign(
-          {
-            clientID: this.config.clientID,
-            clientSecret: this.config.clientSecret
-          },
-          formData.getHeaders()
-        )
+      if (this.version === 'v0.5') {
+        // Throw error if clientID and or clientSecret clientID are missing
+        if (!this.config.clientID || !this.config.clientSecret) {
+          throw new Error('This is a newer request that requires a clientID and clientSecret to retrieve data!')
+        }
+
+        // If running in the web the wrapper will need to use RapidAPI as a proxy thus requires an app key
+        if (!this.config.rapidAPIKey) {
+          throw new Error(
+            'This will not work without setting a rapidAPIKey due to CORS configuration on the ChastiKey API.'
+          )
+        }
+
+        // Base Headers
+        var headers = {
+          'content-type': 'application/json',
+          accept: 'application/json',
+          clientID: this.config.clientID,
+          clientSecret: this.config.clientSecret
+        }
+
+        // When the config is not required to try direct queries to ChastiKey's API
+        if (!this.config.useNoProxy) {
+          // Switch the base of the request over to RapidAPI
+          this.config.baseURL = `https://${this.config.rapidAPIHost}`
+          // Set RapidAPI headers
+          Object.assign(headers, {
+            'x-rapidapi-host': this.config.rapidAPIHost,
+            'x-rapidapi-key': this.config.rapidAPIKey
+          })
+        }
+
         // Make request to ChastiKey
-        const response = (await Axios.post(`${this.baseURLBuilt}${endpoint}`, formData, {
-          headers
+        const response = (await Axios(`${this.baseURLBuilt}${endpoint}`, {
+          method: 'POST',
+          headers,
+          data: params
         })) as AxiosResponse<T>
         // On Response from Server (non-404)
         return response.data
