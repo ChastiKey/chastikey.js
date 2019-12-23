@@ -25,7 +25,7 @@ export class ListLocksResponse {
   }
 
   public get getLocked(): Array<ListLocksLock> {
-    return this.locks.filter(l => l.isLocked)
+    return this.locks.filter(l => l.status !== 'UnlockedReal')
   }
 }
 

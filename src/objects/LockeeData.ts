@@ -28,7 +28,7 @@ export class LockeeDataResponse {
    * @type {number}
    */
   public get getLocked(): Array<LockeeDataLock> {
-    return this.locks.filter(l => l.isLocked)
+    return this.locks.filter(l => l.status !== 'UnlockedReal')
   }
 
   constructor(init?: Partial<LockeeDataResponse>) {
