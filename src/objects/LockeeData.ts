@@ -91,6 +91,12 @@ export class LockeeData {
   public buildNumberInstalled: number
 
   /**
+   * Cumulative time locked in past + current lock (excludes abandoned)
+   * @type {number}
+   */
+  public cumulativeSecondsLocked: number
+
+  /**
    * Date Time of ChastiKey account creation
    * @type {string}
    */
@@ -157,6 +163,12 @@ export class LockeeData {
    * @type {number}
    */
   public totalNoOfCompletedLocks: number
+
+  /**
+   * Total number of locks (regardless of completion)
+   * @type {number}
+   */
+  public totalNoOfLocks: number
 
   /**
    * ChastiKey App version last used
