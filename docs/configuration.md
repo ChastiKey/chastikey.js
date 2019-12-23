@@ -1,13 +1,5 @@
 # Configuration
 
-## What's available
-
-- These are low or non cached lookups
-  - [CheckLock](#checklock)
-  - [Combinations](#combinations)
-  - [ListLocks](#listlocks)
-  - [LockeeData](#lockeedata)
-
 ## Configuration options
 
 > Note: Only the `clientID`, `clientSecret` and `rapidAPIKey` are required for `v0.5` requests.
