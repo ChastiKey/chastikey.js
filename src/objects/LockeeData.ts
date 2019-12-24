@@ -31,6 +31,21 @@ export class LockeeDataResponse {
     return this.locks.filter(l => l.status !== 'UnlockedReal' && l.status !== 'UnlockedFake' && l.deleted === 0)
   }
 
+  /**
+   * Find the time (in seconds) since the last lock ended. Returns null if currently locked.
+   * @readonly
+   * @type {number}
+   */
+  public get timeSinceLastLocked(): number {
+    if (this.getLocked.length === 0 && this.locks.length > 0) {
+      const lastUnlocked = this.locks
+        .filter(l => l.status === 'UnlockedReal')
+        .reduce((prev, cur) => (prev.timestampUnlocked > cur.timestampUnlocked ? prev : cur))
+
+      return Date.now() / 1000 - lastUnlocked.timestampUnlocked
+    } else return null
+  }
+
   constructor(init?: Partial<LockeeDataResponse>) {
     if (init) {
       Object.assign(this.response, init.response)
