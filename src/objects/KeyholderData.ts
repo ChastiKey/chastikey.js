@@ -16,9 +16,9 @@ export class KeyholderDataResponse {
 
   /**
    * ChastiKey App locks
-   * @type {Array<KeyholderDataRunningLock>}
+   * @type {Array<KeyholderDataLock>}
    */
-  public locks: Array<KeyholderDataRunningLock> = []
+  public locks: Array<KeyholderDataLock> = []
 
   constructor(init?: Partial<KeyholderDataResponse>) {
     if (init) {
@@ -26,7 +26,7 @@ export class KeyholderDataResponse {
 
       this.data = new KeyholderData(init.locks ? init.data || {} : {})
       this.locks = init.hasOwnProperty('locks')
-        ? (this.locks = init.locks.map(l => new KeyholderDataRunningLock(l)))
+        ? (this.locks = init.locks.map(l => new KeyholderDataLock(l)))
         : this.locks
     }
   }
@@ -196,7 +196,7 @@ export class KeyholderData {
   }
 }
 
-export class KeyholderDataRunningLock {
+export class KeyholderDataLock {
   public lockName: string
   public sharedLockID: string
   public sharedLockQRCode: string
@@ -235,7 +235,7 @@ export class KeyholderDataRunningLock {
   public simulationWorstCaseMinutesLocked: number
   public timerHidden: number
 
-  constructor(init?: Partial<KeyholderDataRunningLock>) {
+  constructor(init?: Partial<KeyholderDataLock>) {
     Object.assign(this, init || {})
   }
 }
