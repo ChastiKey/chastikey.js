@@ -310,7 +310,8 @@ Example Response:
 
 #### [`LockeeData`] Available Computed Values / Helpers
 
-**`clResp.getLocked`: Array<`LockeeDataLock`>**
+**`clResp.getLocked`: Array<`LockeeDataLock`>**  
+**`clResp.timeSinceLastLocked`: number | null**
 
 #### [`LockeeData.locks`] Available Computed Values / Helpers
 
