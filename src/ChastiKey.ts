@@ -8,6 +8,7 @@ import { RunningLocks } from './api/RunningLocks'
 import { LockeeData } from './api/LockeeData'
 import { Combinations } from './api/Combinations'
 import { KeyholderData } from './api/KeyholderData'
+import { UserData } from './api/UserData'
 
 export type ChastiKeyEndpoint =
   // API
@@ -17,10 +18,11 @@ export type ChastiKeyEndpoint =
   | 'lockeedata.php' // = v0.5
   | 'keyholderdata.php' // = v0.5
   // Exports
-  | 'completed_locks.json'
-  | 'date_first_keyheld.json'
-  | 'keyholders_total_locks_managed.json'
-  | 'running_locks.json'
+  | 'completed_locks.json' // = v1.0 (legacy)
+  | 'date_first_keyheld.json' //  v1.0 (legacy)
+  | 'keyholders_total_locks_managed.json' //  v1.0 (legacy)
+  | 'running_locks.json' //  v1.0 (legacy)
+  | 'userdata.php' // = v0.5
 
 /**
  * Options when constructing `ChastiKey`
@@ -48,6 +50,7 @@ export interface IChastiKeyConfig {
     DateFirstKeyheld?: string
     KeyholderTotalLocksManaged?: string
     RunningLocks?: string
+    UserData?: string
   }
 }
 
@@ -95,7 +98,8 @@ export class ChastiKey {
       CompletedLocks: 'v1.0',
       DateFirstKeyheld: 'v1.0',
       KeyholderTotalLocksManaged: 'v1.0',
-      RunningLocks: 'v1.0'
+      RunningLocks: 'v1.0',
+      UserData: 'v0.5'
     }
   }
 
@@ -175,6 +179,14 @@ export class ChastiKey {
    * @memberof ChastiKey
    */
   public RunningLocks = new RunningLocks(this.apiConfig)
+
+  /**
+   * **Retrieves the current data export JSON for public user/stats data**
+   *
+   * - Cached: `15 Minutes`
+   * @memberof ChastiKey
+   */
+  public UserData = new UserData(this.apiConfig)
 
   /**
    *Creates an instance of ChastiKey.

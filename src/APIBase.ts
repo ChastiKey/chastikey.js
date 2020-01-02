@@ -73,7 +73,7 @@ export class APIBase {
    * @returns
    * @memberof ChastiKey
    */
-  protected async request<T, I>(endpoint: ChastiKeyEndpoint, params?: I | any) {
+  protected async request<T, I = any>(endpoint: ChastiKeyEndpoint, params?: I | any) {
     try {
       // * Newer requests will require a ClientID and Secret from the ChastiKey App
       if (this.version === 'v0.5') {
