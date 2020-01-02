@@ -20,7 +20,7 @@ export class ListLocksResponse {
       }
 
       // Init any ListLock Objects
-      if (init.locks) this.locks = init.locks.map(l => new ListLocksLock(l))
+      if (init.locks) this.locks = init.hasOwnProperty('locks') ? init.locks.map(l => new ListLocksLock(l)) : this.locks
     }
   }
 

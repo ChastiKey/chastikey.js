@@ -9,18 +9,22 @@ import { LockeeData } from './api/LockeeData'
 import { Combinations } from './api/Combinations'
 import { KeyholderData } from './api/KeyholderData'
 import { UserData } from './api/UserData'
+import { SimulationData } from './api/SimulationData'
 
 export type ChastiKeyEndpoint =
-  // API
-  | 'combinations.php' // <= v0.5
-  | 'checklock.php' // <= v0.4
+  // Legacy API
   | 'listlocks2.php' // <= v0.4
+  | 'checklock.php' // <= v0.4
+  // Newer API
+  | 'combinations.php' // <= v0.5
   | 'lockeedata.php' // = v0.5
   | 'keyholderdata.php' // = v0.5
-  // Exports
-  | 'completed_locks.json' // = v1.0 (legacy)
-  | 'date_first_keyheld.json' //  v1.0 (legacy)
-  | 'keyholders_total_locks_managed.json' //  v1.0 (legacy)
+  | 'simulationdata.php' // = v0.5
+  // Legacy Exports
+  | 'completed_locks.json' // = v1.0
+  | 'date_first_keyheld.json' //  v1.0
+  | 'keyholders_total_locks_managed.json' //  v1.0
+  // Newer Exports
   | 'runninglocks.php' // = v0.5
   | 'userdata.php' // = v0.5
 
@@ -50,6 +54,7 @@ export interface IChastiKeyConfig {
     DateFirstKeyheld?: string
     KeyholderTotalLocksManaged?: string
     RunningLocks?: string
+    SimulationData?: string
     UserData?: string
   }
 }
@@ -95,6 +100,7 @@ export class ChastiKey {
       ListLocks: 'v0.4',
       LockeeData: 'v0.5',
       RunningLocks: 'v0.5',
+      SimulationData: 'v0.5',
       UserData: 'v0.5',
       // Exports (Below, These are Legacy and under an older endpoint)
       CompletedLocks: 'v1.0',
@@ -138,12 +144,18 @@ export class ChastiKey {
   public LockeeData = new LockeeData(this.apiConfig)
 
   /**
-   * **Retrieves the current data export JSON for Running Locks**
+   * Retrieves the current data export JSON for Running Locks
    *
    * - Cached: `15 Minutes`
    * @memberof ChastiKey
    */
   public RunningLocks = new RunningLocks(this.apiConfig)
+
+  /**
+   * Locks shared that fall within the specified simulated Min/Max times
+   * @memberof ChastiKey
+   */
+  public SimulationData = new SimulationData(this.apiConfig)
 
   /**
    * Ticker queries
@@ -152,7 +164,7 @@ export class ChastiKey {
   public Ticker = new Ticker(this.apiConfig)
 
   /**
-   * **Retrieves the current data export JSON for public user/stats data**
+   * Retrieves the current data export JSON for public user/stats data
    *
    * - Cached: `15 Minutes`
    * @memberof ChastiKey
@@ -164,7 +176,7 @@ export class ChastiKey {
   // * ////////////////////////
 
   /**
-   * **Cached Completed Locks**
+   * Cached Completed Locks
    *
    * - Cached: `15 Minutes`
    * - Requirement: `ActiveInApp <= 2 weeks`
@@ -173,7 +185,7 @@ export class ChastiKey {
   public CompletedLocks = new CompletedLocks(this.apiConfig)
 
   /**
-   * **Cached Date First keyheld for all public keyholders**
+   * Cached Date First keyheld for all public keyholders
    *
    * - Cached: `15 Minutes`
    * @memberof ChastiKey
@@ -181,7 +193,7 @@ export class ChastiKey {
   public DateFirstKeyheld = new DateFirstKeyheld(this.apiConfig)
 
   /**
-   * **Retrieves the current data export JSON for Keyholder total locks managed counts.**
+   * Retrieves the current data export JSON for Keyholder total locks managed counts.
    *
    * - Cached: `15 Minutes`
    * @memberof ChastiKey

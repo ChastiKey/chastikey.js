@@ -54,7 +54,7 @@ export class UserDataResponse {
     Object.assign(this.response, init.response || {})
 
     // Init any UserData Objects
-    if (init) this.users = init.users.map(u => new UserData(u))
+    if (init) this.users = init.hasOwnProperty('users') ? init.users.map(u => new UserData(u)) : this.users
   }
 
   public search(...filters: Array<{ [key in IUserDataSearchParam]?: RegExp | number | string }>) {

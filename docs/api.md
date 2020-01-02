@@ -4,77 +4,11 @@
 
 - These are low or non cached lookups
   - `[new]` `[auth]` [Combinations](#combinations)
-  - `[new]` `[auth]` [KeyholderData](#keyholderdata)
   - `[new]` `[auth]` [LockeeData](#lockeedata)
-  - `[legacy]` [CheckLock](#checklock)
-  - `[legacy]` [ListLocks](#listlocks)
+  - `[new]` `[auth]` [KeyholderData](#keyholderdata)
+  - `[new]` `[auth]` [SimulatedData](#simulateddata)
 
-## CheckLock
-
-Retrieves the specified user's lock.
-
-- API Versions Available: `v0.2`, `v0.3`, `v0.4`
-- ChastiKey Side Caching: `[ Yes ]` `[ 60 Seconds ]`
-- Authentication: `None`
-- Proxy Required: `Not on <= v0.4`
-
-Available Options:
-
-| Key      | Required? | Accepts Type(s) | Default |
-| -------- | :-------: | --------------- | ------- |
-| username |    Yes    | `string`        |         |
-| lockid   |    Yes    | `string`        |         |
-
-API Usage:
-
-```js
-// Reminder: Uses promises
-
-new ChastiKey().CheckLock.get({ username: 'username', lockid: '123456' })
-new ChastiKey().CheckLock.getByUsername('username', '123456')
-```
-
-Example Response:
-
-```js
-{
-  status: 200,
-  message: 'Success',
-  timestampGenerated: 1576949189,
-  locks: [
-    {
-      isLocked: true
-      isUnlocked: false
-      isAbandoned: false
-      totalTimeLocked: 2259018.6779999733
-      lockID: 1574690326
-      lockDeleted: 0
-      lockedBy: "KeyholderName"
-      lockFrozen: 0
-      timestampExpectedUnlock: 1577368726
-      timestampLocked: 1574690326
-      timestampUnlocked: 0
-      status: "Locked"
-      combination: ""
-    }
-  ],
-
-  // Computed Values
-  getLocked: [ ...Filtered locked locks only ]
-}
-```
-
-#### Available Computed Values / Helpers
-
-**`ListLocksResponse.getLocked`: Array<`ListLocksLock`>**  
-**`ListLocksLock.isLocked`: boolean**  
-**`ListLocksLock.isUnlocked`: boolean**  
-**`ListLocksLock.isAbandoned`: boolean**  
-**`ListLocksLock.totalTimeLocked`: number**
-
----
-
-## Combinations
+### Combinations
 
 Retrieves the specified user's past combinations.
 
@@ -133,75 +67,7 @@ Example Response:
 
 ---
 
-## ListLocks
-
-Retrieves the specified user's locks.
-
-- API Versions Available: `v0.2`, `v0.3`, `v0.4`
-- ChastiKey Side Caching: `[ Yes ]` `[ 60 Seconds ]`
-- Authentication: `None`
-- Proxy Required: `Not on <= v0.4`
-
-Available Options:
-
-| Key         | Required? | Accepts Type(s) | Default |
-| ----------- | :-------: | --------------- | :-----: |
-| username    |    Yes    | `string`        |         |
-| showdeleted |    No     | `boolean`       |   `0`   |
-
-API Usage:
-
-```js
-// Reminder: Uses promises
-
-new ChastiKey().ListLocks.get({ username: 'username' })
-new ChastiKey().ListLocks.getByUsername('username')
-```
-
-Example Response:
-
-```js
-{
-  response: {
-    status: 200,
-    message: "the request has succeeded",
-    timestampGenerated: 1576970577
-  },
-  locks: [
-    {
-      lockID: 1574690326,
-      lockDeleted: 0,
-      lockedBy: 'KeyholderName',
-      lockFrozen: 0,
-      timestampExpectedUnlock: 1577368726,
-      timestampLocked: 1574690326,
-      timestampUnlocked: 0,
-      status: 'Locked',
-      combination: '',
-      // Computed Values
-      isLocked: true,
-      isUnlocked: false,
-      isAbandoned: false,
-      totalTimeLocked: 2280251
-    }
-  ],
-
-  // Computed Values
-  getLocked: [ ...Filtered locked locks only ]
-}
-```
-
-#### Available Computed Values / Helpers
-
-**`ListLocksResponse.getLocked`: Array<`ListLocksLock`>**  
-**`ListLocksLock.isLocked`: boolean**  
-**`ListLocksLock.isUnlocked`: boolean**  
-**`ListLocksLock.isAbandoned`: boolean**  
-**`ListLocksLock.totalTimeLocked`: number**
-
----
-
-## LockeeData
+### LockeeData
 
 Retrieves the specified user's lockee data _(Locks + Stats)_.
 
@@ -216,7 +82,7 @@ Available Options:
 | ---------- | :-------: | --------------- | :-----: |
 | username   |    Yes    | `string`        |         |
 | discordid  |    No     | `string`        |         |
-| showdelete |    No     | `number`        |   `1`   |
+| showdelete |    No     | `number`        |         |
 
 API Usage:
 
@@ -225,7 +91,8 @@ API Usage:
 
 const ck = new ChastiKey({
   clientID: 'xxxx',
-  clientSecret: 'xxxx'
+  clientSecret: 'xxxx',
+  rapidAPIKey: 'xxxx'
 })
 
 ck.LockeeData.get({
@@ -311,7 +178,7 @@ Example Response:
 #### Available Computed Values / Helpers
 
 **`LockeeDataResponse.getLocked`: Array<`LockeeDataLock`>**  
-**`LockeeDataResponse.timeSinceLastLocked`: number | null**
+**`LockeeDataResponse.timeSinceLastLocked`: number | null**  
 **`LockeeData.isVerified`: boolean**  
 **`LockeeDataLock.isCardInfoHidden`: boolean**  
 **`LockeeDataLock.isCumulative`: boolean**  
@@ -332,7 +199,7 @@ Example Response:
 
 ---
 
-## KeyholderData
+### KeyholderData
 
 Retrieves the specified user's keyholder data _(Locks + Stats)_.
 
@@ -343,11 +210,10 @@ Retrieves the specified user's keyholder data _(Locks + Stats)_.
 
 Available Options:
 
-| Key        | Required? | Accepts Type(s) | Default |
-| ---------- | :-------: | --------------- | :-----: |
-| username   |    Yes    | `string`        |         |
-| discordid  |    No     | `string`        |         |
-| showdelete |    No     | `number`        |   `1`   |
+| Key       | Required? | Accepts Type(s) | Default |
+| --------- | :-------: | --------------- | :-----: |
+| username  |    Yes    | `string`        |         |
+| discordid |    No     | `string`        |         |
 
 API Usage:
 
@@ -356,7 +222,8 @@ API Usage:
 
 const ck = new ChastiKey({
   clientID: 'xxxx',
-  clientSecret: 'xxxx'
+  clientSecret: 'xxxx',
+  rapidAPIKey: 'xxxx'
 })
 
 ck.KeyholderData.get({
@@ -454,18 +321,100 @@ Example Response:
 
 #### Available Computed Values / Helpers
 
-**`KeyholderData.isVerified`: boolean**
-**`KeyholderDataLock.isForceTrust`: boolean**
-**`KeyholderDataLock.isKeysDisabled`: boolean**
-**`KeyholderDataLock.isCardInfoHidden`: boolean**
-**`KeyholderDataLock.isCumulative`: boolean**
-**`KeyholderDataLock.isNonCumulative`: boolean**
-**`KeyholderDataLock.isFixed`: boolean**
-**`KeyholderDataLock.isTimerHidden`: boolean**
+**`KeyholderData.isVerified`: boolean**  
+**`KeyholderDataLock.isForceTrust`: boolean**  
+**`KeyholderDataLock.isKeysDisabled`: boolean**  
+**`KeyholderDataLock.isCardInfoHidden`: boolean**  
+**`KeyholderDataLock.isCumulative`: boolean**  
+**`KeyholderDataLock.isNonCumulative`: boolean**  
+**`KeyholderDataLock.isFixed`: boolean**  
+**`KeyholderDataLock.isTimerHidden`: boolean**  
 **`KeyholderDataLock.isMultipleGreensRequired`: boolean**
 
 ---
 
+### SimulationData
+
+Retrieves API Locks from all keyholders that fall within the Min and/or Max simulated times.
+
+- API Versions Available: `v0.5`
+- ChastiKey Side Caching: `[ No ]`
+- Authentication: `clientID` + `clientSecret` + `rapidAPIKey`
+- Proxy Required: `Yes`
+
+Available Options:
+
+| Key        | Required? | Accepts Type(s) | Default |
+| ---------- | :-------: | --------------- | :-----: |
+| MinMinutes |    No     | `number`        |         |
+| MaxMinutes |    No     | `number`        |         |
+
+API Usage:
+
+```js
+// Reminder: Uses promises
+
+const ck = new ChastiKey({
+  clientID: 'xxxx',
+  clientSecret: 'xxxx',
+  rapidAPIKey: 'xxxx'
+
+})
+
+ck.SimulationData.get({
+  MinMinutes: 60
+  MaxMinutes: 600
+})
 ```
 
+Example Response:
+
+```js
+{
+  "response": {
+    "status": 200,
+    "message": "the request has succeeded",
+    "timestampGenerated": 1578007927
+  },
+  "locks": [
+    {
+      "userID": -9,
+      "username": "<hidden>",
+      "discordID": "",
+      "lockName": "",
+      "sharedLockID": "<hidden>",
+      "sharedLockQRCode": "<hidden>",
+      "sharedLockURL": "<hidden>",
+      "maxDoubleUps": 1,
+      "maxFreezes": 1,
+      "maxGreens": 5,
+      "maxReds": 12,
+      "maxResets": 1,
+      "maxYellows": 5,
+      "maxYellowsAdd": 0,
+      "maxYellowsMinus": 0,
+      "minDoubleUps": 1,
+      "minFreezes": 0,
+      "minGreens": 3,
+      "minReds": 10,
+      "minResets": 1,
+      "minYellows": 3,
+      "minYellowsAdd": 0,
+      "minYellowsMinus": 0,
+      "multipleGreensRequired": 0,
+      "regularity": 6,
+      "simulationAverageMinutesLocked": 420374,
+      "simulationBestCaseMinutesLocked": 1800,
+      "simulationWorstCaseMinutesLocked": 8005
+    },
+    ...
+  ]
+}
+
 ```
+
+#### Available Computed Values / Helpers
+
+None at this time.
+
+---

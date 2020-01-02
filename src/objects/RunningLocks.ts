@@ -51,7 +51,7 @@ export class RunningLocksResponse {
     Object.assign(this.response, init.response || {})
 
     // Init any RunningLocksLock Objects
-    if (init) this.locks = init.locks.map(l => new RunningLocksLock(l))
+    if (init) this.locks = init.hasOwnProperty('locks') ? init.locks.map(l => new RunningLocksLock(l)) : this.locks
   }
 
   public search(...filters: Array<{ [key in IRunningLocksSearchParam]?: RegExp | number | string }>) {

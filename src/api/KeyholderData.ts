@@ -27,15 +27,4 @@ export class KeyholderData extends APIBase {
       await this.request<Objects.KeyholderDataResponse, IKeyholderDataGetParams>('keyholderdata.php', params)
     )
   }
-
-  // /**
-  //  * **(Alternative) Fetches the specified user's locks**
-  //  * @param {string} username
-  //  * @param {number} [showdeleted]
-  //  * @returns
-  //  * @memberof KeyholderData
-  //  */
-  // public async getByUsername(username: string, showdeleted?: number) {
-  //   return this.get({ username, showdeleted: showdeleted })
-  // }
 }
