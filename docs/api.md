@@ -375,7 +375,7 @@ Example Response:
   },
   "data": {
     "userID": 00000,
-    "username": "KeyholderName",
+    "username": "KeyholderUsername",
     "discordID": "00000000000000000",
     "displayInStats": 1,
     "includeInAPI": 0,
@@ -412,6 +412,13 @@ Example Response:
       "fixed": 0,
       "forceTrust": 1,
       "keyDisabled": 0,
+      "lockees": [
+        {
+          "userID": 00000,
+          "username": "LockeeUsername",
+          "lockID": 1575546484
+        }
+      ],
       "maxDoubleUps": 15,
       "maxFreezes": 10,
       "maxGreens": 10,
@@ -442,10 +449,23 @@ Example Response:
     }
   ]
 }
+
 ```
 
 #### Available Computed Values / Helpers
 
-**`KeyholderData.isVerified`: boolean**  
+**`KeyholderData.isVerified`: boolean**
+**`KeyholderDataLock.isForceTrust`: boolean**
+**`KeyholderDataLock.isKeysDisabled`: boolean**
+**`KeyholderDataLock.isCardInfoHidden`: boolean**
+**`KeyholderDataLock.isCumulative`: boolean**
+**`KeyholderDataLock.isNonCumulative`: boolean**
+**`KeyholderDataLock.isFixed`: boolean**
+**`KeyholderDataLock.isTimerHidden`: boolean**
+**`KeyholderDataLock.isMultipleGreensRequired`: boolean**
 
 ---
+
+```
+
+```
