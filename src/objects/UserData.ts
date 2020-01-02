@@ -50,6 +50,9 @@ export class UserDataResponse {
   public users: Array<UserData> = []
 
   constructor(init?: Partial<UserDataResponse>) {
+    // Map response
+    Object.assign(this.response, init.response || {})
+
     // Init any UserData Objects
     if (init) this.users = init.users.map(u => new UserData(u))
   }
