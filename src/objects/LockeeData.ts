@@ -206,6 +206,9 @@ export class LockeeData {
     // Fallback
     return 'Novice'
   }
+  public get isVerified(): boolean {
+    return this.discordID ? true : false
+  }
 
   constructor(init?: Partial<LockeeData>) {
     Object.assign(this, init || {})

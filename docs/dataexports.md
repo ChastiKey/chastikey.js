@@ -181,4 +181,5 @@ users: [
 
 #### Available Computed Values / Helpers
 
-**`.search( { searchBy: RegExp | value }, ... )`**
+**`UserDataResponse.search( { searchBy: RegExp | value }, ... )`**
+**`UserData.isVerified`: boolean**

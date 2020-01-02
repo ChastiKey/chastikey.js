@@ -191,6 +191,12 @@ export class KeyholderData {
    */
   public versionInstalled: string
 
+  // ----------------------------
+
+  public get isVerified(): boolean {
+    return this.discordID ? true : false
+  }
+
   constructor(init?: Partial<KeyholderData>) {
     Object.assign(this, init || {})
   }

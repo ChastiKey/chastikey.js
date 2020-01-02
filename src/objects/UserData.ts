@@ -281,6 +281,12 @@ export class UserData {
    */
   public versionInstalled: string
 
+  // ----------------------------
+
+  public get isVerified(): boolean {
+    return this.discordID ? true : false
+  }
+
   constructor(init?: Partial<UserData>) {
     Object.assign(this, init || {})
   }

@@ -308,29 +308,27 @@ Example Response:
 }
 ```
 
-#### [`LockeeData`] Available Computed Values / Helpers
+#### Available Computed Values / Helpers
 
-**`clResp.getLocked`: Array<`LockeeDataLock`>**  
-**`clResp.timeSinceLastLocked`: number | null**
-
-#### [`LockeeData.locks`] Available Computed Values / Helpers
-
-**`isCardInfoHidden`: boolean**  
-**`isCumulative`: boolean**  
-**`isNonCumulative`: boolean**  
-**`combinationInt`: number**  
-**`isDeleted`: boolean**  
-**`isDiscarded`: boolean**  
-**`isFixed`: boolean**  
-**`isFrozen`: boolean**  
-**`isFrozenByCard`: boolean**  
-**`isFrozenByKeyholder`: boolean**  
-**`isLocked`: boolean**  
-**`isMultipleGreensRequired`: boolean**  
-**`isTimerHidden`: boolean**  
-**`isTrustedKeyholder`: boolean**  
-**`isUnlocked`: boolean**  
-**`totalTimeLocked`: number**
+**`LockeeDataResponse.getLocked`: Array<`LockeeDataLock`>**  
+**`LockeeDataResponse.timeSinceLastLocked`: number | null**
+**`LockeeData.isVerified`: boolean**  
+**`LockeeDataLock.isCardInfoHidden`: boolean**  
+**`LockeeDataLock.isCumulative`: boolean**  
+**`LockeeDataLock.isNonCumulative`: boolean**  
+**`LockeeDataLock.combinationInt`: number**  
+**`LockeeDataLock.isDeleted`: boolean**  
+**`LockeeDataLock.isDiscarded`: boolean**  
+**`LockeeDataLock.isFixed`: boolean**  
+**`LockeeDataLock.isFrozen`: boolean**  
+**`LockeeDataLock.isFrozenByCard`: boolean**  
+**`LockeeDataLock.isFrozenByKeyholder`: boolean**  
+**`LockeeDataLock.isLocked`: boolean**  
+**`LockeeDataLock.isMultipleGreensRequired`: boolean**  
+**`LockeeDataLock.isTimerHidden`: boolean**  
+**`LockeeDataLock.isTrustedKeyholder`: boolean**  
+**`LockeeDataLock.isUnlocked`: boolean**  
+**`LockeeDataLock.totalTimeLocked`: number**
 
 ---
 
@@ -446,8 +444,8 @@ Example Response:
 }
 ```
 
-#### [`KeyholderData`] Available Computed Values / Helpers
+#### Available Computed Values / Helpers
 
-#### [`KeyholderData.locks`] Available Computed Values / Helpers
+**`KeyholderData.isVerified`: boolean**  
 
 ---
