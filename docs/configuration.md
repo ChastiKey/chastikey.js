@@ -54,6 +54,7 @@ These only need to be changed if you want to use a different version of the API'
       KeyholderData: 'v0.5',
       ListLocks: 'v0.4',
       LockeeData: 'v0.5',
+      UserData: 'v0.5',
       // Exports
       CompletedLocks: 'v1.0',
       DateFirstKeyheld: 'v1.0',

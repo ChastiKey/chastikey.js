@@ -94,12 +94,12 @@ export class ChastiKey {
       KeyholderData: 'v0.5',
       ListLocks: 'v0.4',
       LockeeData: 'v0.5',
-      // Exports
+      UserData: 'v0.5',
+      // Exports (Below, These are Legacy and under an older endpoint)
       CompletedLocks: 'v1.0',
       DateFirstKeyheld: 'v1.0',
       KeyholderTotalLocksManaged: 'v1.0',
       RunningLocks: 'v1.0',
-      UserData: 'v0.5'
     }
   }
 
@@ -143,6 +143,14 @@ export class ChastiKey {
    */
   public Ticker = new Ticker(this.apiConfig)
 
+  /**
+   * **Retrieves the current data export JSON for public user/stats data**
+   *
+   * - Cached: `15 Minutes`
+   * @memberof ChastiKey
+   */
+  public UserData = new UserData(this.apiConfig)
+
   // * ////////////////////////
   // * Data Exports
   // * ////////////////////////
@@ -179,14 +187,6 @@ export class ChastiKey {
    * @memberof ChastiKey
    */
   public RunningLocks = new RunningLocks(this.apiConfig)
-
-  /**
-   * **Retrieves the current data export JSON for public user/stats data**
-   *
-   * - Cached: `15 Minutes`
-   * @memberof ChastiKey
-   */
-  public UserData = new UserData(this.apiConfig)
 
   /**
    *Creates an instance of ChastiKey.

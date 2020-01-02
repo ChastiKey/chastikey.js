@@ -2,5 +2,5 @@
 
 - [Home](/)
 - [Configuration](configuration.md)
-- [API Calls](api.md)
-- [Data Export Calls (coming soon!)](api.md)
+- [API Requests](api.md)
+- [Data Export Requests](dataexports.md)

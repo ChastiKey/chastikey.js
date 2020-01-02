@@ -3,11 +3,13 @@
 ## What's available
 
 - These are low or non cached lookups
-  - [CompletedLocks](#completedlocks)
-  - [DateFirstKeyheld](#datefirstkeyheld)
-  - [KeyholderTotalLocksManaged](#keyholdertotallocksmanaged)
-  - [RunningLocks](#runninglocks)
-  - [UserData](#userdata)
+  - `[legacy]` [CompletedLocks](#completedlocks)
+  - `[legacy]` [DateFirstKeyheld](#datefirstkeyheld)
+  - `[legacy]` [KeyholderTotalLocksManaged](#keyholdertotallocksmanaged)
+  - `[legacy]` [RunningLocks](#runninglocks)
+  - `[new]` `[auth req]` [UserData](#userdata)
+
+> **Note:** While some Data Exports will say `v1.0` they are actually older legacy exports, newer ones will be under the `api/v0.5` endpoint, these newer ones supersede the older `json/v1.0`.
 
 ### CompletedLocks
 

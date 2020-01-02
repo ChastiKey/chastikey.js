@@ -3,11 +3,11 @@
 ## What's available
 
 - These are low or non cached lookups
-  - `[auth]` [Combinations](#combinations)
-  - `[auth]` [KeyholderData](#keyholderdata)
-  - `[auth]` [LockeeData](#lockeedata)
-  - [CheckLock](#checklock)
-  - [ListLocks](#listlocks)
+  - `[new]` `[auth]` [Combinations](#combinations)
+  - `[new]` `[auth]` [KeyholderData](#keyholderdata)
+  - `[new]` `[auth]` [LockeeData](#lockeedata)
+  - `[legacy]` [CheckLock](#checklock)
+  - `[legacy]` [ListLocks](#listlocks)
 
 ## CheckLock
 
