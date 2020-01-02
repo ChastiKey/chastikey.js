@@ -36,6 +36,7 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public lockID: number
+
   /**
    * Deleted state
    *
@@ -46,6 +47,7 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public lockDeleted: number
+
   /**
    * Keyholder's username
    *
@@ -54,6 +56,7 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public lockedBy: string
+
   /**
    * ChastiKey Discard pile (Variable locks only)
    *
@@ -61,6 +64,7 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public discardPile: string | Array<String>
+
   /**
    * Frozen state (Keyholder or Card)
    *
@@ -71,42 +75,49 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public lockFrozen: number
+
   /**
    * Unix timestamp (seconds) that the lock was deleted from the app
    * @type {number}
    * @memberof ListLocksLock
    */
   public timestampDeleted: number
+
   /**
    * Unix timestamp (seconds) that the lock had its last card pick (variable only)
    * @type {number}
    * @memberof ListLocksLock
    */
   public timestampLastPicked: number
+
   /**
    * Unix timestamp (seconds) that the lock was created
    * @type {number}
    * @memberof ListLocksLock
    */
   public timestampLocked: number
+
   /**
    * Unix timestamp (seconds) that the lock finished for real
    * @type {number}
    * @memberof ListLocksLock
    */
   public timestampUnlocked: number
+
   /**
    * Unix timestamp (seconds) that the lock at the time of this request should unlock
    * @type {number}
    * @memberof ListLocksLock
    */
   public timestampExpectedUnlock: number
+
   /**
    * State of the lock
    * @type {('UnlockedReal' | 'Locked' | 'ReadyToUnlock')}
    * @memberof ListLocksLock
    */
   public status: 'UnlockedReal' | 'Locked' | 'ReadyToUnlock'
+
   /**
    * Lock combination
    *
@@ -115,6 +126,7 @@ export class ListLocksLock {
    * @memberof ListLocksLock
    */
   public combination: string
+
   /**
    * Computed Locked State
    * @readonly
@@ -124,6 +136,7 @@ export class ListLocksLock {
   public get isLocked(): boolean {
     return this.timestampUnlocked === 0
   }
+
   /**
    * Computed Unlocked state
    * @readonly
@@ -133,6 +146,7 @@ export class ListLocksLock {
   public get isUnlocked(): boolean {
     return this.status === 'UnlockedReal'
   }
+
   /**
    * Computed abandoned state
    *
@@ -144,6 +158,7 @@ export class ListLocksLock {
   public get isAbandoned(): boolean {
     return this.lockDeleted === 1 && this.timestampUnlocked === 0
   }
+
   /**
    * Computed total time locked regardless of lock state
    * @readonly

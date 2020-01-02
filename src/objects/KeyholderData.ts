@@ -22,7 +22,7 @@ export class KeyholderDataResponse {
 
   constructor(init?: Partial<KeyholderDataResponse>) {
     if (init) {
-      Object.assign(this.response, init.response)
+      Object.assign(this.response, init.response || {})
 
       this.data = new KeyholderData(init.locks ? init.data || {} : {})
       this.locks = init.hasOwnProperty('locks')

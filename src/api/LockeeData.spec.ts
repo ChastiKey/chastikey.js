@@ -1,24 +1,20 @@
 require('dotenv').config()
 import test from 'ava'
 import { ChastiKey } from '../ChastiKey'
+import { LockeeDataResponse } from '../objects'
 
-test('Test fetch LockeeData -> LockeeData.get({ params })', async t => {
+var resp: LockeeDataResponse = null
+
+test.before('Test fetch LockeeData -> LockeeData.get({ params })', async t => {
   const ck = new ChastiKey({
     clientID: process.env.CLIENTID,
     clientSecret: process.env.CLIENTSECRET,
     rapidAPIKey: process.env.RAPIDAPIKEY
   })
-  const resp = await ck.LockeeData.get({ username: 'emma' })
-  t.is(resp.locks.length > 0, true)
+  resp = await ck.LockeeData.get({ username: 'emma' })
 })
 
-// test('Test fetch LockeeData -> LockeeData.getByUsername( <username> )', async t => {
-//   const ck = new ChastiKey({
-//     api: {
-//       clientID: process.env.CLIENTID,
-//       clientSecret: process.env.CLIENTSECRET
-//     }
-//   })
-//   const resp = await ck.LockeeData.getByUsername('emma')
-//   t.is(resp.locks.length > 0, true)
-// })
+test('Test LockeeData Has Data -> LockeeDataResponse', async t => {
+  t.is(resp.response.status === 200, true)
+  t.is(resp.data.userID !== undefined, true)
+})

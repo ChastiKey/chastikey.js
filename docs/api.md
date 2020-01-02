@@ -374,7 +374,7 @@ Example Response:
     "timestampGenerated": 1577059905
   },
   "data": {
-    "userID": 22751,
+    "userID": 00000,
     "username": "KeyholderName",
     "discordID": "00000000000000000",
     "displayInStats": 1,

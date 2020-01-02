@@ -16,7 +16,7 @@ export class CombinationsResponse {
 
   constructor(init: Partial<CombinationsResponse>) {
     if (init) {
-      Object.assign(this.response, init.response)
+      Object.assign(this.response, init.response || {})
 
       this.locks = init.hasOwnProperty('locks')
         ? (this.locks = init.locks.map(l => new CombinationLock(l)))

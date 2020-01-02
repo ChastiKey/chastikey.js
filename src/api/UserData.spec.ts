@@ -12,6 +12,10 @@ test.before('Test fetch UserData -> UserData.get({ params })', async t => {
     rapidAPIKey: process.env.RAPIDAPIKEY
   })
   resp = await ck.UserData.get()
+})
+
+test('Test UserData Has Data -> UserDataResponse', async t => {
+  t.is(resp.response.status === 200, true)
   t.is(resp.users.length > 0, true)
 })
 

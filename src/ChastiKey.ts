@@ -21,7 +21,7 @@ export type ChastiKeyEndpoint =
   | 'completed_locks.json' // = v1.0 (legacy)
   | 'date_first_keyheld.json' //  v1.0 (legacy)
   | 'keyholders_total_locks_managed.json' //  v1.0 (legacy)
-  | 'running_locks.json' //  v1.0 (legacy)
+  | 'runninglocks.php' // = v0.5
   | 'userdata.php' // = v0.5
 
 /**
@@ -94,12 +94,12 @@ export class ChastiKey {
       KeyholderData: 'v0.5',
       ListLocks: 'v0.4',
       LockeeData: 'v0.5',
+      RunningLocks: 'v0.5',
       UserData: 'v0.5',
       // Exports (Below, These are Legacy and under an older endpoint)
       CompletedLocks: 'v1.0',
       DateFirstKeyheld: 'v1.0',
-      KeyholderTotalLocksManaged: 'v1.0',
-      RunningLocks: 'v1.0',
+      KeyholderTotalLocksManaged: 'v1.0'
     }
   }
 
@@ -136,6 +136,14 @@ export class ChastiKey {
    * @memberof ChastiKey
    */
   public LockeeData = new LockeeData(this.apiConfig)
+
+  /**
+   * **Retrieves the current data export JSON for Running Locks**
+   *
+   * - Cached: `15 Minutes`
+   * @memberof ChastiKey
+   */
+  public RunningLocks = new RunningLocks(this.apiConfig)
 
   /**
    * Ticker queries
@@ -179,14 +187,6 @@ export class ChastiKey {
    * @memberof ChastiKey
    */
   public KeyholderTotalLocksManaged = new KeyholderTotalLocksManaged(this.apiConfig)
-
-  /**
-   * **Retrieves the current data export JSON for Running Locks**
-   *
-   * - Cached: `15 Minutes`
-   * @memberof ChastiKey
-   */
-  public RunningLocks = new RunningLocks(this.apiConfig)
 
   /**
    *Creates an instance of ChastiKey.

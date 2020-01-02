@@ -8,6 +8,9 @@ var resp: DateFirstKeyheldResponse
 
 test.before('Test fetch DateFirstKeyheld -> DateFirstKeyheld.get()', async t => {
   resp = await ck.DateFirstKeyheld.get()
+})
+
+test('Test DateFirstKeyheld Has Data -> DateFirstKeyheldResponse', async t => {
   t.is(resp.keyholders.length > 0, true)
 })
 

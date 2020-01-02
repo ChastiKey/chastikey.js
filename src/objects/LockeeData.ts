@@ -48,7 +48,7 @@ export class LockeeDataResponse {
 
   constructor(init?: Partial<LockeeDataResponse>) {
     if (init) {
-      Object.assign(this.response, init.response)
+      Object.assign(this.response, init.response || {})
 
       this.data = new LockeeData(init.locks ? init.data || {} : {})
       this.locks = init.hasOwnProperty('locks') ? (this.locks = init.locks.map(l => new LockeeDataLock(l))) : this.locks

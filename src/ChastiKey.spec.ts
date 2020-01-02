@@ -35,6 +35,9 @@ test('Has .Combinations', t => {
 test('Has .LockeeData', t => {
   t.is(typeof ck.LockeeData, 'object')
 })
+test('Has .UserData', t => {
+  t.is(typeof ck.UserData, 'object')
+})
 
 test('Test fetch ListLocks', async t => {
   const resp = await ck.ListLocks.get({ username: 'emma', showdeleted: true })
