@@ -1,13 +1,22 @@
+require('dotenv').config()
 import test from 'ava'
-import { RunningLocks } from './RunningLocks'
+import { ChastiKey } from '../ChastiKey'
 import { RunningLocksResponse } from '../objects'
 
 // Since this is a BIG export, put the data here to save sending the same query over
-const khtlm = new RunningLocks({ repo: 'json', apiVersion: 'v1.0' })
 var resp: RunningLocksResponse
 
 test.before('Test fetch RunningLocks -> RunningLocks.get()', async t => {
-  resp = await khtlm.get()
+  const ck = new ChastiKey({
+    clientID: process.env.CLIENTID,
+    clientSecret: process.env.CLIENTSECRET,
+    rapidAPIKey: process.env.RAPIDAPIKEY
+  })
+  resp = await ck.RunningLocks.get()
+})
+
+test('Test RunningLocks Has Data -> RunningLocksResponse', async t => {
+  t.is(resp.response.status === 200, true)
   t.is(resp.locks.length > 0, true)
 })
 

@@ -1,35 +1,4 @@
-export enum IRunningLocksSearchParam {
-  userID = 'userID',
-  username = 'username',
-  discordID = 'discordID',
-  lockID = 'lockID',
-  lockedBy = 'lockedBy',
-  lockName = 'lockName',
-  sharedLockID = 'sharedLockID',
-  sharedLockQRCode = 'sharedLockQRCode',
-  sharedLockURL = 'sharedLockURL',
-  botChosen = 'botChosen',
-  cardInfoHidden = 'cardInfoHidden',
-  cumulative = 'cumulative',
-  doubleUpCards = 'doubleUpCards',
-  fixed = 'fixed',
-  freezeCards = 'freezeCards',
-  greenCards = 'greenCards',
-  greenCardsPicked = 'greenCardsPicked',
-  lockFrozenByCard = 'lockFrozenByCard',
-  lockFrozenByKeyholder = 'lockFrozenByKeyholder',
-  multipleGreensRequired = 'multipleGreensRequired',
-  noOfTurns = 'noOfTurns',
-  redCards = 'redCards',
-  regularity = 'regularity',
-  resetCards = 'resetCards',
-  timerHidden = 'timerHidden',
-  timestampLocked = 'timestampLocked',
-  trustKeyholder = 'trustKeyholder',
-  yellowCards = 'yellowCards'
-}
-
-export class RunningLocksResponse {
+export class LockeeDataResponse {
   public response = {
     /**
      * Response Information of API request
@@ -40,39 +9,54 @@ export class RunningLocksResponse {
   }
 
   /**
-   * Locks from Data Export
-   * @type {Array<RunningLocksLock>}
-   * @memberof RunningLocksResponse
+   * ChastiKey App user account data & stats
+   * @type {LockeeData}
    */
-  public locks: Array<RunningLocksLock> = []
+  public data: LockeeData
 
-  constructor(init?: RunningLocksResponse) {
-    // Map response
-    Object.assign(this.response, init.response || {})
+  /**
+   * ChastiKey App locks
+   * @type {Array<LockeeDataLock>}
+   */
+  public locks: Array<LockeeDataLock> = []
 
-    // Init any RunningLocksLock Objects
-    if (init) this.locks = init.hasOwnProperty('locks') ? init.locks.map(l => new RunningLocksLock(l)) : this.locks
+  // ----------------------------
+
+  /**
+   * Array of Locked Locks
+   * @readonly
+   * @type {number}
+   */
+  public get getLocked(): Array<LockeeDataLock> {
+    return this.locks.filter(l => l.status !== 'UnlockedReal' && l.status !== 'UnlockedFake' && l.deleted === 0)
   }
 
-  public search(...filters: Array<{ [key in IRunningLocksSearchParam]?: RegExp | number | string }>) {
-    var filtered: Array<RunningLocksLock> = this.locks
+  /**
+   * Find the time (in seconds) since the last lock ended. Returns null if currently locked.
+   * @readonly
+   * @type {number}
+   */
+  public get timeSinceLastLocked(): number {
+    if (this.getLocked.length === 0 && this.locks.length > 0) {
+      const lastUnlocked = this.locks
+        .filter(l => l.status === 'UnlockedReal')
+        .reduce((prev, cur) => (prev.timestampUnlocked > cur.timestampUnlocked ? prev : cur))
 
-    filters.forEach(f => {
-      for (const k in f) {
-        const typeFixedKey = k as IRunningLocksSearchParam
-        filtered = filtered.filter(l => {
-          return typeof f[typeFixedKey] === 'object'
-            ? new RegExp(f[typeFixedKey] as string).test(l[typeFixedKey] as string)
-            : l[typeFixedKey] === f[typeFixedKey]
-        })
-      }
-    })
+      return Date.now() / 1000 - lastUnlocked.timestampUnlocked
+    } else return null
+  }
 
-    return filtered
+  constructor(init?: Partial<LockeeDataResponse>) {
+    if (init) {
+      Object.assign(this.response, init.response || {})
+
+      this.data = new LockeeData(init.locks ? init.data || {} : {})
+      this.locks = init.hasOwnProperty('locks') ? (this.locks = init.locks.map(l => new LockeeDataLock(l))) : this.locks
+    }
   }
 }
 
-export class RunningLocksLock {
+export class LockeeData {
   /**
    * ChastiKey Account User ID
    * @type {number}
@@ -92,9 +76,149 @@ export class RunningLocksLock {
   public discordID: string
 
   /**
+   * Numerical status value for Stats Enabled/Disabled in the ChastiKey App
+   * @type {number}
+   */
+  public displayInStats: number
+
+  /**
+   * TODO: Further Documentation Required - Upcoming feature/functionality?
+   * @type {number}
+   */
+  public includeInAPI: number
+
+  /**
+   * Average lockee rating from past locks
+   * @type {number}
+   */
+  public averageRating: number
+
+  /**
+   * Average time locked in locks
+   * @type {number}
+   */
+  public averageTimeLockedInSeconds: number
+
+  /**
+   * ChastiKey App build number last used
+   * @type {number}
+   */
+  public buildNumberInstalled: number
+
+  /**
+   * Cumulative time locked in past + current lock (excludes abandoned)
+   * @type {number}
+   */
+  public cumulativeSecondsLocked: number
+
+  /**
+   * Date Time of ChastiKey account creation
+   * @type {string}
+   */
+  public joined: string
+
+  /**
+   * Lockee Experience Level
+   *
+   * - `1` Novice
+   * - `2` Intermediate
+   * - `3` Experienced
+   * - `4` Devoted
+   * @type {(1 | 2 | 3 | 4)}
+   */
+  public lockeeLevel: 1 | 2 | 3 | 4
+
+  /**
+   * Longest Lockee Lock completed in seconds
+   * @type {number}
+   */
+  public longestCompletedLockInSeconds: number
+
+  /**
+   * ChastiKey App main role selected
+   * @type {string}
+   */
+  public mainRole: string
+
+  /**
+   * Number of ratings from Keyholders in past locks
+   * @type {number}
+   */
+  public noOfRatings: number
+
+  /**
+   * Number of seconds in current Lock
+   * @type {number}
+   */
+  public secondsLockedInCurrentLock: number
+
+  /**
+   * ChastiKey App status
+   *
+   * - `Available` When the app is open
+   * - `Offline` When the app is closed
+   * @type {('Available' | 'Offline')}
+   */
+  public status: 'Available' | 'Offline' = 'Offline'
+
+  /**
+   * Timestamp of ChastiKey account creation
+   * @type {number}
+   */
+  public timestampJoined: number
+
+  /**
+   * Timestamp last active in the ChastiKey App
+   * @type {number}
+   */
+  public timestampLastActive: number
+
+  /**
+   * Total number of locks completed as a lockee
+   * @type {number}
+   */
+  public totalNoOfCompletedLocks: number
+
+  /**
+   * Total number of locks (regardless of completion)
+   * @type {number}
+   */
+  public totalNoOfLocks: number
+
+  /**
+   * ChastiKey App version last used
+   * @type {string}
+   */
+  public versionInstalled: string
+
+  // ----------------------------
+
+  /**
+   * Computed Lockee Experience level
+   * @readonly
+   * @type {string}
+   */
+  public get lockeeExperienceLevel(): string {
+    if (this.lockeeLevel === 4) return 'Devoted'
+    if (this.lockeeLevel === 3) return 'Experienced'
+    if (this.lockeeLevel === 2) return 'Intermediate'
+    if (this.lockeeLevel === 1) return 'Novice'
+    // Fallback
+    return 'Novice'
+  }
+  public get isVerified(): boolean {
+    return this.discordID ? true : false
+  }
+
+  constructor(init?: Partial<LockeeData>) {
+    Object.assign(this, init || {})
+  }
+}
+
+export class LockeeDataLock {
+  /**
    * ChastiKey lock ID
    * @type {number}
-   * @memberof ListLocksLock
    */
   public lockID: number
 
@@ -163,6 +287,28 @@ export class RunningLocksLock {
    * @type {number}
    */
   public cumulative: number
+
+  /**
+   * Lock Combination set upon loading the lock & visible again once the lock has ended
+   *
+   * **Tip:** See `combinationInt` for the numerical version of this
+   * @type {string}
+   */
+  public combination: string
+
+  /**
+   * Deleted state
+   *
+   * **Tip:** See `isDeleted` for the computed boolean version of this value
+   * @type {number}
+   */
+  public deleted: number
+
+  /**
+   * Discard Cards Pile as recorded from interacting with the lock in drawing card
+   * @type {string}
+   */
+  public discardPile: string
 
   /**
    * `Variable Lock Only` Double up cards remaining
@@ -277,6 +423,12 @@ export class RunningLocksLock {
   public timerHidden: number
 
   /**
+   * Timestamp the lock was deleted from the ChastiKey App
+   * @type {number}
+   */
+  public timestampDeleted: number
+
+  /**
    * Timestamp the lock is expected to unlock - this can change
    * @type {number}
    */
@@ -299,6 +451,12 @@ export class RunningLocksLock {
    * @type {number}
    */
   public timestampNextPick: number
+
+  /**
+   * Timestamp the lock was declared unlocked in the ChastiKey App
+   * @type {number}
+   */
+  public timestampUnlocked: number
 
   /**
    * Total time ths lock has been frozen
@@ -333,7 +491,23 @@ export class RunningLocksLock {
   public get isNonCumulative(): boolean {
     return this.cumulative === 0
   }
+  public get combinationInt(): number {
+    return this.combination ? Number(this.combination) : null
+  }
+  public get isDeleted(): boolean {
+    return this.deleted === 1
+  }
 
+  /**
+   * Computed discarded state
+   *
+   * Discarded is when a lock is Deleted a secondary time from the ChastiKey App
+   * @readonly
+   * @type {boolean}
+   */
+  public get isDiscarded(): boolean {
+    return this.deleted === 1 && this.timestampUnlocked === 0
+  }
   public get isFixed(): boolean {
     return this.fixed === 1
   }
@@ -346,6 +520,9 @@ export class RunningLocksLock {
   public get isFrozenByKeyholder(): boolean {
     return this.lockFrozenByKeyholder === 1
   }
+  public get isLocked(): boolean {
+    return this.status !== 'UnlockedReal' && this.status !== 'UnlockedFake'
+  }
   public get isMultipleGreensRequired(): boolean {
     return this.multipleGreensRequired === 1
   }
@@ -355,6 +532,9 @@ export class RunningLocksLock {
   public get isTrustedKeyholder(): boolean {
     return this.trustKeyholder === 1
   }
+  public get isUnlocked(): boolean {
+    return this.status === 'UnlockedReal' || this.status === 'UnlockedFake'
+  }
 
   /**
    * Computed total time locked regardless of lock state
@@ -362,10 +542,10 @@ export class RunningLocksLock {
    * @type {number}
    */
   public get totalTimeLocked(): number {
-    return Date.now() / 1000 - this.timestampLocked
+    return this.isLocked ? Date.now() / 1000 - this.timestampLocked : this.timestampUnlocked - this.timestampLocked
   }
 
-  constructor(init?: Partial<RunningLocksLock>) {
-    Object.assign(this, init)
+  constructor(init?: Partial<LockeeDataLock>) {
+    Object.assign(this, init || {})
   }
 }

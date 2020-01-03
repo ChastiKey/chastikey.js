@@ -1,4 +1,5 @@
 import { APIBase } from '../APIBase'
+import { IChastiKeyConfig } from '../ChastiKey'
 
 export interface ITickerGetParams {
   username: string
@@ -18,6 +19,10 @@ export interface ITickerGetParams {
  * @extends {APIBase}
  */
 export class Ticker extends APIBase {
+  constructor(overrides?: IChastiKeyConfig) {
+    super(Object.assign({ repo: 'api', version: '1.0' }, overrides))
+  }
+
   /**
    * **Generate the Ticker URL**
    * @param {string} username

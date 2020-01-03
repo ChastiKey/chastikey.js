@@ -1,13 +1,13 @@
 import test from 'ava'
-import { KeyholderTotalLocksManaged } from './KeyholderTotalLocksManaged'
+import { ChastiKey } from '../ChastiKey'
 import { KeyholderTotalLocksManagedResponse } from '../objects'
 
 // Since this is a BIG export, put the data here to save sending the same query over
-const khtlm = new KeyholderTotalLocksManaged({ repo: 'json', apiVersion: 'v1.0' })
+const ck = new ChastiKey()
 var resp: KeyholderTotalLocksManagedResponse
 
 test.before('Test fetch KeyholderTotalLocksManaged -> KeyholderTotalLocksManaged.get()', async t => {
-  resp = await khtlm.get()
+  resp = await ck.KeyholderTotalLocksManaged.get()
   t.is(resp.keyholders.length > 0, true)
 })
 

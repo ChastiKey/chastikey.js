@@ -1,4 +1,13 @@
-1.4.1:
+2.0.0
+- Updated: RunningLocks Export
+- Added: New Endpoint Combinations
+- Added: New Endpoint LockeeData
+- Added: New Endpoint KeyholderData
+- Added: New Endpoint SimulationData
+- Added: New Endpoint UserData Export
+- Added: New Usage / Documentation site @ https://chastikey.github.io/chastikey.js
+
+1.4.1
 - Updating: Dependencies
 - Added: New property to locks returned from ListLocks2
 

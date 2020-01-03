@@ -1,13 +1,13 @@
 import test from 'ava'
-import { CompletedLocks } from './CompletedLocks'
+import { ChastiKey } from '../ChastiKey'
 import { CompletedLocksResponse } from '../objects'
 
 // Since this is a BIG export, put the data here to save sending the same query over
-const cl = new CompletedLocks({ repo: 'json', apiVersion: 'v1.0' })
+const ck = new ChastiKey()
 var resp: CompletedLocksResponse
 
 test.before('Test fetch CompletedLocks -> CompletedLocks.get()', async t => {
-  resp = await cl.get()
+  resp = await ck.CompletedLocks.get()
   t.is(resp.locks.length > 0, true)
 })
 

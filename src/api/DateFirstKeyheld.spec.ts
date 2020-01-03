@@ -1,13 +1,16 @@
 import test from 'ava'
-import { DateFirstKeyheld } from './DateFirstKeyheld'
+import { ChastiKey } from '../ChastiKey'
 import { DateFirstKeyheldResponse } from '../objects'
 
 // Since this is a BIG export, put the data here to save sending the same query over
-const dfkh = new DateFirstKeyheld({ repo: 'json', apiVersion: 'v1.0' })
+const ck = new ChastiKey()
 var resp: DateFirstKeyheldResponse
 
 test.before('Test fetch DateFirstKeyheld -> DateFirstKeyheld.get()', async t => {
-  resp = await dfkh.get()
+  resp = await ck.DateFirstKeyheld.get()
+})
+
+test('Test DateFirstKeyheld Has Data -> DateFirstKeyheldResponse', async t => {
   t.is(resp.keyholders.length > 0, true)
 })
 
