@@ -201,6 +201,15 @@ export class RunningLocksLock {
    * @type {number}
    */
   public greenCardsPicked: number
+
+  /**
+   * Numerical value for lock frozen status
+   *
+   * **Tip:** See `isFrozen` for the computed boolean version of this value
+   * @type {number}
+   */
+  public lockFrozen: number
+
   /**
    * `Variable Lock Only` Numerical value for lock frozen by card status
    *
@@ -254,6 +263,12 @@ export class RunningLocksLock {
   public resetCards: number
 
   /**
+   * State of the lock
+   * @type {('UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake')}
+   */
+  public status: 'UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake'
+
+  /**
    * Numerical value for lock timer hidden status
    *
    * **Tip:** See `isTimerHidden` for the computed boolean version of this value
@@ -262,10 +277,34 @@ export class RunningLocksLock {
   public timerHidden: number
 
   /**
+   * Timestamp the lock is expected to unlock - this can change
+   * @type {number}
+   */
+  public timestampExpectedUnlock: number
+
+  /**
+   * Timestamp of the last interaction
+   * @type {number}
+   */
+  public timestampLastPicked: number
+
+  /**
    * Timestamp the lock was declared locked in the ChastiKey App
    * @type {number}
    */
   public timestampLocked: number
+
+  /**
+   * `Variable Lock Only` Timestamp when the next card draw will be available
+   * @type {number}
+   */
+  public timestampNextPick: number
+
+  /**
+   * Total time ths lock has been frozen
+   * @type {number}
+   */
+  public totalTimeFrozen: number
 
   /**
    * Numerical value for trusted keyholder status
@@ -299,7 +338,7 @@ export class RunningLocksLock {
     return this.fixed === 1
   }
   public get isFrozen(): boolean {
-    return this.lockFrozenByCard === 1 || this.lockFrozenByKeyholder === 1
+    return this.lockFrozen === 1
   }
   public get isFrozenByCard(): boolean {
     return this.lockFrozenByCard === 1

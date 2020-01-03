@@ -36,7 +36,7 @@ Example Response:
 response: {
   status: 200,
   message: "the request has succeeded",
-  timestampGenerated: 1577973006
+  timestampGenerated: 1578009002
 },
 locks: [
     {
@@ -57,17 +57,23 @@ locks: [
       freezeCards: 0,
       greenCards: 1,
       greenCardsPicked: 0,
+      lockFrozen: 0,
       lockFrozenByCard: 0,
       lockFrozenByKeyholder: 0,
       multipleGreensRequired: 0,
-      noOfTurns: 1,
-      redCards: 0,
-      regularity: 24,
-      resetCards: 0,
+      noOfTurns: 102,
+      redCards: 240,
+      regularity: 0,
+      resetCards: 8,
+      status: "Locked",
       timerHidden: 0,
-      timestampLocked: 1522095804,
+      timestampExpectedUnlock: 0,
+      timestampLastPicked: 1539829620,
+      timestampLocked: 1530723010,
+      timestampNextPick: 1539916020,
+      totalTimeFrozen: 0,
       trustKeyholder: 0,
-      yellowCards: 0
+      yellowCards: 150
     },
     ...
   ]
