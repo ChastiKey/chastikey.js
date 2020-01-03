@@ -20,7 +20,7 @@ Available Options:
 
 API Usage:
 
-```ts
+```js
 const ticker = new ChastiKey().Ticker.getURL({
   username: 'UsernameHere',
   type: 'Keyholder',

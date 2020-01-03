@@ -53,17 +53,12 @@ new ChastiKey().ListLocks.get( { ... } )
 
 ### Web Page
 
-Until some server side configuration is completed the webpacked version of `chastikey.js` will remain out of order.
-
-<!--
-
 ```html
-<script src="https://cdn.jsdelivr.net/gh/ChastiKey/chastikey.js@1.4.0/dist/ChastiKey.js"></script>
-// Then you're ready for:
+<script src="https://cdn.jsdelivr.net/gh/ChastiKey/chastikey.js@latest/dist/ChastiKey.js"></script>
+<!-- Then you're ready for: -->
 <script>
   new ChastiKey().ListLocks.get( ... )
     .then(resp => ... )
     .catch(error => ... )
 </script>
-``` -->
-
+```

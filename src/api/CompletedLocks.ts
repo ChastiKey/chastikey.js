@@ -13,6 +13,7 @@ import { CompletedLocksResponse } from '../objects/'
  */
 export class CompletedLocks extends APIBase {
   protected repo = 'json'
+  protected name = 'CompletedLocks'
 
   /**
    * **Fetches the scheduled data export of completed locks**

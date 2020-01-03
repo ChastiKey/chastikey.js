@@ -3,13 +3,13 @@ import { ChastiKeyEndpoint, IChastiKeyConfig } from './ChastiKey'
 import { FetchError } from './errors'
 
 export class APIBase {
-  protected readonly callerName: string = this.constructor.name
+  protected readonly name: string
   protected readonly runningInNode = typeof self === 'undefined'
   protected readonly repo: string
   public config: IChastiKeyConfig
 
   private get version() {
-    return (this.config.apiVersion as { [key: string]: string })[this.callerName]
+    return (this.config.apiVersion as { [key: string]: string })[this.name]
   }
 
   constructor(config: IChastiKeyConfig) {

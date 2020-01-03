@@ -16,6 +16,7 @@ interface ILockeeDataGetParams extends IChastiKeyParam {
  */
 export class LockeeData extends APIBase {
   protected repo = 'api'
+  protected name = 'LockeeData'
 
   /**
    * **Fetches the specified user's locks & Basic account data/stats**

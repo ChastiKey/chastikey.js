@@ -13,6 +13,7 @@ import { UserDataResponse } from '../objects/'
  */
 export class UserData extends APIBase {
   protected repo = 'api'
+  protected name = 'UserData'
 
   /**
    * **Fetches the scheduled data export for current public user data**

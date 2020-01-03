@@ -15,6 +15,7 @@ interface ISimulationDataGetParams extends IChastiKeyParam {
  */
 export class SimulationData extends APIBase {
   protected repo = 'api'
+  protected name = 'SimulationData'
 
   /**
    * **Fetch Locks that fall within the simulated time ranges**

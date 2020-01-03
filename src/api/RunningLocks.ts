@@ -13,6 +13,7 @@ import { RunningLocksResponse } from '../objects/'
  */
 export class RunningLocks extends APIBase {
   protected repo = 'api'
+  protected name = 'RunningLocks'
 
   /**
    * **Fetches the scheduled data export for running locks**

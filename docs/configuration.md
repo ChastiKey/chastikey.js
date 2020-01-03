@@ -54,12 +54,13 @@ These only need to be changed if you want to use a different version of the API'
       KeyholderData: 'v0.5',
       ListLocks: 'v0.4',
       LockeeData: 'v0.5',
+      RunningLocks: 'v0.5',
+      SimulationData: 'v0.5',
       UserData: 'v0.5',
-      // Exports
+      // Exports (Below, These are Legacy and under an older endpoint)
       CompletedLocks: 'v1.0',
       DateFirstKeyheld: 'v1.0',
-      KeyholderTotalLocksManaged: 'v1.0',
-      RunningLocks: 'v1.0'
+      KeyholderTotalLocksManaged: 'v1.0'
     }
 }
 ```

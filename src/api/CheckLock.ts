@@ -18,6 +18,7 @@ interface ICheckLockGetParams extends IChastiKeyParam {
  */
 export class CheckLock extends APIBase {
   protected repo = 'api'
+  protected name = 'CheckLock'
 
   /**
    * **Fetches the specified lock**

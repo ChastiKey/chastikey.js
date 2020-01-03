@@ -15,6 +15,7 @@ interface IKeyholderDataGetParams extends IChastiKeyParam {
  */
 export class KeyholderData extends APIBase {
   protected repo = 'api'
+  protected name = 'KeyholderData'
 
   /**
    * **Fetches the specified user's locks & Basic account data/stats**

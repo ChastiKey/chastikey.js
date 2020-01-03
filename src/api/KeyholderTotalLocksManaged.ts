@@ -12,6 +12,7 @@ import { KeyholderTotalLocksManagedResponse } from '../objects/'
  */
 export class KeyholderTotalLocksManaged extends APIBase {
   protected repo = 'json'
+  protected name = 'KeyholderTotalLocksManaged'
 
   /**
    * **Fetches the scheduled data export for keyholders total locks managed count**
