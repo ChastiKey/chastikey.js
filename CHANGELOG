@@ -1,3 +1,6 @@
+2.1.0
+- Removed: `includeInAPI` from LockeeData as its being removed
+
 2.0.0
 - Updated: RunningLocks Export
 - Added: New Endpoint Combinations

@@ -82,12 +82,6 @@ export class LockeeData {
   public displayInStats: number
 
   /**
-   * TODO: Further Documentation Required - Upcoming feature/functionality?
-   * @type {number}
-   */
-  public includeInAPI: number
-
-  /**
    * Average lockee rating from past locks
    * @type {number}
    */
