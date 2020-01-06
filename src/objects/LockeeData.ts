@@ -367,6 +367,12 @@ export class LockeeDataLock {
   public lockFrozenByKeyholder: number
 
   /**
+   * Lock Log ID for making requests to LogData
+   * @type {number}
+   */
+  public logID: number
+
+  /**
    * `Variable Lock Only` Numerical value for multiple greens required status
 
    * **Tip:** See `isMultipleGreensRequired` for the computed boolean version of this value
