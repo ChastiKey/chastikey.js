@@ -181,6 +181,7 @@ Example Response:
 
 **`LockeeDataResponse.getLocked`: Array<`LockeeDataLock`>**  
 **`LockeeDataResponse.timeSinceLastLocked`: number | null**  
+**`LockeeDataResponse.search( { searchBy: RegExp | value }, ... )`: Array<`LockeeDataLock`>**
 **`LockeeData.isVerified`: boolean**  
 **`LockeeDataLock.isCardInfoHidden`: boolean**  
 **`LockeeDataLock.isCumulative`: boolean**  

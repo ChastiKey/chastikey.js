@@ -2,6 +2,7 @@
 - Removed: `includeInAPI` from LockeeData as its being removed
 - Added: `logID` to LockeeDataLock & RunningLocksLock
 - Added: New Endpoint `LogData` Export
+- Added: Search method to LockeeData response to filter through locks
 
 2.0.0
 - Updated: RunningLocks Export
