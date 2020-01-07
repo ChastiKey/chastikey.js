@@ -18,6 +18,7 @@ export enum IRunningLocksSearchParam {
   greenCardsPicked = 'greenCardsPicked',
   lockFrozenByCard = 'lockFrozenByCard',
   lockFrozenByKeyholder = 'lockFrozenByKeyholder',
+  logID = 'logID',
   multipleGreensRequired = 'multipleGreensRequired',
   noOfTurns = 'noOfTurns',
   redCards = 'redCards',
@@ -225,6 +226,12 @@ export class RunningLocksLock {
    * @type {number}
    */
   public lockFrozenByKeyholder: number
+
+  /**
+   * Lock Log ID for making requests to LogData
+   * @type {number}
+   */
+  public logID: number
 
   /**
    * `Variable Lock Only` Numerical value for multiple greens required status

@@ -1,6 +1,6 @@
 2.1.0
 - Removed: `includeInAPI` from LockeeData as its being removed
-- Added: `logID` to LockeeDataLock
+- Added: `logID` to LockeeDataLock & RunningLocksLock
 - Added: New Endpoint `LogData` Export
 
 2.0.0
