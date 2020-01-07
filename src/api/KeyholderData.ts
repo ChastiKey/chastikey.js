@@ -3,12 +3,12 @@ import { APIBase } from '../APIBase'
 import { IChastiKeyParam } from '../ChastiKey'
 
 interface IKeyholderDataGetParams extends IChastiKeyParam {
-  username: string
+  username?: string
   discordid?: string
 }
 
 /**
- * **Query the API for the specified user**
+ * **Query the API for the specified user's Keyholder Data**
  * @export
  * @class KeyholderData
  * @extends {APIBase}

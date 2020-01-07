@@ -10,6 +10,7 @@ import { Combinations } from './api/Combinations'
 import { KeyholderData } from './api/KeyholderData'
 import { UserData } from './api/UserData'
 import { SimulationData } from './api/SimulationData'
+import { LogData } from './api/LogData'
 
 export type ChastiKeyEndpoint =
   // Legacy API
@@ -18,6 +19,7 @@ export type ChastiKeyEndpoint =
   // Newer API
   | 'combinations.php' // <= v0.5
   | 'lockeedata.php' // = v0.5
+  | 'logdata.php' // = v0.5
   | 'keyholderdata.php' // = v0.5
   | 'simulationdata.php' // = v0.5
   // Legacy Exports
@@ -50,6 +52,7 @@ export interface IChastiKeyConfig {
     KeyholderData?: string
     ListLocks?: string
     LockeeData?: string
+    LogData?: string
     CompletedLocks?: string
     DateFirstKeyheld?: string
     KeyholderTotalLocksManaged?: string
@@ -99,6 +102,7 @@ export class ChastiKey {
       KeyholderData: 'v0.5',
       ListLocks: 'v0.4',
       LockeeData: 'v0.5',
+      LogData: 'v0.5',
       RunningLocks: 'v0.5',
       SimulationData: 'v0.5',
       UserData: 'v0.5',
@@ -142,6 +146,12 @@ export class ChastiKey {
    * @memberof ChastiKey
    */
   public LockeeData = new LockeeData(this.apiConfig)
+
+  /**
+   * LogData queries
+   * @memberof ChastiKey
+   */
+  public LogData = new LogData(this.apiConfig)
 
   /**
    * Retrieves the current data export JSON for Running Locks

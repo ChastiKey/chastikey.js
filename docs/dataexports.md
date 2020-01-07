@@ -60,6 +60,7 @@ locks: [
       lockFrozen: 0,
       lockFrozenByCard: 0,
       lockFrozenByKeyholder: 0,
+      logID: 1357902468,
       multipleGreensRequired: 0,
       noOfTurns: 102,
       redCards: 240,

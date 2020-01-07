@@ -3,7 +3,7 @@ import { APIBase } from '../APIBase'
 import { IChastiKeyParam } from '../ChastiKey'
 
 interface ILockeeDataGetParams extends IChastiKeyParam {
-  username: string
+  username?: string
   discordid?: string
   showdeleted?: number
 }
@@ -29,15 +29,4 @@ export class LockeeData extends APIBase {
       await this.request<Objects.LockeeDataResponse, ILockeeDataGetParams>('lockeedata.php', params)
     )
   }
-
-  // /**
-  //  * **(Alternative) Fetches the specified user's locks**
-  //  * @param {string} username
-  //  * @param {number} [showdeleted]
-  //  * @returns
-  //  * @memberof LockeeData
-  //  */
-  // public async getByUsername(username: string, showdeleted?: number) {
-  //   return this.get({ username, showdeleted: showdeleted })
-  // }
 }

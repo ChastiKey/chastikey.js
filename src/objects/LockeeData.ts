@@ -1,3 +1,43 @@
+export enum ILockeeDataLocksSearchParam {
+  lockID = 'lockID',
+  lockedBy = 'lockedBy',
+  lockName = 'lockName',
+  sharedLockID = 'sharedLockID',
+  sharedLockQRCode = 'sharedLockQRCode',
+  sharedLockURL = 'sharedLockURL',
+  botChosen = 'botChosen',
+  cardInfoHidden = 'cardInfoHidden',
+  cumulative = 'cumulative',
+  combination = 'combination',
+  deleted = 'deleted',
+  discardPile = 'discardPile',
+  doubleUpCards = 'doubleUpCards',
+  fixed = 'fixed',
+  freezeCards = 'freezeCards',
+  greenCards = 'greenCards',
+  greenCardsPicked = 'greenCardsPicked',
+  lockFrozen = 'lockFrozen',
+  lockFrozenByCard = 'lockFrozenByCard',
+  lockFrozenByKeyholder = 'lockFrozenByKeyholder',
+  logID = 'logID',
+  multipleGreensRequired = 'multipleGreensRequired',
+  noOfTurns = 'noOfTurns',
+  redCards = 'redCards',
+  regularity = 'regularity',
+  resetCards = 'resetCards',
+  status = 'status',
+  timerHidden = 'timerHidden',
+  timestampDeleted = 'timestampDeleted',
+  timestampExpectedUnlock = 'timestampExpectedUnlock',
+  timestampLastPicked = 'timestampLastPicked',
+  timestampLocked = 'timestampLocked',
+  timestampNextPick = 'timestampNextPick',
+  timestampUnlocked = 'timestampUnlocked',
+  totalTimeFrozen = 'totalTimeFrozen',
+  trustKeyholder = 'trustKeyholder',
+  yellowCards = 'yellowCards'
+}
+
 export class LockeeDataResponse {
   public response = {
     /**
@@ -54,6 +94,23 @@ export class LockeeDataResponse {
       this.locks = init.hasOwnProperty('locks') ? (this.locks = init.locks.map(l => new LockeeDataLock(l))) : this.locks
     }
   }
+
+  public search(...filters: Array<{ [key in ILockeeDataLocksSearchParam]?: RegExp | number | string }>) {
+    var filtered: Array<LockeeDataLock> = this.locks
+
+    filters.forEach(f => {
+      for (const k in f) {
+        const typeFixedKey = k as ILockeeDataLocksSearchParam
+        filtered = filtered.filter(l => {
+          return typeof f[typeFixedKey] === 'object'
+            ? new RegExp(f[typeFixedKey] as string).test(l[typeFixedKey] as string)
+            : l[typeFixedKey] === f[typeFixedKey]
+        })
+      }
+    })
+
+    return filtered
+  }
 }
 
 export class LockeeData {
@@ -80,12 +137,6 @@ export class LockeeData {
    * @type {number}
    */
   public displayInStats: number
-
-  /**
-   * TODO: Further Documentation Required - Upcoming feature/functionality?
-   * @type {number}
-   */
-  public includeInAPI: number
 
   /**
    * Average lockee rating from past locks
@@ -371,6 +422,12 @@ export class LockeeDataLock {
    * @type {number}
    */
   public lockFrozenByKeyholder: number
+
+  /**
+   * Lock Log ID for making requests to LogData
+   * @type {number}
+   */
+  public logID: number
 
   /**
    * `Variable Lock Only` Numerical value for multiple greens required status

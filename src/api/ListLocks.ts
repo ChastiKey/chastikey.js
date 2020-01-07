@@ -3,14 +3,14 @@ import { APIBase } from '../APIBase'
 import { IChastiKeyParam } from '../ChastiKey'
 
 interface IListLocksGetParams extends IChastiKeyParam {
-  username: string
+  username?: string
   // discord_id?: string
   showdeleted?: boolean
   bot?: string
 }
 
 /**
- * **Query the API for the specified user**
+ * **Query the API for the specified user Locks (Legacy)**
  *
  * - Cached: `60 seconds server side`
  * @export

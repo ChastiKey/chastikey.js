@@ -5,6 +5,7 @@
 - These are low or non cached lookups
   - `[new]` `[auth]` [Combinations](#combinations)
   - `[new]` `[auth]` [LockeeData](#lockeedata)
+  - `[new]` `[auth]` [LogData](#logdata)
   - `[new]` `[auth]` [KeyholderData](#keyholderdata)
   - `[new]` `[auth]` [SimulatedData](#simulateddata)
 
@@ -80,9 +81,11 @@ Available Options:
 
 | Key        | Required? | Accepts Type(s) | Default |
 | ---------- | :-------: | --------------- | :-----: |
-| username   |    Yes    | `string`        |         |
-| discordid  |    No     | `string`        |         |
+| username   |    \*     | `string`        |         |
+| discordid  |    \*     | `string`        |         |
 | showdelete |    No     | `number`        |         |
+
+`* username or discordid is required`
 
 API Usage:
 
@@ -114,7 +117,6 @@ Example Response:
     "username": "Username",
     "discordID": "146439529824256000",
     "displayInStats": 1,
-    "includeInAPI": 0,
     "averageRating": 5,
     "averageTimeLockedInSeconds": 166339,
     "buildNumberInstalled": 142,
@@ -179,6 +181,7 @@ Example Response:
 
 **`LockeeDataResponse.getLocked`: Array<`LockeeDataLock`>**  
 **`LockeeDataResponse.timeSinceLastLocked`: number | null**  
+**`LockeeDataResponse.search( { searchBy: RegExp | value }, ... )`: Array<`LockeeDataLock`>**
 **`LockeeData.isVerified`: boolean**  
 **`LockeeDataLock.isCardInfoHidden`: boolean**  
 **`LockeeDataLock.isCumulative`: boolean**  
@@ -199,6 +202,81 @@ Example Response:
 
 ---
 
+### LogData
+
+Retrieves the specified user's lock log.
+
+- API Versions Available: `v0.5`
+- ChastiKey Side Caching: `[ No ]`
+- Authentication: `clientID` + `clientSecret` + `rapidAPIKey`
+- Proxy Required: `Yes`
+
+Available Options:
+
+| Key       | Required? | Accepts Type(s) | Default |
+| --------- | :-------: | --------------- | :-----: |
+| username  |    \*     | `string`        |         |
+| discordid |    \*     | `string`        |         |
+| lockid    |    Yes    | `number`        |         |
+| logid     |    Yes    | `number`        |         |
+
+`* username or discordid is required`
+
+API Usage:
+
+```js
+// Reminder: Uses promises
+
+const ck = new ChastiKey({
+  clientID: 'xxxx',
+  clientSecret: 'xxxx',
+  rapidAPIKey: 'xxxx'
+})
+
+ck.LogData.get({
+  username: 'username',
+  lockid: 123456789,
+  logid: 135790246
+})
+```
+
+Example Response:
+
+```js
+{
+  "response": {
+    "status": 200,
+    "message": "the request has succeeded",
+    "timestampGenerated": 1578241424
+  },
+  "query": {
+    "discordID": "",
+    "limit": 0,
+    "lockID": 1577141888,
+    "logID": 1577141892,
+    "since": 0,
+    "username": "Username"
+  },
+  "log": [
+    {
+      "id": 16094,
+      "action": "StartedLock",
+      "actionedBy": "Lockee",
+      "hidden": 0,
+      "result": "",
+      "timestamp": 1577141890
+    },
+    ...
+  ]
+}
+```
+
+#### Available Computed Values / Helpers
+
+None at this time.
+
+---
+
 ### KeyholderData
 
 Retrieves the specified user's keyholder data _(Locks + Stats)_.
@@ -212,8 +290,10 @@ Available Options:
 
 | Key       | Required? | Accepts Type(s) | Default |
 | --------- | :-------: | --------------- | :-----: |
-| username  |    Yes    | `string`        |         |
-| discordid |    No     | `string`        |         |
+| username  |    \*     | `string`        |         |
+| discordid |    \*     | `string`        |         |
+
+`* username or discordid is required`
 
 API Usage:
 
@@ -245,7 +325,6 @@ Example Response:
     "username": "KeyholderUsername",
     "discordID": "00000000000000000",
     "displayInStats": 1,
-    "includeInAPI": 0,
     "averageRating": 4.99,
     "buildNumberInstalled": 142,
     "dateFirstKeyheld": "01\/01\/2018",
