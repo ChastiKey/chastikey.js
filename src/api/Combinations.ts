@@ -3,13 +3,13 @@ import { APIBase } from '../APIBase'
 import { IChastiKeyParam } from '../ChastiKey'
 
 interface ICombinationsGetParams extends IChastiKeyParam {
-  username: string
+  username?: string
   discordid?: string
   showdeleted?: number
 }
 
 /**
- * **Query the API for the specified user**
+ * **Query the API for the specified user's past unlock combinations**
  * @export
  * @class Combinations
  * @extends {APIBase}
@@ -19,7 +19,7 @@ export class Combinations extends APIBase {
   protected name = 'Combinations'
 
   /**
-   * **Fetches the specified user's locks & Basic account data/stats**
+   * **Perform fetch**
    * @param {ICombinationsGetParams} params
    * @returns {Promise<Objects.CombinationsResponse>}
    * @memberof Combinations
@@ -29,15 +29,4 @@ export class Combinations extends APIBase {
       await this.request<Objects.CombinationsResponse, ICombinationsGetParams>('combinations.php', params)
     )
   }
-
-  // /**
-  //  * **(Alternative) Fetches the specified user's locks**
-  //  * @param {string} username
-  //  * @param {number} [showdeleted]
-  //  * @returns
-  //  * @memberof Combinations
-  //  */
-  // public async getByUsername(username: string, showdeleted?: number) {
-  //   return this.get({ username, showdeleted: showdeleted })
-  // }
 }

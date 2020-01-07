@@ -11,32 +11,45 @@ test.before('Creating a new ChastiKey instance for requests', t => {
 test('Has .CheckLock', t => {
   t.is(typeof ck.CheckLock, 'object')
 })
-test('Has .ListLocks', t => {
-  t.is(typeof ck.ListLocks, 'object')
+
+test('Has CheckLock', t => {
+  t.is(typeof ck.CheckLock, 'object')
 })
-test('Has .Ticker', t => {
-  t.is(typeof ck.Ticker, 'object')
-})
-test('Has .CompletedLocks', t => {
-  t.is(typeof ck.CompletedLocks, 'object')
-})
-test('Has .DateFirstKeyheld', t => {
-  t.is(typeof ck.DateFirstKeyheld, 'object')
-})
-test('Has .KeyholderTotalLocksManaged', t => {
-  t.is(typeof ck.KeyholderTotalLocksManaged, 'object')
-})
-test('Has .RunningLocks', t => {
-  t.is(typeof ck.RunningLocks, 'object')
-})
-test('Has .Combinations', t => {
+test('Has Combinations', t => {
   t.is(typeof ck.Combinations, 'object')
 })
-test('Has .LockeeData', t => {
+test('Has KeyholderData', t => {
+  t.is(typeof ck.KeyholderData, 'object')
+})
+test('Has ListLocks', t => {
+  t.is(typeof ck.ListLocks, 'object')
+})
+test('Has LockeeData', t => {
   t.is(typeof ck.LockeeData, 'object')
 })
-test('Has .UserData', t => {
+test('Has LogData', t => {
+  t.is(typeof ck.LogData, 'object')
+})
+test('Has RunningLocks', t => {
+  t.is(typeof ck.RunningLocks, 'object')
+})
+test('Has SimulationData', t => {
+  t.is(typeof ck.SimulationData, 'object')
+})
+test('Has Ticker', t => {
+  t.is(typeof ck.Ticker, 'object')
+})
+test('Has UserData', t => {
   t.is(typeof ck.UserData, 'object')
+})
+test('Has CompletedLocks', t => {
+  t.is(typeof ck.CompletedLocks, 'object')
+})
+test('Has DateFirstKeyheld', t => {
+  t.is(typeof ck.DateFirstKeyheld, 'object')
+})
+test('Has KeyholderTotalLocksManaged', t => {
+  t.is(typeof ck.KeyholderTotalLocksManaged, 'object')
 })
 
 test('Test fetch ListLocks', async t => {
