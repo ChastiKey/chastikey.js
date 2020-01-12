@@ -1,3 +1,4 @@
+require('dotenv').config()
 import test from 'ava'
 import ChastiKey from './ChastiKey'
 
@@ -55,4 +56,14 @@ test('Has KeyholderTotalLocksManaged', t => {
 test('Test fetch ListLocks', async t => {
   const resp = await ck.ListLocks.get({ username: 'emma', showdeleted: true })
   t.is(resp.locks.length > 0, true)
+})
+
+test('Test fetch Failure', async t => {
+  const ck = new ChastiKey({
+    clientID: process.env.CLIENTID,
+    clientSecret: process.env.CLIENTSECRET,
+    rapidAPIKey: process.env.RAPIDAPIKEY
+  })
+  const resp = await ck.LockeeData.get({ username: '0000-0000' })
+  t.is(resp.response.status, 400)
 })

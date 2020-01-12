@@ -1,3 +1,6 @@
+2.2.0
+- Updated: API Base will now respond with the failure response data if the server responds, if not it will still throw.
+
 2.1.0
 - Removed: `includeInAPI` from LockeeData as its being removed
 - Added: `logID` to LockeeDataLock & RunningLocksLock

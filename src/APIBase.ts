@@ -129,6 +129,10 @@ export class APIBase {
         return response.data
       }
     } catch (error) {
+      if (error.response) {
+        if (error.response.hasOwnProperty('data')) return error.response.data
+        return
+      }
       throw new FetchError(error.response ? error.response.status : 999, error.message)
     }
   }
