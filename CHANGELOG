@@ -1,5 +1,8 @@
-2.2.1
+2.3.0
+- Updated: Documentation
 - Removed: KeyholderData Object value `includeInAPI`
+- Added: `twitterUsername` to KeyholderData, LockeeData
+- Added: KeyholderDataLock `lockName`
 
 2.2.0
 - Updated: API Base will now respond with the failure response data if the server responds, if not it will still throw.

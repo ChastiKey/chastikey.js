@@ -276,6 +276,12 @@ export class UserData {
   public totalNoOfLocks: number
 
   /**
+   * Twitter Username
+   * @type {string}
+   */
+  public twitterUsername: string
+
+  /**
    * ChastiKey App version last used
    * @type {string}
    */

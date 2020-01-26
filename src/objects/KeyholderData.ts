@@ -180,6 +180,12 @@ export class KeyholderData {
   public totalLocksManaged: number
 
   /**
+   * Twitter Username
+   * @type {string}
+   */
+  public twitterUsername: string
+
+  /**
    * ChastiKey App version last used
    * @type {string}
    */
@@ -202,6 +208,12 @@ export class KeyholderDataLock {
    * @type {number}
    */
   public lockID: number
+
+  /**
+   * ChastiKey lock ID
+   * @type {number}
+   */
+  public lockName: number
 
   /**
    * Shared ID of the Lock

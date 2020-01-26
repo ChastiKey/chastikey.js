@@ -40,10 +40,10 @@ response: {
 },
 locks: [
     {
-      userID: 00000,
+      userID: 111222,
       username: "Username",
       discordID: "",
-      lockID: 0,
+      lockID: 123456789,
       lockedBy: "",
       lockName: "",
       sharedLockID: "",
@@ -161,6 +161,7 @@ Example Response:
       totalLocksManaged: 0,
       totalNoOfCompletedLocks: 0,
       totalNoOfLocks: 0,
+      twitterUsername: "TwitterUsernameHere",
       versionInstalled: "2.4.3"
     },
     ...
