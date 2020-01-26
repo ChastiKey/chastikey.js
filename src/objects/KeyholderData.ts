@@ -58,12 +58,6 @@ export class KeyholderData {
   public displayInStats: number
 
   /**
-   * TODO: Further Documentation Required - Upcoming feature/functionality?
-   * @type {number}
-   */
-  public includeInAPI: number
-
-  /**
    * Average rating score
    * @type {number}
    */
