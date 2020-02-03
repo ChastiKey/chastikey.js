@@ -1,3 +1,7 @@
+2.3.1
+- Fixing: LockeeData Documentation for `showdeleted` option.
+- Updated: LockeeData type for `showdeleted` to also accept boolean type.
+
 2.3.0
 - Updated: Documentation
 - Removed: KeyholderData Object value `includeInAPI`

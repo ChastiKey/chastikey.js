@@ -79,11 +79,11 @@ Retrieves the specified user's lockee data _(Locks + Stats)_.
 
 Available Options:
 
-| Key        | Required? | Accepts Type(s) | Default |
-| ---------- | :-------: | --------------- | :-----: |
-| username   |    \*     | `string`        |         |
-| discordid  |    \*     | `string`        |         |
-| showdelete |    No     | `number`        |         |
+| Key         | Required? | Accepts Type(s)    | Default |
+| ----------- | :-------: | ------------------ | :-----: |
+| username    |    \*     | `string`           |         |
+| discordid   |    \*     | `string`           |         |
+| showdeleted |    No     | `number` `boolean` |         |
 
 `* username or discordid is required`
 

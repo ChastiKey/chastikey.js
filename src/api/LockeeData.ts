@@ -5,7 +5,7 @@ import { IChastiKeyParam } from '../ChastiKey'
 interface ILockeeDataGetParams extends IChastiKeyParam {
   username?: string
   discordid?: string
-  showdeleted?: number
+  showdeleted?: number | boolean
 }
 
 /**

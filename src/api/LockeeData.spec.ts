@@ -11,7 +11,7 @@ test.before('Test fetch LockeeData -> LockeeData.get({ params })', async t => {
     clientSecret: process.env.CLIENTSECRET,
     rapidAPIKey: process.env.RAPIDAPIKEY
   })
-  resp = await ck.LockeeData.get({ username: 'emma' })
+  resp = await ck.LockeeData.get({ username: 'emma', showdeleted: true })
 })
 
 test('Test LockeeData Has Data -> LockeeDataResponse', async t => {
