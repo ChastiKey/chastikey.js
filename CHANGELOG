@@ -1,6 +1,7 @@
 2.3.1
 - Fixing: LockeeData Documentation for `showdeleted` option.
 - Updated: LockeeData type for `showdeleted` to also accept boolean type.
+- Updated: Types and Documentation to handle changes to Keyholder Experience.
 
 2.3.0
 - Updated: Documentation

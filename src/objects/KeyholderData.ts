@@ -87,8 +87,9 @@ export class KeyholderData {
    * - `1` Novice
    * - `2` Keyholder
    * - `3` Established
-   * - `4` Renowned
-   * @type {(1 | 2 | 3 | 4)}
+   * - `4` Distinguished
+   * - `5` Renowned
+   * @type {(1 | 2 | 3 | 4 | 5)}
    */
   public keyholderLevel: number
 
