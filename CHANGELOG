@@ -1,5 +1,6 @@
 2.4.0
 - Updated: RunningLocks search options.
+- Updated: Dependencies.
 - Added: Keyholder & Card frozen timestamps and computed values on locks.
 - Added: DisplayInStats to UserData.
 
