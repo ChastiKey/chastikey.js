@@ -131,6 +131,12 @@ export class UserData {
   public dateFirstKeyheld: string
 
   /**
+   * Numerical status value for Stats Enabled/Disabled in the ChastiKey App
+   * @type {number}
+   */
+  public displayInStats: number
+
+  /**
    * Date Time of ChastiKey account creation
    * @type {string}
    */

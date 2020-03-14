@@ -54,6 +54,7 @@ Example Response:
       lockedBy: "KeyholderName",
       lockName: "",
       combination: "8106",
+      test: 0,
       timestampUnlocked: 1574650402,
       // Computed Values
       combinationInt: 8106
@@ -64,7 +65,8 @@ Example Response:
 
 #### Available Computed Values / Helpers
 
-**`CombinationLock.combinationInt`: number**
+**`CombinationLock.combinationInt`: number**  
+**`CombinationLock.isTest`: boolean**
 
 ---
 
@@ -163,9 +165,12 @@ Example Response:
       regularity: 3,
       resetCards: -9,
       status: "UnlockedReal",
+      test: 0,
       timerHidden: 0,
       timestampDeleted: 0,
       timestampExpectedUnlock: 0,
+      timestampFrozenByCard: 1562428580,
+      timestampFrozenByKeyholder: 1562428783,
       timestampLastPicked: 1562428783,
       timestampLocked: 1562291263,
       timestampNextPick: 0,
@@ -182,7 +187,7 @@ Example Response:
 
 **`LockeeDataResponse.getLocked`: Array<`LockeeDataLock`>**  
 **`LockeeDataResponse.timeSinceLastLocked`: number | null**  
-**`LockeeDataResponse.search( { searchBy: RegExp | value }, ... )`: Array<`LockeeDataLock`>**
+**`LockeeDataResponse.search( { searchBy: RegExp | value }, ... )`: Array<`LockeeDataLock`>**  
 **`LockeeData.isVerified`: boolean**  
 **`LockeeDataLock.isCardInfoHidden`: boolean**  
 **`LockeeDataLock.isCumulative`: boolean**  
@@ -196,10 +201,12 @@ Example Response:
 **`LockeeDataLock.isFrozenByKeyholder`: boolean**  
 **`LockeeDataLock.isLocked`: boolean**  
 **`LockeeDataLock.isMultipleGreensRequired`: boolean**  
+**`LockeeDataLock.isTest`: boolean**  
 **`LockeeDataLock.isTimerHidden`: boolean**  
 **`LockeeDataLock.isTrustedKeyholder`: boolean**  
 **`LockeeDataLock.isUnlocked`: boolean**  
-**`LockeeDataLock.totalTimeLocked`: number**
+**`LockeeDataLock.totalTimeLocked`: number**  
+**`LockeeDataLock.totalTimeFrozenCurrent`: number**
 
 ---
 

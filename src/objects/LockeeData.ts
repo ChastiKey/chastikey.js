@@ -26,9 +26,12 @@ export enum ILockeeDataLocksSearchParam {
   regularity = 'regularity',
   resetCards = 'resetCards',
   status = 'status',
+  test = 'test',
   timerHidden = 'timerHidden',
   timestampDeleted = 'timestampDeleted',
   timestampExpectedUnlock = 'timestampExpectedUnlock',
+  timestampFrozenByCard = 'timestampFrozenByCard',
+  timestampFrozenByKeyholder = 'timestampFrozenByKeyholder',
   timestampLastPicked = 'timestampLastPicked',
   timestampLocked = 'timestampLocked',
   timestampNextPick = 'timestampNextPick',
@@ -478,6 +481,14 @@ export class LockeeDataLock {
   public status: 'UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake'
 
   /**
+   * Numerical value for lock type where 1 is a lock flagged as a 'Test Lock' when it was loaded in
+   * the ChastiKey App
+   *
+   * @type {number}
+   */
+  public test: number
+
+  /**
    * Numerical value for lock timer hidden status
    *
    * **Tip:** See `isTimerHidden` for the computed boolean version of this value
@@ -496,6 +507,18 @@ export class LockeeDataLock {
    * @type {number}
    */
   public timestampExpectedUnlock: number
+
+  /**
+   * `Variable Lock Only` Timestamp the lock was frozen by a card pick
+   * @type {number}
+   */
+  public timestampFrozenByCard: number
+
+  /**
+   * Timestamp the lock was frozen by the keyholder
+   * @type {number}
+   */
+  public timestampFrozenByKeyholder: number
 
   /**
    * Timestamp of the last interaction
@@ -589,6 +612,9 @@ export class LockeeDataLock {
   public get isMultipleGreensRequired(): boolean {
     return this.multipleGreensRequired === 1
   }
+  public get isTest(): boolean {
+    return this.test === 1
+  }
   public get isTimerHidden(): boolean {
     return this.timerHidden === 1
   }
@@ -606,6 +632,17 @@ export class LockeeDataLock {
    */
   public get totalTimeLocked(): number {
     return this.isLocked ? Date.now() / 1000 - this.timestampLocked : this.timestampUnlocked - this.timestampLocked
+  }
+
+  /**
+   * Computed timestamp of the current Freeze (Card or Keyholder frozen)
+   * @readonly
+   * @type {number}
+   */
+  public get totalTimeFrozenCurrent(): number {
+    if (this.timestampFrozenByKeyholder) return Date.now() / 1000 - this.timestampFrozenByKeyholder
+    if (this.timestampFrozenByCard) return Date.now() / 1000 - this.timestampFrozenByCard
+    return 0
   }
 
   constructor(init?: Partial<LockeeDataLock>) {

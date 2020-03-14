@@ -16,6 +16,7 @@ export enum IRunningLocksSearchParam {
   freezeCards = 'freezeCards',
   greenCards = 'greenCards',
   greenCardsPicked = 'greenCardsPicked',
+  lockFrozen = 'lockFrozen',
   lockFrozenByCard = 'lockFrozenByCard',
   lockFrozenByKeyholder = 'lockFrozenByKeyholder',
   logID = 'logID',
@@ -24,8 +25,15 @@ export enum IRunningLocksSearchParam {
   redCards = 'redCards',
   regularity = 'regularity',
   resetCards = 'resetCards',
+  status = 'status',
   timerHidden = 'timerHidden',
+  timestampExpectedUnlock = 'timestampExpectedUnlock',
+  timestampFrozenByCard = 'timestampFrozenByCard',
+  timestampFrozenByKeyholder = 'timestampFrozenByKeyholder',
+  timestampLastPicked = 'timestampLastPicked',
   timestampLocked = 'timestampLocked',
+  timestampNextPick = 'timestampNextPick',
+  totalTimeFrozen = 'totalTimeFrozen',
   trustKeyholder = 'trustKeyholder',
   yellowCards = 'yellowCards'
 }
@@ -290,6 +298,18 @@ export class RunningLocksLock {
   public timestampExpectedUnlock: number
 
   /**
+   * `Variable Lock Only` Timestamp the lock was frozen by a card pick
+   * @type {number}
+   */
+  public timestampFrozenByCard: number
+
+  /**
+   * Timestamp the lock was frozen by the keyholder
+   * @type {number}
+   */
+  public timestampFrozenByKeyholder: number
+
+  /**
    * Timestamp of the last interaction
    * @type {number}
    */
@@ -370,6 +390,17 @@ export class RunningLocksLock {
    */
   public get totalTimeLocked(): number {
     return Date.now() / 1000 - this.timestampLocked
+  }
+
+  /**
+   * Computed timestamp of the current Freeze (Card or Keyholder frozen)
+   * @readonly
+   * @type {number}
+   */
+  public get totalTimeFrozenCurrent(): number {
+    if (this.timestampFrozenByKeyholder) return Date.now() / 1000 - this.timestampFrozenByKeyholder
+    if (this.timestampFrozenByCard) return Date.now() / 1000 - this.timestampFrozenByCard
+    return 0
   }
 
   constructor(init?: Partial<RunningLocksLock>) {

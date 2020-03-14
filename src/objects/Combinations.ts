@@ -62,12 +62,23 @@ export class CombinationLock {
    */
   public timestampUnlocked: number
 
+  /**
+   * Numerical value for lock type where 1 is a lock flagged as a 'Test Lock' when it was loaded in
+   * the ChastiKey App
+   *
+   * @type {number}
+   */
+  public test: number
+
   // ----------------------------
 
   public get combinationInt(): number {
     return this.combination ? Number(this.combination) : null
   }
-
+  public get isTest(): boolean {
+    return this.test === 1
+  }
+  
   constructor(init?: Partial<CombinationLock>) {
     Object.assign(this, init || {})
   }

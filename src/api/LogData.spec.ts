@@ -11,7 +11,7 @@ test.before('Test fetch LogData -> LogData.get({ params })', async t => {
     clientSecret: process.env.CLIENTSECRET,
     rapidAPIKey: process.env.RAPIDAPIKEY
   })
-  resp = await ck.LogData.get({ username: 'Emma', logID: 1577141892, lockID: 1577141888 })
+  resp = await ck.LogData.get({ username: 'Emma', logID: 1584193036, lockID: 1584193029 })
 })
 
 test('Test LogData Has Data -> LogDataResponse', async t => {

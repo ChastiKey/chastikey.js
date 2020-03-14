@@ -69,9 +69,11 @@ locks: [
       status: "Locked",
       timerHidden: 0,
       timestampExpectedUnlock: 0,
-      timestampLastPicked: 1539829620,
-      timestampLocked: 1530723010,
-      timestampNextPick: 1539916020,
+      timestampFrozenByCard: 0,
+      timestampFrozenByKeyholder: 0,
+      timestampLastPicked: 1584106629,
+      timestampLocked: 1584193029,
+      timestampNextPick: 1584193029,
       totalTimeFrozen: 0,
       trustKeyholder: 0,
       yellowCards: 150
@@ -94,7 +96,8 @@ locks: [
 **`RunningLocksLock.isMultipleGreensRequired: boolean`**  
 **`RunningLocksLock.isTimerHidden: boolean`**  
 **`RunningLocksLock.isTrustedKeyholder: boolean`**  
-**`RunningLocksLock.totalTimeLocked: number`**
+**`RunningLocksLock.totalTimeLocked: number`**  
+**`RunningLocksLock.totalTimeFrozenCurrent: number`**
 
 ### UserData
 
@@ -139,6 +142,7 @@ Example Response:
       buildNumberInstalled: 133,
       cumulativeSecondsLocked: 0,
       dateFirstKeyheld: "01\/01\/1970",
+      displayInStats: 1,
       joined: "2019-01-01 01:23:45",
       keyholderLevel: 0,
       lockeeLevel: 0,
