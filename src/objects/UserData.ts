@@ -8,6 +8,9 @@ export enum IUserDataSearchParam {
   buildNumberInstalled = 'buildNumberInstalled',
   cumulativeSecondsLocked = 'cumulativeSecondsLocked',
   dateFirstKeyheld = 'dateFirstKeyheld',
+  displayInStats = 'displayInStats',
+  followersCount = 'followersCount',
+  followingCount = 'followingCount',
   joined = 'joined',
   keyholderLevel = 'keyholderLevel',
   lockeeLevel = 'lockeeLevel',
@@ -30,6 +33,7 @@ export enum IUserDataSearchParam {
   totalLocksManaged = 'totalLocksManaged',
   totalNoOfCompletedLocks = 'totalNoOfCompletedLocks',
   totalNoOfLocks = 'totalNoOfLocks',
+  twitterUsername = 'twitterUsername',
   versionInstalled = 'versionInstalled'
 }
 

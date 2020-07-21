@@ -1,11 +1,15 @@
 export enum ILockeeDataLocksSearchParam {
+  lockGroupID = 'lockGroupID',
   lockID = 'lockID',
   lockedBy = 'lockedBy',
   lockName = 'lockName',
   sharedLockID = 'sharedLockID',
   sharedLockQRCode = 'sharedLockQRCode',
   sharedLockURL = 'sharedLockURL',
+  autoResetFrequencyInSeconds = 'autoResetFrequencyInSeconds',
+  autoResetsPaused = 'autoResetsPaused',
   botChosen = 'botChosen',
+  build = 'build',
   cardInfoHidden = 'cardInfoHidden',
   cumulative = 'cumulative',
   combination = 'combination',
@@ -20,21 +24,30 @@ export enum ILockeeDataLocksSearchParam {
   lockFrozenByCard = 'lockFrozenByCard',
   lockFrozenByKeyholder = 'lockFrozenByKeyholder',
   logID = 'logID',
+  maximumAutoResets = 'maximumAutoResets',
   multipleGreensRequired = 'multipleGreensRequired',
+  noOfTimesAutoReset = 'noOfTimesAutoReset',
+  noOfTimesCardReset = 'noOfTimesCardReset',
+  noOfTimesFullReset = 'noOfTimesFullReset',
   noOfTurns = 'noOfTurns',
   redCards = 'redCards',
   regularity = 'regularity',
   resetCards = 'resetCards',
   status = 'status',
+  stickyCards = 'stickyCards',
   test = 'test',
   timerHidden = 'timerHidden',
   timestampDeleted = 'timestampDeleted',
   timestampExpectedUnlock = 'timestampExpectedUnlock',
   timestampFrozenByCard = 'timestampFrozenByCard',
   timestampFrozenByKeyholder = 'timestampFrozenByKeyholder',
+  timestampLastAutoReset = 'timestampLastAutoReset',
+  timestampLastCardReset = 'timestampLastCardReset',
+  timestampLastFullReset = 'timestampLastFullReset',
   timestampLastPicked = 'timestampLastPicked',
   timestampLocked = 'timestampLocked',
   timestampNextPick = 'timestampNextPick',
+  timestampRealLastPicked = 'timestampRealLastPicked',
   timestampUnlocked = 'timestampUnlocked',
   totalTimeFrozen = 'totalTimeFrozen',
   trustKeyholder = 'trustKeyholder',
@@ -277,6 +290,12 @@ export class LockeeData {
 
 export class LockeeDataLock {
   /**
+   * The Lock ID is used to identify locks that are grouped together such as Fakes and Real locks.
+   * @type {number}
+   */
+  public lockGroupID: number
+
+  /**
    * ChastiKey lock ID
    * @type {number}
    */
@@ -323,6 +342,18 @@ export class LockeeDataLock {
   public sharedLockURL: string
 
   /**
+   * If the lock has an auto reset, this is the frequency in seconds of the auto reset
+   * @type {number}
+   */
+  public autoResetFrequencyInSeconds: number
+
+  /**
+   * If auto reset functionality is paused
+   * @type {number}
+   */
+  public autoResetsPaused: number
+
+  /**
    * - `0` Human Keyholder
    * - `1` Bot Hailey
    * - `2` Bot Blaine
@@ -331,6 +362,12 @@ export class LockeeDataLock {
    * @type {(0 | 1 | 2 | 3 | 4)}
    */
   public botChosen: 0 | 1 | 2 | 3 | 4
+
+  /**
+   * ChastiKey App build number
+   * @type {number}
+   */
+  public build: number
 
   /**
    * Numerical status value for if Card info is hidden by the Keyholder
@@ -439,12 +476,36 @@ export class LockeeDataLock {
   public logID: number
 
   /**
+   * Maximum number of auto resets
+   * @type {number}
+   */
+  public maximumAutoResets: number
+
+  /**
    * `Variable Lock Only` Numerical value for multiple greens required status
 
    * **Tip:** See `isMultipleGreensRequired` for the computed boolean version of this value
    * @type {number}
    */
   public multipleGreensRequired: number
+
+  /**
+   * Count of lock auto resets
+   * @type {number}
+   */
+  public noOfTimesAutoReset: number
+
+  /**
+   * Count of lock resets by a card
+   * @type {number}
+   */
+  public noOfTimesCardReset: number
+
+  /**
+   * Count of complete lock resets
+   * @type {number}
+   */
+  public noOfTimesFullReset: number
 
   /**
    * `Variable Lock Only` Count of turns made over the lock's lifetime
@@ -479,6 +540,14 @@ export class LockeeDataLock {
    * @type {('UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake')}
    */
   public status: 'UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake'
+
+  /**
+   * `Variable Lock Only` Sticky cards remaining
+   *
+   * **Note:** Will return `-9` if card info is hidden
+   * @type {number}
+   */
+  public stickyCards: number
 
   /**
    * Numerical value for lock type where 1 is a lock flagged as a 'Test Lock' when it was loaded in
@@ -521,22 +590,50 @@ export class LockeeDataLock {
   public timestampFrozenByKeyholder: number
 
   /**
-   * Timestamp of the last interaction
+   * Timestamp the lock was last auto reset
+   * @type {number}
+   */
+  public timestampLastAutoReset: number
+
+  /**
+   * `Variable Lock Only` Timestamp of the last reset from a card
+   *
+   *
+   * @type {number}
+   */
+  public timestampLastCardReset: number
+
+  /**
+   * Timestamp of the last full reset
+   * @type {number}
+   */
+  public timestampLastFullReset: number
+
+  /**
+   * `Variable Lock Only` Timestamp of the last interaction
    * @type {number}
    */
   public timestampLastPicked: number
 
   /**
-   * Timestamp the lock was declared locked in the ChastiKey App
+   * `Variable Lock Only` Timestamp the lock was declared locked in the ChastiKey App
    * @type {number}
    */
   public timestampLocked: number
 
   /**
-   * `Variable Lock Only` Timestamp when the next card draw will be available
+   * Timestamp when the next card draw will be available
+   *
+   * `Variable Lock Only`
    * @type {number}
    */
   public timestampNextPick: number
+
+  /**
+   * `Variable Lock Only` imestamp the last real pick was performed (when there are )
+   * @type {number}
+   */
+  public timestampRealLastPicked: number
 
   /**
    * Timestamp the lock was declared unlocked in the ChastiKey App
