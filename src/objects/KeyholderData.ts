@@ -76,6 +76,18 @@ export class KeyholderData {
   public dateFirstKeyheld: string
 
   /**
+   * Number of user followers within the ChastiKey App
+   * @type {number}
+   */
+  public followersCount: number
+
+  /**
+   * Number of user following within the ChastiKey App
+   * @type {number}
+   */
+  public followingCount: number
+
+  /**
    * Date Time of ChastiKey account creation
    * @type {string}
    */
@@ -241,6 +253,12 @@ export class KeyholderDataLock {
   public sharedLockURL: string
 
   /**
+   * If the lock has an auto reset, this is the frequency in seconds of the auto reset
+   * @type {number}
+   */
+  public autoResetFrequencyInSeconds: number
+
+  /**
    * Numerical value for if users can be in other locks when loading this lock
    * @type {number}
    */
@@ -297,6 +315,12 @@ export class KeyholderDataLock {
    * @type {number}
    */
   public maxDoubleUps: number
+
+  /**
+   * Maximum number of automatic resets defined for lock
+   * @type {number}
+   */
+  public maxAutoResets: number
 
   /**
    * `Variable Lock Only` Maximum Freeze Cards
