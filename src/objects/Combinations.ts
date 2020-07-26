@@ -1,3 +1,14 @@
+export enum ICombinationsSearchParam {
+  lockGroupID = 'lockGroupID',
+  lockID = 'lockID',
+  lockedBy = 'lockedBy',
+  lockName = 'lockName',
+  build = 'build',
+  combination = 'combination',
+  timestampUnlocked = 'timestampUnlocked',
+  test = 'test'
+}
+
 export class CombinationsResponse {
   public response = {
     /**
@@ -23,9 +34,32 @@ export class CombinationsResponse {
         : this.locks
     }
   }
+
+  public search(...filters: Array<{ [key in ICombinationsSearchParam]?: RegExp | number | string }>) {
+    var filtered: Array<CombinationLock> = this.locks
+
+    filters.forEach(f => {
+      for (const k in f) {
+        const typeFixedKey = k as ICombinationsSearchParam
+        filtered = filtered.filter(l => {
+          return typeof f[typeFixedKey] === 'object'
+            ? new RegExp(f[typeFixedKey] as string).test(l[typeFixedKey] as string)
+            : l[typeFixedKey] === f[typeFixedKey]
+        })
+      }
+    })
+
+    return filtered
+  }
 }
 
 export class CombinationLock {
+  /**
+   * The Lock ID is used to identify locks that are grouped together such as Fakes and Real locks.
+   * @type {number}
+   */
+  public lockGroupID: number
+
   /**
    * ChastiKey lock ID
    * @type {number}
@@ -47,6 +81,12 @@ export class CombinationLock {
    * @type {string}
    */
   public lockName: string
+
+  /**
+   * ChastiKey App build number
+   * @type {number}
+   */
+  public build: number
 
   /**
    * Lock Combination set upon loading the lock & visible again once the lock has ended
@@ -78,7 +118,7 @@ export class CombinationLock {
   public get isTest(): boolean {
     return this.test === 1
   }
-  
+
   constructor(init?: Partial<CombinationLock>) {
     Object.assign(this, init || {})
   }
