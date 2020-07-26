@@ -20,8 +20,6 @@
     "postinstall": "tsc"
   },
   "ava": {
-    "babel": false,
-    "compileEnhancements": false,
     "extensions": [
       "ts"
     ],

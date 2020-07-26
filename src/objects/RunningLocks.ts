@@ -115,6 +115,12 @@ export class RunningLocksLock {
   public discordID: string
 
   /**
+   * The Lock ID is used to identify locks that are grouped together such as Fakes and Real locks.
+   * @type {number}
+   */
+  public lockGroupID: number
+
+  /**
    * ChastiKey lock ID
    * @type {number}
    * @memberof ListLocksLock
@@ -162,6 +168,18 @@ export class RunningLocksLock {
   public sharedLockURL: string
 
   /**
+   * If the lock has an auto reset, this is the frequency in seconds of the auto reset
+   * @type {number}
+   */
+  public autoResetFrequencyInSeconds: number
+
+  /**
+   * If auto reset functionality is paused
+   * @type {number}
+   */
+  public autoResetsPaused: number
+
+  /**
    * - `0` Human Keyholder
    * - `1` Bot Hailey
    * - `2` Bot Blaine
@@ -170,6 +188,12 @@ export class RunningLocksLock {
    * @type {(0 | 1 | 2 | 3 | 4)}
    */
   public botChosen: 0 | 1 | 2 | 3 | 4
+
+  /**
+   * ChastiKey App build number
+   * @type {number}
+   */
+  public build: number
 
   /**
    * Numerical status value for if Card info is hidden by the Keyholder
@@ -186,6 +210,12 @@ export class RunningLocksLock {
    * @type {number}
    */
   public cumulative: number
+
+  /**
+   * Discard Cards Pile as recorded from interacting with the lock in drawing card
+   * @type {string}
+   */
+  public discardPile: string
 
   /**
    * `Variable Lock Only` Double up cards remaining
@@ -256,12 +286,36 @@ export class RunningLocksLock {
   public logID: number
 
   /**
+   * Maximum number of auto resets
+   * @type {number}
+   */
+  public maximumAutoResets: number
+
+  /**
    * `Variable Lock Only` Numerical value for multiple greens required status
 
    * **Tip:** See `isMultipleGreensRequired` for the computed boolean version of this value
    * @type {number}
    */
   public multipleGreensRequired: number
+
+  /**
+   * Count of lock auto resets
+   * @type {number}
+   */
+  public noOfTimesAutoReset: number
+
+  /**
+   * Count of lock resets by a card
+   * @type {number}
+   */
+  public noOfTimesCardReset: number
+
+  /**
+   * Count of complete lock resets
+   * @type {number}
+   */
+  public noOfTimesFullReset: number
 
   /**
    * `Variable Lock Only` Count of turns made over the lock's lifetime
@@ -298,6 +352,14 @@ export class RunningLocksLock {
   public status: 'UnlockedReal' | 'Locked' | 'ReadyToUnlock' | 'UnlockedFake'
 
   /**
+   * `Variable Lock Only` Sticky cards remaining
+   *
+   * **Note:** Will return `-9` if card info is hidden
+   * @type {number}
+   */
+  public stickyCards: number
+
+  /**
    * Numerical value for lock timer hidden status
    *
    * **Tip:** See `isTimerHidden` for the computed boolean version of this value
@@ -324,6 +386,26 @@ export class RunningLocksLock {
   public timestampFrozenByKeyholder: number
 
   /**
+   * Timestamp the lock was last auto reset
+   * @type {number}
+   */
+  public timestampLastAutoReset: number
+
+  /**
+   * `Variable Lock Only` Timestamp of the last reset from a card
+   *
+   *
+   * @type {number}
+   */
+  public timestampLastCardReset: number
+
+  /**
+   * Timestamp of the last full reset
+   * @type {number}
+   */
+  public timestampLastFullReset: number
+
+  /**
    * Timestamp of the last interaction
    * @type {number}
    */
@@ -340,6 +422,12 @@ export class RunningLocksLock {
    * @type {number}
    */
   public timestampNextPick: number
+
+  /**
+   * `Variable Lock Only` imestamp the last real pick was performed (when there are )
+   * @type {number}
+   */
+  public timestampRealLastPicked: number
 
   /**
    * Total time ths lock has been frozen

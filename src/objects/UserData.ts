@@ -135,6 +135,18 @@ export class UserData {
   public dateFirstKeyheld: string
 
   /**
+   * Number of user followers within the ChastiKey App
+   * @type {number}
+   */
+  public followersCount: number
+
+  /**
+   * Number of user following within the ChastiKey App
+   * @type {number}
+   */
+  public followingCount: number
+
+  /**
    * Numerical status value for Stats Enabled/Disabled in the ChastiKey App
    * @type {number}
    */
