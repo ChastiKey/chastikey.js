@@ -12,6 +12,6 @@ test.before('Test fetch CompletedLocks -> CompletedLocks.get()', async t => {
 })
 
 test('Test CompletedLocks Search -> CompletedLocks.search( { username: /^e/i }, { build: 133 } )', async t => {
-  const searchResults = resp.search({ username: /^e/i }, { build: 133 })
+  const searchResults = resp.search({ username: /^e/i }, { build: /[0-9]{3,4}/ })
   t.is(searchResults.length > 0, true)
 })
