@@ -77,6 +77,18 @@ export class SimulationDataLock {
   public sharedLockURL: string
 
   /**
+   * If the lock has an auto reset, this is the frequency in seconds of the auto reset
+   * @type {number}
+   */
+  public autoResetFrequencyInSeconds: number
+
+  /**
+   * Maximum number of automatic resets defined for lock
+   * @type {number}
+   */
+  public maxAutoResets: number
+
+  /**
    * `Variable Lock Only` Maximum Double up Cards
    * @type {number}
    */
