@@ -1,4 +1,4 @@
-# chastikey.js <small>2.4</small>
+# chastikey.js <small>2.5</small>
 
 > JS/TS API Wrapper for the ChastiKey API
 
