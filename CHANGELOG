@@ -1,5 +1,14 @@
 2.5.0
 - Updated: Dependancies audit fix.
+- Updated: Sync up with outputs from ChastiKey's API.
+  - LockeeData
+  - KeyholderData
+  - RunningLocks
+  - SimulationData
+  - Combinations
+  - UserData
+- Added: Included in the sync up are the new Sticky Cards field on Lock objects.
+- Added: Search to Combinations Response.
 
 2.4.0
 - Updated: RunningLocks search options.
