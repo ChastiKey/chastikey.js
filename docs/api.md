@@ -66,6 +66,7 @@ Example Response:
 
 #### Available Computed Values / Helpers
 
+**`CombinationLock.search( { searchBy: RegExp | value }, ... )`: Array<`CombinationLock`>**  
 **`CombinationLock.combinationInt`: number**  
 **`CombinationLock.isTest`: boolean**
 
