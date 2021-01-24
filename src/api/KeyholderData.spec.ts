@@ -8,7 +8,7 @@ test('Test fetch KeyholderData -> KeyholderData.get({ params })', async t => {
     clientSecret: process.env.CLIENTSECRET,
     rapidAPIKey: process.env.RAPIDAPIKEY
   })
-  const resp = await ck.KeyholderData.get({ username: 'MistressAlyona' })
+  const resp = await ck.KeyholderData.get({ username: 'Emma' })
   t.is(resp.locks.length > 0, true)
 })
 
