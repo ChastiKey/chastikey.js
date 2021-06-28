@@ -353,6 +353,12 @@ export class KeyholderDataLock {
   public maxResets: number
 
   /**
+   * `Variable Lock Only` Maximum Sticky Cards
+   * @type {number}
+   */
+  public maxStickies: number
+
+  /**
    * Maximum Number of Users
    * @type {number}
    */
@@ -411,6 +417,12 @@ export class KeyholderDataLock {
    * @type {number}
    */
   public minResets: number
+
+  /**
+   * `Variable Lock Only` Minimum Sticky Cards
+   * @type {number}
+   */
+  public minStickies: number
 
   /**
    * Minimum ChastiKey App version required to load lock

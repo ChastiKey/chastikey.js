@@ -1,3 +1,8 @@
+2.5.2
+- Updated: Build Dependencies.
+- Added: Sticky Cards to Keyholder Lock's data.
+- Added: `timestampRequestedKeyholdersDecision` to Lockee Lock data.
+
 2.5.1
 - Updated: Dependencies.
 

@@ -48,6 +48,7 @@ export enum ILockeeDataLocksSearchParam {
   timestampLocked = 'timestampLocked',
   timestampNextPick = 'timestampNextPick',
   timestampRealLastPicked = 'timestampRealLastPicked',
+  timestampRequestedKeyholdersDecision = 'timestampRequestedKeyholdersDecision',
   timestampUnlocked = 'timestampUnlocked',
   totalTimeFrozen = 'totalTimeFrozen',
   trustKeyholder = 'trustKeyholder',
@@ -634,6 +635,12 @@ export class LockeeDataLock {
    * @type {number}
    */
   public timestampRealLastPicked: number
+
+  /**
+   * Timestamp the lockee requested a Keyholder Decision on lock continuation
+   * @type {number}
+   */
+  public timestampRequestedKeyholdersDecision: number
 
   /**
    * Timestamp the lock was declared unlocked in the ChastiKey App
